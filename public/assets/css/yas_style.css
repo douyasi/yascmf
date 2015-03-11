@@ -1,0 +1,390 @@
+/*
+ * @title       yas_style
+ * @description 芽丝CMF通用STYLE
+ * @name        yas_style.css
+ * @author      raoyc<raoyc2009@gmail.com>
+ * @link        http://raoyc.com/
+ * @copyright   Copyright (c) 2014
+ */
+@charset "utf-8";
+@import url("yas_base.css");
+
+
+
+/*****
+layout START
+*****/
+/*--头部导航区域:start--*/
+#top_head_nav{
+	height: 50px;
+	line-height: 50px;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	min-width: 1040px;
+	background-color: #1995dc;
+	z-index: 10;
+}
+.cmf_logo{
+	float: left;
+	width: 200px;
+}
+.cmf_logo .yas_logo{
+	margin: 5px 40px;
+	float: left;
+	display: block;
+	height: 40px;
+	line-height: 50px;
+	vertical-align: baseline;
+	text-align: center;
+}
+.yas_logo span{
+	float: right;
+	color: #fff;
+}
+.cmf_top_menu{
+	float: left;
+}
+.cmf_top_menu li{
+	float: left;
+	width: 125px;
+	text-align: center;
+}
+.cmf_top_menu li a{
+	display: block;
+	font-size: 16px;
+	color: #fff;
+}
+.cmf_top_menu li.current,.cmf_top_menu li a:hover{
+	background-color: #157ab5;
+	font-weight: bold;
+}
+.cmf_operate{
+	float: right;
+	position: relative;
+}
+.cmf_operate ul li{
+	float: left;
+	font-size: 18px;
+	width: 50px;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	color: #fff;
+}
+.cmf_operate ul li a{
+	display: block;
+	color: #fff;
+}
+.cmf_operate ul li a:hover{
+	background-color: #157ab5;
+	font-weight: bold;
+}
+.cmf_operate .li_usr_op_tips{
+	position: absolute;
+	right: 2px;
+	top: 50px;
+	width: 150px;
+	color: #000;
+	border: 1px solid #d9d9d6;
+	z-index: 999999;
+}
+.li_usr_op_tips ul li{
+	display: inline-block;
+	width: 150px;
+	line-height: 30px;
+	height: 30px;
+	font-size: 14px;
+	color: #333;
+}
+.li_usr_op_tips ul li a{
+	display: block;
+	color: #000;
+}
+.li_usr_op_tips ul li a:hover{
+	background-color: #fee188;
+}
+/*--头部导航区域:end--*/
+
+/*--主体区域:start--*/
+#main_container{
+	margin-top: 50px;
+}
+.main_container{
+	position: static;
+	padding: 0;
+}
+.main_container>.main_container_inner {
+	position: relative;
+}
+/*--主体区域:end--*/
+
+/*--左侧导航栏:start--*/
+.main_container_inner .left_sidebar{
+	position: fixed;
+	border: 1px solid #ccc;
+	border-width: 0 1px 0 0;
+	background-color: #f6f6f6;
+	left: 0;
+	width: 200px;
+	min-height: 800px;
+	height: 100%;
+	/*z-index: 1000001;*/
+}
+.left_sidebar{
+	z-index: 100;
+}
+.left_sidebar .nav_list{
+	margin-top: 36px;
+}
+
+/*默认一级目录项样式*/
+.nav_list > li{
+	line-height: 36px;
+	margin:3px auto;
+	font-size: 18px;
+	width: 160px;
+	background-color: #e3e3e3;
+	color: #666;
+	text-align: left;
+	position: relative;
+}
+
+/*一级目录项 可超链接*/
+.nav_list >li >a{
+	display: block;
+	margin-left: 10px;
+	color: #666;
+}
+.nav_list >li a:hover{
+	color: #06b;
+}
+/*一级目录项 不可超链接*/
+.nav_list >li >h3{
+	display: block;
+	margin-left: 10px;
+	color: #666;
+	cursor: pointer;
+}
+.nav_list >li >h3 i{
+	float: right;
+	margin: auto 8px;
+	line-height: 36px;
+}
+.nav_list >li >h3:hover{
+	color: #06b;
+}
+ /*当前激活样式*/
+.nav_list >li.active >a{
+	color: #06b;
+}
+.nav_list >li.active >h3{
+	color: #06b;
+	cursor: pointer;
+}
+.nav_list >li.active >a >h3,.nav_list >li.active >h3{
+	font-weight: bold;
+}
+
+.nav_list >li.active{
+	border-left: 5px solid #f60;
+	width: 155px;
+	background-color: #fff;
+	color: #06b;
+}
+
+/*二级目录项 默认样式*/
+
+ /*当前激活样式*/
+.nav_list >li.active .submenu {
+	display: block;
+}
+ /*点击展开之后样式*/
+.nav_list >li.open .submenu{
+	display: block;
+}
+.nav_list >li .submenu {
+	display: none;
+	overflow: hidden;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	font-size: 16px;
+	position: relative;
+	background-color: #fff;
+}
+.submenu li{
+	height: 32px;
+	line-height: 32px;
+}
+/*二级目录项 超链接样式*/
+.submenu >li a{
+	display: block;
+	margin-left: 20px;
+	color: #434343;
+}
+/*二级目录项 当前页样式*/
+.submenu >li.active{
+	width: 160px;
+	background-color: #000;
+	color: #fff;
+}
+.submenu >li:hover{
+	/*background-color: #e3e3e3;*/
+	color: #06b;
+}
+.submenu >li.active a{
+	color: #fff;
+}
+.submenu >li:hover a{
+	color: #06b;
+}
+.submenu >li i{
+	float: left;
+	line-height: 32px;
+	margin: auto 8px;
+} 
+/*--左侧导航栏:end--*/
+
+/*--右侧内容区:start--*/
+.main_container_inner .right_main_content{
+	margin-left: 220px;
+	margin-right: 0;
+	min-height: 100%;
+	padding: 0;
+}
+.right_main_content .main_content{
+	padding-top: 36px;
+}
+.main_content .validation_tips_area{
+	width: 80%;
+	min-width: 660px;
+	position: fixed;
+	top: 120px;
+	border: 1px solid #000;
+	z-index: 9999999;
+	opacity: 0.9;
+	filter: alpha(opacity=90);
+	background-color: #000;
+}
+.validation_tips_area{
+	line-height: 36px;
+	background-color: #f6f6f6;
+	color: #666;
+	border-radius: 12px;
+}
+.validation_tips_area .tips_text{
+	margin: auto 20px;
+	font-size: 18px;
+	line-height: 36px;
+}
+
+ /*面包屑导航*/
+.main_content .breadcrumb_nav{
+	font-size: 16px;
+	line-height: 42px;
+	width: 80%;
+	min-width: 660px;
+	border-bottom: 2px solid #2d2d2d;
+}
+.breadcrumb_nav a:hover{
+	font-size: 16px;
+	color: #06b;
+}
+.breadcrumb_nav .search_box{
+	float: right;
+	padding-right: 10px;
+}
+.search_box input[type="text"]{
+	width: 150px;
+}
+ /*主体表单区域*/
+
+  /*nav_tabs*/
+.main_content .nav_tabs{
+	margin: 10px 10px 0 0;
+	min-width: 800px;
+	height: 36px; 
+	line-height: 36px;
+	font-size: 16px;
+	color: #555;
+	padding: 0 15px;
+}
+.nav_tabs ul{
+	overflow:hidden;
+}
+.nav_tabs ul li{
+	float: left;
+}
+.nav_tabs ul li a{
+	display: block;
+	color: #555;
+	padding: 0 15px;
+}
+.nav_tabs li.active a{
+	display: block;
+	background-color: #06b;
+	line-height: 36px;
+	color: #fff;
+	font-weight: bold;
+	border-radius: 8px 8px 0 0;
+}
+
+  /*表单主体*/
+.main_content .main_form_content{
+	width: 90%;
+	min-width: 800px;
+	margin: -2px 10px 10px 0;
+	line-height:32px;
+	font-size:14px;
+	color: #555;
+	border-color: #06b;
+	border-radius: 10px;
+	border-style: solid;
+	border-width: 2px 1px 1px 1px;
+}
+  /*cmf内容主体*/
+ .main_content .main_cmf_content{
+	width: 90%;
+	min-width: 800px;
+	margin: 10px 10px 10px 0;
+	line-height:32px;
+	font-size:14px;
+	color: #555;
+}
+.main_form_content,.main_cmf_content{
+	padding-left: 20px;
+}
+.main_form_content .tab_content{
+	margin-top: 20px;
+}
+.main_form_content .tab_content,.main_form_content .form_buttons{
+	display: block;
+}
+.tab_content .tab_pane{
+	display: none;
+}
+.tab_content >.active{
+	display: block;
+}
+.tab_content ul li{
+	display: block;
+	margin-bottom: 16px;
+}
+
+.form_buttons{
+	margin: 10px auto;
+}
+
+/*主体表单区域*/
+
+/*页脚*/
+.right_main_content .yas_footer{
+	min-width: 400px;
+	margin: 10px auto;
+	height: 40px;
+	line-height: 40px;
+	font-family: Georgia, "Helvetica Neue", Helvetica, "微软雅黑", "Microsoft Yahei", Arial, sans-serif;
+}
+

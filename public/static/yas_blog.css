@@ -1,0 +1,82 @@
+/*
+ * @title       yas_blog
+ * @description 芽丝博客 前台样式
+ * @name        yas_blog.css
+ * @author      raoyc<raoyc2009@gmail.com>
+ * @link        http://raoyc.com/
+ * @copyright   Copyright (c) 2014
+ */
+
+@charset "utf-8";
+/*重置字体样式*/
+body{
+	font-family: "微软雅黑","Microsoft Yahei","Helvetica Neue",Helvetica,Georgia,Arial,sans-serif;
+}
+/*代码样式使用等宽字体*/
+pre, code, tt {
+	font-size: 12px;
+	font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+ul.yas_articles,.yas_articles li.yas_article_item{
+}
+li.yas_article_item{
+	cursor: pointer;
+}
+li.yas_article_item .panel:hover{
+	border-color: #1995dc;
+}
+li.yas_article_item .yas_article_title{
+	text-align: center;
+	font-weight: 400;
+	text-transform: uppercase;
+	color: #32323a;
+	min-height: 60px;
+	max-height: 80px;
+	overflow: hidden;
+}
+.yas_articles li.yas_article_item a{
+	text-decoration: none;
+	text-align: center;
+}
+.yas_tags{
+	line-height: 200%;
+}
+
+
+/*******************************************************************
+
+This chunk is to fix Bootstrap so that the Markdown output looks good
+
+*******************************************************************/
+
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+  font-size: 15px;
+  line-height: 150%;
+}
+
+xmp, textarea {
+  display: none;
+}
+
+h1,h2,h3,h4 {
+  margin: 15px 0;
+}
+
+pre {
+  margin: 20px 0;
+}
+
+img {
+  margin: 10px 0;
+}
+
+.navbar {
+  z-index: 1;
+}
+
+.table {
+  width: auto;
+}
+
