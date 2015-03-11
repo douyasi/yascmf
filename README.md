@@ -11,13 +11,14 @@
 
 ① 下载源码包：
 
-你可以通过多种方式下载源码（如HTTP下载，Git克隆），下载之后进入源码目录生成 `.env` 文件。
+你可以通过多种方式下载源码（如HTTP下载，Git克隆），下载之后进入源码目录，使用 `composer` 安装PHP依赖，生成 `.env` 配置文件。
 
 Linux 下可执行下面命令：
 
 ```bash
 git clone https://github.com/douyasi/yascmf.git
 cd yascmf
+composer install
 touch .env
 ```
 Windows 下生成 `.env` 文件可以在命令行输入下面命令：
