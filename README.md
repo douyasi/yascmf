@@ -44,7 +44,7 @@ DB_PASSWORD=root
 CACHE_DRIVER=file
 SESSION_DRIVER=file
 ```
-③ 服务器绑定域名，并将文档根目录设置为源码包 `public` 目录下，给 `storage` 目录可写权限，如果后台需要上传图片请给 `public\uploads` 可写权限，如果使用 `minify` 来压缩与合并`CSS`与JS静态资源，请给 `public\min\tmp` 可写权限。
+③ 服务器绑定域名，并将文档根目录设置为源码包 `public` 目录下，给 `storage` 目录可写权限，如果后台需要上传图片请给 `public\uploads` 可写权限，如果使用 `minify` 来压缩与合并 `CSS` 与 `JS` 静态资源，请给 `public\min\tmp` 可写权限。
 
 ④ 访问服务器绑定的域名，如果能访问演示站类似的前台界面，说明您已经安装成功。
 
