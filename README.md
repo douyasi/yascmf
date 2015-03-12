@@ -44,7 +44,7 @@ DB_PASSWORD=root
 CACHE_DRIVER=file
 SESSION_DRIVER=file
 ```
-③ 服务器绑定域名，并将文档根目录设置为源码包 `public` 目录下，给 `storage` 目录可写权限。
+③ 服务器绑定域名，并将文档根目录设置为源码包 `public` 目录下，给 `storage` 目录可写权限，如果后台需要上传图片请给 `public\uploads` 可写权限，如果使用 `minify` 来压缩与合并`CSS`与JS静态资源，请给 `public\min\tmp` 可写权限。
 
 ④ 访问服务器绑定的域名，如果能访问演示站类似的前台界面，说明您已经安装成功。
 
@@ -61,10 +61,10 @@ SESSION_DRIVER=file
 ② 实现自定义分页样式扩展，不是那种类似 `Bootstrap` 分页样式的扩展；  
 ③ 了解仓库（Repository）设计模式；  
 ④ 理解 `Laravel` 事件（Event）以及其监听触发方法；  
-⑤ 掌握使用 `Entrust` （Laravel 5适配版本）包来实现角色与权限的控制；  
+⑤ 掌握使用 `Entrust` （ `Laravel 5` 适配版本）包来实现角色与权限的控制；  
 ⑥ 理解 `Http` 层中间件（Middleware）、请求（Request）与控制器（Controller）三者之间的关系；  
 ⑦ 缓存的使用；  
-⑧ Blade模版继承、嵌套与扩展等；  
+⑧ `Blade` 模版继承、嵌套与扩展等；  
 ⑨ 服务容器、自动注入等概念的了解；  
 ⑩ ......
 
@@ -73,8 +73,8 @@ SESSION_DRIVER=file
 ####前端页面
 ① JS模版引擎  
 ② Ajax与Json  
-③ jQuery
-④ CKEditor 网页编辑器    
+③ jQuery  
+④ CKEditor 网页编辑器      
 ⑤ Bootstrap 前端框架  
 ⑥ JS弹窗组件  
 ⑦ CSS与JS静态资源的压缩与合并  
