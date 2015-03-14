@@ -37,7 +37,7 @@
 				</div>
 				
 				<div class="yas_footer">
-					&copy; Copyright 2011-{{ date('Y') }} designed &amp; developed by <a href="{{{ Cache::get('system_author_website') }}}">{{ Cache::get('system_author') }}</a>
+					&copy; Copyright 2011-{{ date('Y') }} designed &amp; developed by <a href="{{ Cache::get('system_author_website') }}">{{ Cache::get('system_author') }}</a>
 				</div>
 
 			</div>
