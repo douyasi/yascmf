@@ -18,7 +18,7 @@
 		@if(empty($archives))
 			<div class="panel panel-primary">
 				<div class="panel-heading">
-					<h3 class="panel-title">{{{ date('Y-m') }}}</h3>
+					<h3 class="panel-title">{{ date('Y-m') }}</h3>
 				</div>
 				<div class="panel-body">
 					笔者太懒了，一篇文章都没有，大家一起鄙视TA
@@ -28,14 +28,14 @@
 			@foreach($archives as $archive)
 			<div class="panel panel-primary">
 				<div class="panel-heading">
-					<h3 class="panel-title">{{{ $archive['year_month'] }}}</h3>
+					<h3 class="panel-title">{{ $archive['year_month'] }}</h3>
 				</div>
 				<div class="panel-body">
-					共发布 <strong>{{{ $archive['count'] }}}</strong> 文章
+					共发布 <strong>{{ $archive['count'] }}</strong> 文章
 				</div>
 				<div class="list-group">
 					@foreach($archive['articles'] as $art)
-					<a href="{{ get_article_slug($art->slug, $art->id, $art->c_slug, $art->c_id) }}" class="list-group-item">{{{ $art->title }}}</a>
+					<a href="{{ get_article_slug($art->slug, $art->id, $art->c_slug, $art->c_id) }}" class="list-group-item">{{ $art->title }}</a>
 					@endforeach
 				</div>
 			</div>
