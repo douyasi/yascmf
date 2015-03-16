@@ -121,4 +121,17 @@ class DataCache{
 		}
 		return true;
 	}
+	
+	/**
+	 * 重建数据缓存
+	 * 
+	 * @return boolean true
+	 */
+	public static function rebuildDataCache(){
+		Cache::forget('categories');  //清理掉分类缓存
+		Cache::forget('archives');  //清理掉存档缓存
+		static::cacheCategories();
+		static::cacheArchive();
+		return true;
+	}
 }

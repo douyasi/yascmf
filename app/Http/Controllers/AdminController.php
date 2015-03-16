@@ -135,7 +135,7 @@ class AdminController extends CommonController{
 	 */
 	public function getRebuildCache(){
 		SystemOptionCache::cacheStatic();
-		DataCache::cacheCategories();
+		DataCache::rebuildDataCache();
 		return view('back.cache.index');
 	}
 }
