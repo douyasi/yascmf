@@ -31,7 +31,7 @@
 				var html = build_html(0, '失败：服务器端异常', '操作');
 				$('.validation_tips_area').html(html).css('display','block');
 				setTimeout( function(){$('.validation_tips_area').fadeOut('slow');},2000);
-				//setTimeout("location.reload()",1000);
+				setTimeout("location.reload()",1000);
 			}
 		};
 		$('{{ $_form }}').ajaxForm(options);
