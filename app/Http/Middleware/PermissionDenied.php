@@ -7,19 +7,19 @@ use Closure;
  *
  * @author raoyc <raoyc2009@gmail.com>
  */
-class PermissionDenied {
+class PermissionDenied
+{
 
-	/**
-	 * Handle an incoming request.
-	 *
-	 * @param  \Illuminate\Http\Request  $request
-	 * @param  \Closure  $next
-	 * @return mixed
-	 */
-	public function handle($request, Closure $next)
-	{
-		return response()->view('back.exceptions.deny', array(), 403);
-		return $next($request);
-	}
-
+    /**
+     * Handle an incoming request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure  $next
+     * @return mixed
+     */
+    public function handle($request, Closure $next)
+    {
+        return response()->view('back.exceptions.deny', array(), 403);
+        return $next($request);
+    }
 }

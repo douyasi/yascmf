@@ -2,6 +2,7 @@
 
 use Illuminate\Support\ServiceProvider;
 use Douyasi\Extensions\DouyasiValidator as DouyasiValidator;
+
 //use Validator;
 
 /**
@@ -9,38 +10,36 @@ use Douyasi\Extensions\DouyasiValidator as DouyasiValidator;
  *
  * @author raoyc<raoyc2009@gmail.com>
  */
-class DouyasiValidatorServiceProvider extends ServiceProvider {
+class DouyasiValidatorServiceProvider extends ServiceProvider
+{
 
-	/**
-	 * Bootstrap the application services.
-	 *
-	 * @return void
-	 */
-	public function boot()
-	{
-		//
-		/*注册自定义验证类*/
-		/*
-		Validator::resolver(function($translator, $data, $rules, $messages)
-		{
-			return new DouyasiValidator($translator, $data, $rules, $messages);
-		});
-		*/
-		$this->app['validator']->resolver(function($translator, $data, $rules, $messages)
-		{
-			return new DouyasiValidator($translator, $data, $rules, $messages);
-		});
-	}
+    /**
+     * Bootstrap the application services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        //
+        /*注册自定义验证类*/
+        /*
+        Validator::resolver(function($translator, $data, $rules, $messages)
+        {
+            return new DouyasiValidator($translator, $data, $rules, $messages);
+        });
+        */
+        $this->app['validator']->resolver(function ($translator, $data, $rules, $messages) {
+            return new DouyasiValidator($translator, $data, $rules, $messages);
+        });
+    }
 
-	/**
-	 * Register the application services.
-	 *
-	 * @return void
-	 */
-	public function register()
-	{
-		//
-		
-	}
-
+    /**
+     * Register the application services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        //
+    }
 }

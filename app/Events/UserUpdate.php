@@ -1,22 +1,21 @@
 <?php namespace Douyasi\Events;
 
 use Douyasi\Events\Event;
-
 use Illuminate\Queue\SerializesModels;
 
-class UserUpdate extends Event {
+class UserUpdate extends Event
+{
 
-	use SerializesModels;
+    use SerializesModels;
 
-	/**
-	 * Create a new event instance.
-	 *
-	 * @return void
-	 */
-	public function __construct($user)
-	{
-		//
-		$this->user = $user;
-	}
-
+    /**
+     * Create a new event instance.
+     *
+     * @return void
+     */
+    public function __construct($user)
+    {
+        //
+        $this->user = $user;
+    }
 }

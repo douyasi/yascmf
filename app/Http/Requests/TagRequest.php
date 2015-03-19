@@ -2,8 +2,6 @@
 
 use Douyasi\Http\Requests\DouyasiRequest;
 
-class TagRequest extends DouyasiRequest {
-
-
-
+class TagRequest extends DouyasiRequest
+{
 }
