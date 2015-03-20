@@ -44,7 +44,7 @@ interface IRepository
      * 更新特定id资源
      *
      * @param  int $id 资源id
-     * @param  array $inputs 必须传入跟更新模型相关的数据
+     * @param  array $inputs 必须传入与更新模型相关的数据
      * @param  string|array $extra 可选额外传入的参数
      * @return void
      */
