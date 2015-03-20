@@ -15,12 +15,11 @@ class Setting extends Eloquent
     public $timestamps = false;  //关闭自动更新时间戳
 
     /**
-     * 此表为复合型的Meta元数据表
-     * 根据type不同确定不同内容模型
-     * type : CATEGORY 分类
-     * type : TAG 标签
+     * 动态设置分组
+     * 模型对象关系：动态设置对应的分组
+     *
+     * @return Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-
     public function setting_type()
     {
         return $this->belongsTo('Douyasi\Models\SettingType');

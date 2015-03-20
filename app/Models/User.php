@@ -22,7 +22,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     protected $fillable = ['nickname', 'email', 'realname', 'gender', 'pid', 'pid_card_thumb1', 'pid_card_thumb2', 'avatar', 'phone', 'address', 'emergency_contact'];
     protected $hidden = ['password', 'confirmation_code', 'remember_token'];
     
-    
+
+    #********
+    #* 此表为复合型的用户数据表，根据type不同确定不同用户
+    #* type : Manager 管理型用户
+    #* type : Customer 投资型客户
+    #********
     //限定管理型用户
     public function scopeManager($query)
     {
@@ -33,15 +38,5 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function scopeCustomer($query)
     {
         return $query->where('user_type', '=', 'Customer');
-    }
-
-    /**
-     * 模型对象关系：投资客户对应的资金账户
-     *
-     * @return Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function account()
-    {
-        return $this->hasOne('Douyasi\Models\Account', 'user_id', 'id');
     }
 }
