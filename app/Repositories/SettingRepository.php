@@ -177,7 +177,7 @@ class SettingRepository extends BaseRepository
                                  ->select('settings.*', 'setting_type.name as tname', 'setting_type.id as tid', 'setting_type.name as tname', 'setting_type.value as tvalue')
                                  ->orderBy('sort', 'desc')
                                  ->orderBy('id', 'desc')
-                                 ->paginate(10);
+                                 ->paginate($size);
         return $settings;
     }
 
