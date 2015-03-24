@@ -74,15 +74,18 @@ class AdminSystemLogController extends BackController
         $sys_log = $this->log->getById($id);
         is_null($sys_log) && abort(404);
 
-        $ret = SettingCache::cacheSetting('system_operation', 'array');  //以数组键值对方式缓存动态设置
-
-        if ($ret) {
-            $sys_op = Cache::get('system_operation');
+        if (!Cache::has('system_operation')) {
+            $ret = SettingCache::cacheSetting('system_operation', 'array');
+            if($ret){
+                 $sys_op = Cache::get('system_operation');
+            } else {
+                //缓存数据出错，抛出异常
+                return view('back.exceptions.jump', ['exception' => '数据缓存异常，请联系网站管理员！']);
+            }
         } else {
-            //缓存数据出错
-            return view('exceptions.jump', ['exception' => '数据缓存异常，请联系网站管理员！']);
-            die();
+            $sys_op = Cache::get('system_operation');
         }
+        
         return view('back.system_log.show', compact('sys_log', 'sys_op'));
     }
 }

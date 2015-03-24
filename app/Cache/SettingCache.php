@@ -18,7 +18,7 @@ use Config;
 class SettingCache
 {
     
-    /**
+/**
      * 缓存特定动态设置分组下的设置数据
      *
      * @param string $type_name 动态设置分组名
@@ -32,7 +32,7 @@ class SettingCache
             return false;  //缓存失败，不存在该分组名
         } else {
             $type_id = $setting_type->id;
-            $settings = Setting::where('type_id', '=', e($type_id))->get();  //获取该$type_name下动态设置settings
+            $settings = Setting::where('type_id', '=', e($type_id))->where('status', '=', '1')->get();  //获取该$type_name下动态设置settings
             if ($format === 'array') {
                 $set = array();
                 if (!$settings->isEmpty()) {  //Eloquent ORM 查询结果集非空
@@ -68,11 +68,17 @@ class SettingCache
      * @param string $type_name 动态设置分组名
      * @return void
      */
-    public static function uncacheSetting($type_name='')
+    public static function uncacheSetting($type_name = '')
     {
         if ($type_name === '') {
             if (Config::get('cache.driver') === 'memcached') {
                 Cache::tags('setting')->flush();  //清理所有动态设置（缓存标签为setting）缓存
+            } else {
+                $setting_types = SettingType::lists('name');  //这里返回是数组
+                foreach ($setting_types as $st)
+                {
+                    static::uncacheSetting($st);
+                }
             }
         } else {
             if (Config::get('cache.driver') === 'memcached') {

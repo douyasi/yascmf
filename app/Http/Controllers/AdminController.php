@@ -6,6 +6,7 @@ use Douyasi\Events\UserUpload as UserUpload;
 use Validator;
 use Douyasi\Cache\SystemOptionCache as SystemOptionCache;
 use Douyasi\Cache\DataCache as DataCache;
+use Douyasi\Cache\SettingCache as SettingCache;
 use Cache;
 
 /**
@@ -130,6 +131,7 @@ class AdminController extends CommonController
     {
         SystemOptionCache::cacheStatic();
         DataCache::rebuildDataCache();
+        SettingCache::uncacheSetting();
         return view('back.cache.index');
     }
 }
