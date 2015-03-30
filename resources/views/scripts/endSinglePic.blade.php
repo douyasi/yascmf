@@ -1,5 +1,6 @@
 		{{-- SinglePic --}}
 		$('.uploadPic').click(function(){
+			var ele = $(this).data('id');
 			$.layer({
 					type : 2,
 					shade: [0.5, '#000',true],
@@ -8,7 +9,7 @@
 					closeBtn: false,
 					shadeClose: true,
 					fix: false,
-					iframe : {src: '{{ route('admin.upload') }}'},
+					iframe : {src: '{{ route('admin.upload') }}?from='+ ele},
 					area : ['600px' , '250px'],
 					offset : ['', ''],
 					success: function(layero){
@@ -29,7 +30,8 @@
 				});
 		});
 		$('.previewPic').hover(function(){
-			var pic_url = $.trim($('#thumb').val());
+			var ele = $(this).data('id');
+			var pic_url = $.trim($('#'+ele).val());
 			if( pic_url.indexOf('{{ url('') }}') === -1){  //如果不是站内域名，不予预览
 				tmp = '<div style="max-width: 300px;background-color: #000;"><p style="margin:10px; color: #f00;">没有图片地址，或者图片地址为外链，暂时无法预览！</p></div>';
 			}

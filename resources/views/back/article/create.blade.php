@@ -41,7 +41,7 @@
 										<li>
 											<label class="description" for="thumb">缩略图  <span class="tips">某些前端模版可能需要缩略图</span></label>
 											<div class="form_item">
-												<input type="text" id="thumb" name="thumb" value="" placeholder="缩略图地址：如{{ url('') }}/assets/img/yas_logo.png">  <a href="javascript:void(0);" class="uploadPic"><i class="fa fa-fw fa-picture-o" title="上传"></i></a>  <a href="javascript:void(0);" class="previewPic"><i class="fa fa-fw fa-eye" title="预览小图"></i></a>
+												<input type="text" id="thumb" name="thumb" value="" placeholder="缩略图地址：如{{ url('') }}/assets/img/yas_logo.png">  <a href="javascript:void(0);" class="uploadPic" data-id="thumb"><i class="fa fa-fw fa-picture-o" title="上传"></i></a>  <a href="javascript:void(0);" class="previewPic" data-id="thumb"><i class="fa fa-fw fa-eye" title="预览小图"></i></a>
 											</div>
 										</li>
 										<li>
@@ -113,7 +113,7 @@
 @stop
 
 	@section('layer')
-	@include('scripts.endSinglePic') {{-- 引入当个图片上传与娱乐JS，依赖于Layer --}}
+	@include('scripts.endSinglePic') {{-- 引入单个图片上传与预览JS，依赖于Layer --}}
 	@stop
 
 

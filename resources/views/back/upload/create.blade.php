@@ -54,7 +54,7 @@
 			<li>
 				<label class="description" for="name">上传图片  <span class="required">(*)</span></label>
 				<div class="form_item">
-					{!! Form::file('picture') !!}
+					{!! Form::file('picture', array('accept' => '.jpg,.png,.gif,.bmp')) !!}
 				</div>
 			</li>
 			
