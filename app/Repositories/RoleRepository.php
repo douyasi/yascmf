@@ -66,7 +66,7 @@ class RoleRepository extends BaseRepository
         $perms = $role->perms;  //请参阅Entrust文档：https://github.com/Zizaco/entrust/tree/laravel-5
         $cans = array();
         foreach ($perms as $p) {
-            $cans[] = array('id'=>$p->id,'name'=>$p->name);
+            $cans[] = ['id' => $p->id, 'name' => $p->name];
         }
         return $cans;
     }
