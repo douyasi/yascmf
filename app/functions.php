@@ -246,7 +246,13 @@ function user($ret = 'nickname')
                 break;
         }
     } else {
-        return false;
+        if($ret === 'object'){
+            $user = app()->make('Douyasi\Repositories\UserRepository');
+            return $user->manager(1);  //主要为了修正 `php artisan route:list` 命令出错问题
+        }
+        else{
+            return 'No Auth::check()';
+        }
     }
 }
 

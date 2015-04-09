@@ -129,6 +129,17 @@ class UserRepository extends BaseRepository
         return $role;
     }
 
+    /**
+     * 获取特定id管理员信息
+     * 
+     * @param  int $id
+     * @return Douyasi\Models\User
+     */
+    public function manager($id)
+    {
+        return $this->model->manager()->find($id);
+    }
+
     #********
     #* 资源 REST 相关的接口函数 START
     #********
