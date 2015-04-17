@@ -32,7 +32,7 @@
 
 				<ul class="nav navbar-nav navbar-right">
 					<!--<li><a href="#" target="_blank">芽丝官网</a></li>-->
-					@if(user())
+					@if(Auth::check())
 						<li><a href="{{ route('admin') }}">后台</a></li>
 						<li><a href="{{ route('logout') }}">退出</a></li>
 					@else
