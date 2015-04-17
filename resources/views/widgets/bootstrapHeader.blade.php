@@ -3,7 +3,7 @@
 	<div class="navbar navbar-default navbar-fixed-top">
 		<div class="container">
 			<div class="navbar-header">
-				<a href="/" class="navbar-brand">{{{ Cache::get('website_title','芽丝博客') }}}</a>
+				<a href="/" class="navbar-brand">{{ Cache::get('website_title','芽丝博客') }}</a>
 				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main" aria-expanded="true">
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
@@ -15,7 +15,7 @@
 					<li><a href="{{ route('home') }}">首页</a>
 					@foreach($topPage as $tPage)
 					<li>
-						<a href="{{ get_page_slug($tPage->slug, $tPage->id) }}">{{{ $tPage->title }}}</a>
+						<a href="{{ get_page_slug($tPage->slug, $tPage->id) }}">{{ $tPage->title }}</a>
 					</li>
 					@endforeach
 					<li><a href="{{ route('archive') }}">归档</a>

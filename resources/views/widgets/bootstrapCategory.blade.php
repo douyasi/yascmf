@@ -6,8 +6,8 @@
 			@else
 				@foreach ($categories as $rCat)
 				<li class="list-group-item">
-					<span class="badge">{{{ $rCat['count'] }}}</span>
-					<a href="{{{ get_category_slug($rCat['category']->slug, $rCat['category']->id) }}}">{{ $rCat['category']->name }}</a>
+					<span class="badge">{{ $rCat['count'] }}</span>
+					<a href="{{ get_category_slug($rCat['category']->slug, $rCat['category']->id) }}">{{ $rCat['category']->name }}</a>
 				</li>
 				@endforeach
 			@endif
