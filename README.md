@@ -22,7 +22,8 @@ composer install
 touch .env
 ```
 Windows 下生成 `.env` 文件可以在命令行输入下面命令：
-```
+
+```bash
 echo. > .env
 ```
 
@@ -31,7 +32,8 @@ echo. > .env
 请将源码包根目录下 `yascmf_app.sql` 导入数据库，默认使用 `UTF-8` 编码，`utf8_unicode_ci`作为排序规则。
 
 请根据数据库与服务器实际情况修改 `.env` 配置文件，这里给出一个示例。
-```
+
+```php
 APP_ENV=local
 APP_DEBUG=true
 APP_KEY=RrQvzbUxaKIlj74s3hOYClGQ71zoVixr
@@ -44,6 +46,7 @@ DB_PASSWORD=root
 CACHE_DRIVER=file
 SESSION_DRIVER=file
 ```
+
 ③ 服务器绑定域名，并将文档根目录设置为源码包 `public` 目录下，给 `storage` 目录可写权限，如果后台需要上传图片请给 `public\uploads` 可写权限，如果使用 `minify` 来压缩与合并 `CSS` 与 `JS` 静态资源，请给 `public\min\tmp` 可写权限。
 
 ④ 访问服务器绑定的域名，如果能访问演示站类似的前台界面，说明您已经安装成功。
@@ -52,12 +55,12 @@ SESSION_DRIVER=file
 
 ###界面展示
 
-前台： （ 前台界面更多请查看[演示网站](http://www.yas.so/) ）   
+前台： （ 前台界面更多请查看[演示网站](http://www.yas.so/) ）  
 ![front](http://douyasi.com/usr/uploads/2015/03/3488851921.jpg)  
 
 后台：  （后台界面与当前版本存在配色差异）
 ![ajax_success](http://www.yas.so/static/img/ajax_success.jpg)  
-  
+
 ![error](http://www.yas.so/static/img/error.jpg)  
 
 ###源码学习
@@ -69,7 +72,7 @@ SESSION_DRIVER=file
 ② 实现[自定义分页样式扩展](https://github.com/douyasi/yascmf/blob/master/app/Extensions/DouyasiPresenter.php)，不是那种类似 Bootstrap 分页样式；  
 ③ 了解仓库（Repository）设计模式（注意本系统后台使用了[仓库](https://github.com/douyasi/yascmf/tree/master/app/Repositories)，前台没有）;  
 ④ 理解 Laravel [事件](https://github.com/douyasi/yascmf/blob/master/app/Handlers/Events/UserEventHandler.php) 以及其[监听触发方法](https://github.com/douyasi/yascmf/blob/master/app/Http/Controllers/AuthorityController.php#L42)；  
-⑤ 掌握使用 `Entrust` （[Laravel 5适配版本](https://github.com/Zizaco/entrust/tree/laravel-5)）包来实现角色与权限的控制；
+⑤ 掌握使用 `Entrust` （[Laravel 5适配版本](https://github.com/Zizaco/entrust/tree/laravel-5)）包来实现角色与权限的控制；  
 ⑥ 理解 `Http` 层 中间件（`Middleware`） 、 请求（`Request`） 与 控制器（`Controller`） 三者之间的关系；  
 ⑦ 在控制器中结合 [Request](https://github.com/douyasi/yascmf/blob/master/app/Http/Requests/ArticleRequest.php)  实现[表单验证](https://github.com/douyasi/yascmf/blob/master/app/Http/Controllers/Admin/AdminArticleController.php#L94)；  
 ⑧ [缓存](https://github.com/douyasi/yascmf/blob/master/app/Cache/DataCache.php#L80)的使用；  
@@ -80,11 +83,11 @@ SESSION_DRIVER=file
 前端方面知识或技术要点：
 
 ① `Javascript` 模版引擎   [laytpl](http://sentsin.com/layui/laytpl/)  
-② `Ajax` 与 `JSON`    
+② `Ajax` 与 `JSON`  
 ③  `jQuery` 响应事件及其使用  
-④ `CKEditor` 网页编辑器   
-⑤ `Bootstrap` 前端框架   
-⑥ `JS` 弹窗组件 [Layer](http://sentsin.com/jquery/layer/)    
+④ `CKEditor` 网页编辑器  
+⑤ `Bootstrap` 前端框架  
+⑥ `JS` 弹窗组件 [Layer](http://sentsin.com/jquery/layer/)  
 ⑦ `CSS` 与 `JS` 静态资源的压缩与合并（使用 [minify](https://github.com/douyasi/yascmf/blob/master/app/functions.php#L76) ）  
 ......
 
