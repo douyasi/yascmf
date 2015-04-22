@@ -1,0 +1,42 @@
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Source Sans Pro Light'), local('SourceSansPro-Light'), url(./s/sourcesanspro/v9/toadOcfmlt9b38dHJxOBGNbE_oMaV8t2eFeISPpzbdE.woff) format('woff'), url(./s/sourcesanspro/v9/toadOcfmlt9b38dHJxOBGPS42wKzre0cxmO5m5GyTsY.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Source Sans Pro'), local('SourceSansPro-Regular'), url(./s/sourcesanspro/v9/ODelI1aHBYDBqgeIAH2zlBM0YzuT7MdOe03otPbuUS0.woff) format('woff'), url(./s/sourcesanspro/v9/ODelI1aHBYDBqgeIAH2zlEY6Fu39Tt9XkmtSosaMoEA.ttf) format('truetype'), url(./s/sourcesanspro/v9/ODelI1aHBYDBqgeIAH2zlN0tugusXa58UbOrParLRF0.eot) format('eot');
+}
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 600;
+  src: local('Source Sans Pro Semibold'), local('SourceSansPro-Semibold'), url(./s/sourcesanspro/v9/toadOcfmlt9b38dHJxOBGJ6-ys_j0H4QL65VLqzI3wI.woff) format('woff'), url(./s/sourcesanspro/v9/toadOcfmlt9b38dHJxOBGBRq_IsDXucKYMk4-diqPEc.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Source Sans Pro Bold'), local('SourceSansPro-Bold'), url(./s/sourcesanspro/v9/toadOcfmlt9b38dHJxOBGFkQc6VGVFSmCnC_l7QZG60.woff) format('woff'), url(./s/sourcesanspro/v9/toadOcfmlt9b38dHJxOBGLlcMrNrsnL9dgADnXgYJjs.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: italic;
+  font-weight: 300;
+  src: local('Source Sans Pro Light Italic'), local('SourceSansPro-LightIt'), url(./s/sourcesanspro/v9/fpTVHK8qsXbIeTHTrnQH6GGomRtBD2u8FwSY4jjlmeA.woff) format('woff'), url(./s/sourcesanspro/v9/fpTVHK8qsXbIeTHTrnQH6Dy0a9mz2IKMOL1zj2ElpUf3rGVtsTkPsbDajuO5ueQw.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: italic;
+  font-weight: 400;
+  src: local('Source Sans Pro Italic'), local('SourceSansPro-It'), url(./s/sourcesanspro/v9/M2Jd71oPJhLKp0zdtTvoMzNrcjQuD0pTu1za2FULaMs.woff) format('woff'), url(./s/sourcesanspro/v9/M2Jd71oPJhLKp0zdtTvoMzpKUtbt71woJ25xl7KOGD0.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: italic;
+  font-weight: 600;
+  src: local('Source Sans Pro Semibold Italic'), local('SourceSansPro-SemiboldIt'), url(./s/sourcesanspro/v9/fpTVHK8qsXbIeTHTrnQH6PULlOK_XQENnt2ryrY843E.woff) format('woff'), url(./s/sourcesanspro/v9/fpTVHK8qsXbIeTHTrnQH6OgjO17HpiopmTnQucPs34_3rGVtsTkPsbDajuO5ueQw.ttf) format('truetype');
+}
