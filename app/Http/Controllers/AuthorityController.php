@@ -37,7 +37,7 @@ class AuthorityController extends CommonController
             'user_type' => 'Manager',
             'is_lock'=> 0,
         ];
-        if (Auth::attempt($credentials, false)) {
+        if (Auth::attempt($credentials, $request->has('remember'))) {
             event(new UserLogin(user('object')));  //触发登录事件
             return redirect()->intended(route('admin'));
         } else {
