@@ -42,9 +42,9 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li class="active"><a href="{{ url('demo/index') }}"><i class="fa fa-circle-o"></i> 概述</a></li>
+                <li class="active"><a href="{{ route('admin.console.index') }}"><i class="fa fa-circle-o"></i> 概述</a></li>
                 <li><a href="#"><i class="fa fa-circle-o"></i> 个人资料</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> 重建缓存</a></li>
+                <li><a href="{{ route('admin.cache') }}"><i class="fa fa-circle-o"></i> 重建缓存</a></li>
               </ul>
             </li>
             <!--//控制台 active treeview-->
@@ -57,10 +57,10 @@
                 <span class="label label-primary pull-right">4</span>
               </a>
               <ul class="treeview-menu">
-                <li><a href="#"><i class="fa fa-file-o"></i> 文章</a></li>
-                <li><a href="#"><i class="fa fa-file-o"></i> 单页</a></li>
-                <li><a href="#"><i class="fa fa-file-o"></i> 碎片</a></li>
-                <li><a href="#"><i class="fa fa-file-o"></i> 分类</a></li>
+                <li><a href="{{ route('admin.article.index') }}"><i class="fa fa-file-o"></i> 文章</a></li>
+                <li><a href="{{ route('admin.page.index') }}"><i class="fa fa-file-o"></i> 单页</a></li>
+                <li><a href="{{ route('admin.fragment.index') }}"><i class="fa fa-file-o"></i> 碎片</a></li>
+                <li><a href="{{ route('admin.category.index') }}"><i class="fa fa-file-o"></i> 分类</a></li>
               </ul>
             </li>
             <!--//内容管理 treeview-->
@@ -135,4 +135,12 @@
           </ul><!-- /.sidebar-menu -->
         </section>
         <!-- /.sidebar -->
+        <!--尝试导航自动高亮-->
+        <script type="text/javascript">
+          {{-- URL::current() --}}
+          {{-- Route::currentRouteName() --}}
+          $('.submenu>li').find('a[href="{{ cur_nav(Route::currentRouteName()) }}"]').closest('li').addClass('active');  //二级链接高亮
+          $('.submenu>li').find('a[href="{{ cur_nav(Route::currentRouteName()) }}"]').closest('.nav_list>li').addClass('active');  //一级栏目[含二级链接]高亮
+          $('.nav_list>li').find('a[href="{{ cur_nav(Route::currentRouteName()) }}"]').closest('.nav_list>li').addClass('active');  //一级栏目[不含二级链接]高亮
+        </script>
       </aside>

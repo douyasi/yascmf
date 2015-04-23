@@ -56,9 +56,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!--wrapper start-->
     <div class="wrapper">
 
-      @include('widget.main-header')
+      @include('widgets.main-header')
 
-      @include('widget.main-sidebar')
+      @include('widgets.main-sidebar')
 
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
@@ -83,10 +83,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <footer class="main-footer">
         <!-- To the right -->
         <div class="pull-right hidden-xs">
-          后台模版基于 <a href="https://github.com/almasaeed2010/AdminLTE">AdminLTE</a> ， 经过 <a href="#">raoyc</a> 修改以适配当前系统 。
+          后台模版基于 <a href="https://github.com/almasaeed2010/AdminLTE">AdminLTE</a> ， 经过 <a href="http://raoyc.com">raoyc</a> 修改以适配当前系统 。
         </div>
         <!-- Default to the left -->
-        <strong>Copyright &copy; 2015 芽丝内容管理框架(<code>YASCMF</code>)</strong>    版本: v1.0
+        <strong>Copyright &copy; Copyright 2011-{{ date('Y') }} <a href="{{ Cache::get('system_author_website', 'http://douyasi.com') }}">{{ Cache::get('system_author','芽丝内容管理框架') }}</a></strong>  (<code>YASCMF</code>)  版本: v1.0
       </footer>
 
 @stop
@@ -95,7 +95,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <!-- Control Sidebar -->
       <aside class="control-sidebar control-sidebar-dark">
 
-        @include('widget.control-sidebar')
+        @include('widgets.control-sidebar')
 
       </aside><!-- /.control-sidebar -->
       <!-- Add the sidebar's background. This div must be placed
