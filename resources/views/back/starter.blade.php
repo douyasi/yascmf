@@ -1,6 +1,6 @@
 {{-- starter.blade.php --}}
 
-@extends('layout.back')
+@extends('layout._back')
 
 @section('content-header')
 @parent

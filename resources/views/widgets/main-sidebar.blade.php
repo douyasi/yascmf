@@ -35,15 +35,15 @@
             
             <!--含子节点 且当前状态为active 的一级导航节点-->
             <!--控制台 active treeview-->
-            <li class="active treeview">
+            <li class="treeview">
               <a href="#">
                 <i class="fa fa-dashboard"></i>
                 <span>控制面板</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li class="active"><a href="{{ route('admin.console.index') }}"><i class="fa fa-circle-o"></i> 概述</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> 个人资料</a></li>
+                <li><a href="{{ route('admin.console.index') }}"><i class="fa fa-circle-o"></i> 概述</a></li>
+                <li><a href="{{ route('admin.me.index') }}"><i class="fa fa-circle-o"></i> 个人资料</a></li>
                 <li><a href="{{ route('admin.cache') }}"><i class="fa fa-circle-o"></i> 重建缓存</a></li>
               </ul>
             </li>
@@ -66,7 +66,7 @@
             <!--//内容管理 treeview-->
 
             <!--无子节点的一级导航节点-->
-            <li class="active"><a href="#"><i class='fa fa-link'></i> <span>友链</span></a></li>
+            <li><a href="#"><i class='fa fa-link'></i> <span>友链</span></a></li>
             <li><a href="#"><i class='fa fa-book'></i> <span>写作</span></a></li>
             <li><a href="#"><i class="fa fa-tags"></i> <span>标签</span></a></li>
             
@@ -135,14 +135,4 @@
           </ul><!-- /.sidebar-menu -->
         </section>
         <!-- /.sidebar -->
-        <!--尝试导航自动高亮-->
-        <script type="text/javascript">
-
-          {{-- URL::current() --}}
-          {{-- Route::currentRouteName() --}}
-
-          $('.submenu>li').find('a[href="{{ cur_nav(Route::currentRouteName()) }}"]').closest('li').addClass('active');  //二级链接高亮
-          $('.submenu>li').find('a[href="{{ cur_nav(Route::currentRouteName()) }}"]').closest('.nav_list>li').addClass('active');  //一级栏目[含二级链接]高亮
-          $('.nav_list>li').find('a[href="{{ cur_nav(Route::currentRouteName()) }}"]').closest('.nav_list>li').addClass('active');  //一级栏目[不含二级链接]高亮
-        </script>
       </aside>

@@ -13,11 +13,6 @@
     Template from https://almsaeedstudio.com/
     modified by raoyc<raoyc2009@gmail.com>
 -->
-
-<!--
-This is a starter template page. Use this page to start your new project from
-scratch. This page gets rid of all links and provides the needed markup only.
--->
 @stop
 
 @section('title') 后台 - YASCMF @stop
@@ -114,7 +109,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     <!-- Slimscroll -->
     <script src="{{ asset('plugins/slimScroll/jquery.slimscroll.min.js') }}" type="text/javascript"></script>
+    
+    <!--highlight main-sidebar-->
+    <script type="text/javascript">
+      $(document).ready(function(){
+          {{-- URL::current() --}}
+          {{-- Route::currentRouteName() --}}
 
+          $('ul.treeview-menu>li').find('a[href="{{ cur_nav(Route::currentRouteName()) }}"]').closest('li').addClass('active');  //二级链接高亮
+          $('ul.treeview-menu>li').find('a[href="{{ cur_nav(Route::currentRouteName()) }}"]').closest('li.treeview').addClass('active');  //一级栏目[含二级链接]高亮
+          $('sidebar-menu>li').find('a[href="{{ cur_nav(Route::currentRouteName()) }}"]').addClass('active');  //一级栏目[不含二级链接]高亮
+      });
+    </script>
     <!-- AdminLTE for demo purposes -->
     <script src="{{ asset('dist/js/yascmf.js') }}" type="text/javascript"></script>
 

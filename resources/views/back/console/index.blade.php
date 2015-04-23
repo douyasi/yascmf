@@ -7,9 +7,8 @@
             <small>概述</small>
           </h1>
           <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> 主页</a></li>
-            <li><a href="#">控制面板</a></li>
-            <li class="active">概述</li>
+            <li><a href="{{ route('admin') }}"><i class="fa fa-dashboard"></i> 主页</a></li>
+            <li class="active">控制面板 - 概述</li>
           </ol>
 @stop
 

@@ -15,7 +15,7 @@ class AdminMeController extends BackController
 
 
     /**
-     * The RoleRepository instance.
+     * The MeRepository instance.
      *
      * @var Douyasi\Repositories\MeRepository
      */
@@ -50,20 +50,11 @@ class AdminMeController extends BackController
      */
     public function putUpdate(MeRequest $request)
     {
-        //
-        if ($request->is_ajax() && $request->is_method('put')) {
-            $validator = $request->validate('update');
-            $data = $request->data('update');
-            $json = $request->response();
-            $json = array_replace($json, ['operation' => '修改个人资料']);
-
-            if ($validator->passes()) {
-                $this->me->update(user('id'), $data);
-                $json = array_replace($json, ['status' => 1, 'info' => '成功']);
-            } else {
-                $json = format_json_message($validator->messages(), $json);
-            }
-            return response()->json($json);
+        //新的Bootstrap后台框架开始废弃ajax提交方式
+        if ($request->isMethod('put')) {
+            $data = $request->all();
+            $this->me->update(user('id'), $data);
+            return response()->json(['result' => 'pass']);
         } else {
             return view('back.exceptions.jump', ['exception' => '非法请求，不予处理！']);
         }
