@@ -137,8 +137,10 @@
         <!-- /.sidebar -->
         <!--尝试导航自动高亮-->
         <script type="text/javascript">
+
           {{-- URL::current() --}}
           {{-- Route::currentRouteName() --}}
+
           $('.submenu>li').find('a[href="{{ cur_nav(Route::currentRouteName()) }}"]').closest('li').addClass('active');  //二级链接高亮
           $('.submenu>li').find('a[href="{{ cur_nav(Route::currentRouteName()) }}"]').closest('.nav_list>li').addClass('active');  //一级栏目[含二级链接]高亮
           $('.nav_list>li').find('a[href="{{ cur_nav(Route::currentRouteName()) }}"]').closest('.nav_list>li').addClass('active');  //一级栏目[不含二级链接]高亮
