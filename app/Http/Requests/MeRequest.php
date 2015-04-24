@@ -60,7 +60,7 @@ class MeRequest extends Request
 
             'password.min'   => '密码长度不得少于6',
             'password.max'   => '密码长度不得超出16',
-            'password.regex' => '密码包含非法字符，只能为英文字母(a-zA-Z)、阿拉伯数字(0-9)与特殊符号(~@#%_)组合',
+            'password.regex' => '密码包含非法字符，只能为英文字母（a-zA-Z）、阿拉伯数字（0-9）与特殊符号（~@#%_）组合',
 
             'password_confirmation.same' => '2次密码不一致',
         ];

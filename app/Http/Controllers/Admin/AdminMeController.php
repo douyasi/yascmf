@@ -37,9 +37,9 @@ class AdminMeController extends BackController
      */
     public function getindex()
     {
-        //
-        $me = user('object');
-        return view('back.me.index', compact('me'));
+        //出于兼容Bootstrap后台框架考虑，表单数据使用$input传入，以便出错回调保留上次提交的数据
+        $input = user('object');
+        return view('back.me.index', compact('input'));
     }
 
 
@@ -50,13 +50,8 @@ class AdminMeController extends BackController
      */
     public function putUpdate(MeRequest $request)
     {
-        //新的Bootstrap后台框架开始废弃ajax提交方式
-        if ($request->isMethod('put')) {
-            $data = $request->all();
-            $this->me->update(user('id'), $data);
-            return response()->json(['result' => 'pass']);
-        } else {
-            return view('back.exceptions.jump', ['exception' => '非法请求，不予处理！']);
-        }
+        //使用Bootstrap后台框架，可以废弃ajax提交方式，使用表单自动验证
+        $this->me->update(user('id'), $request->all());
+        return redirect()->route('admin.me.index')->with('message', '成功更新个人资料！');
     }
 }

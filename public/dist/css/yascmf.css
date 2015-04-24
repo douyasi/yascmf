@@ -4365,3 +4365,9 @@ fieldset[disabled] .btn-vk.active {
     white-space: normal!important;
   }
 }
+
+
+/*在AdminLTE基础上额外补充的一些样式*/
+.tablebox-controls {
+  padding: 5px;
+}

@@ -33,6 +33,8 @@
     <!--
     <link href="{{ asset('dist/css/skins/skin-black.min.css') }}" rel="stylesheet" type="text/css" />
     -->
+    <link href="{{ asset('plugins/iCheck/flat/blue.css') }}" rel="stylesheet" type="text/css" />
+
 @stop
 
 @section('head_js')
@@ -110,6 +112,9 @@
     <!-- Slimscroll -->
     <script src="{{ asset('plugins/slimScroll/jquery.slimscroll.min.js') }}" type="text/javascript"></script>
     
+    @section('extraPlugin')
+    @show{{-- 引入额外依赖JS插件 --}}
+
     <!--highlight main-sidebar-->
     <script type="text/javascript">
       $(document).ready(function(){
@@ -119,6 +124,9 @@
           $('ul.treeview-menu>li').find('a[href="{{ cur_nav(Route::currentRouteName()) }}"]').closest('li').addClass('active');  //二级链接高亮
           $('ul.treeview-menu>li').find('a[href="{{ cur_nav(Route::currentRouteName()) }}"]').closest('li.treeview').addClass('active');  //一级栏目[含二级链接]高亮
           $('sidebar-menu>li').find('a[href="{{ cur_nav(Route::currentRouteName()) }}"]').addClass('active');  //一级栏目[不含二级链接]高亮
+
+          @section('filledScript')
+          @show{{-- 在document ready 里面填充一些JS代码 --}}
       });
     </script>
     <!-- AdminLTE for demo purposes -->
@@ -130,7 +138,7 @@
           fixed layout. -->
 
       @section('extraSection')
-      @show{{-- 补充额外的一些代码 --}}
+      @show{{-- 补充额外的一些东东，不一定是JS，可能是HTML --}}
 
 @stop
 

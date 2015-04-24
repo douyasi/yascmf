@@ -51,12 +51,13 @@ class AdminArticleController extends BackController
         ];
 
         //使用仓库方法获取文章列表
-        $articles = $this->content->index($data, 'article');
+        $articles = $this->content->index($data, 'article', env('PAGE_SIZE', 10));
 
+        //注意：因为已经使用 Bootstrap 后台模版，故无须再传入自定义的分页样式
         //传入自定义的分页Presenter
-        $links = page_links($articles, $data);
+        //$links = page_links($articles, $data);
 
-        return view('back.article.index', compact('articles', 'links'));
+        return view('back.article.index', compact('articles'));
     }
 
 
@@ -168,17 +169,7 @@ class AdminArticleController extends BackController
     public function destroy(ArticleRequest $request, $id)
     {
         //
-        if ($request->is_ajax() && $request->is_method('delete')) {
-            $this->content->destroy($id, 'article');
-            $json = [
-                'status' => 1,
-                'info' => '成功',
-                'operation' => '删除文章',
-                'url' => route('admin.article.index'),
-            ];
-            return response()->json($json);
-        } else {
-            return view('back.exceptions.jump', ['exception' => '非法请求，不予处理！']);
-        }
+        $this->content->destroy($id, 'article');
+        return redirect()->route('admin.article.index')->with('message', '删除文章成功！');
     }
 }

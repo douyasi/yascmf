@@ -43,9 +43,9 @@ class DouyasiPresenter implements PresenterContract
     /*
     <div class="yas_page">
         <span class="current">1</span>
-        <a href="http://yascmf.app/admin/article?page=2">2</a>
-        <a href="http://yascmf.app/admin/article?page=3">3</a>
-        <a href="http://yascmf.app/admin/article?page=4">4</a>
+        <a href="http://yascmf.dev/admin/article?page=2">2</a>
+        <a href="http://yascmf.dev/admin/article?page=3">3</a>
+        <a href="http://yascmf.dev/admin/article?page=4">4</a>
     </div>
     */
     /**

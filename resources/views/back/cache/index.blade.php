@@ -14,7 +14,7 @@
 
 @section('content')
         <div class="callout callout-info">
-          <h4><i class="icon fa fa-check"></i>提示</h4>
+          <h4><i class="icon fa fa-check"></i> 提示</h4>
           <p>重建缓存成功！</p>
         </div>
 @stop
