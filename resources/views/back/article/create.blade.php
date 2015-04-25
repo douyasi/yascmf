@@ -53,7 +53,7 @@
                       </div>
                       <div class="form-group">
                         <label>缩略图  <a href="javascript:void(0);" class="uploadPic" data-id="thumb"><i class="fa fa-fw fa-picture-o" title="上传"></i></a>  <a href="javascript:void(0);" class="previewPic" data-id="thumb"><i class="fa fa-fw fa-eye" title="预览小图"></i></a></label>
-                        <input type="text" class="form-control" id="thumb" name="thumb" value="{{ Input::old('thumb') }}" placeholder="缩略图地址：如{{ url('') }}/assets/img/yas_logo.png">  
+                        <input type="text" class="form-control" id="thumb" name="thumb" value="{{ Input::old('thumb') }}" placeholder="缩略图地址：如{{ url('') }}/assets/img/yas_logo.png">
                       </div>
                       <div class="form-group">
                         <label>分类 <small class="text-red">*</small></label>
@@ -107,7 +107,6 @@
   <script src="{{ asset('plugins/iCheck/icheck.min.js') }}" type="text/javascript"></script>
   <!--引入Chosen组件-->
   @include('scripts.endChosen')
-
 
 @stop
 

@@ -100,7 +100,7 @@ html {overflow-x:hidden;overflow-y:hidden;}/*禁止出现滚动条*/
           后台模版基于 <a href="https://github.com/almasaeed2010/AdminLTE">AdminLTE</a> ， 经过 <a href="http://raoyc.com">raoyc</a> 修改以适配当前系统 。
         </div>
         <!-- Default to the left -->
-        <strong>Copyright &copy; Copyright 2011-{{ date('Y') }} <a href="{{ Cache::get('system_author_website', 'http://douyasi.com') }}">{{ Cache::get('system_author','芽丝内容管理框架') }}</a></strong>  (<code>YASCMF</code>)  版本: v1.0
+        <strong>Copyright &copy; Copyright 2011-{{ date('Y') }} <a href="{{ Cache::get('system_author_website', 'http://douyasi.com') }}">{{ Cache::get('system_author','raoyc') }}</a></strong>  芽丝内容管理框架(<code>YASCMF</code>)  版本: v1.0
       </footer>
 
 @stop
@@ -141,7 +141,7 @@ html {overflow-x:hidden;overflow-y:hidden;}/*禁止出现滚动条*/
 
           $('ul.treeview-menu>li').find('a[href="{{ cur_nav(Route::currentRouteName()) }}"]').closest('li').addClass('active');  //二级链接高亮
           $('ul.treeview-menu>li').find('a[href="{{ cur_nav(Route::currentRouteName()) }}"]').closest('li.treeview').addClass('active');  //一级栏目[含二级链接]高亮
-          $('sidebar-menu>li').find('a[href="{{ cur_nav(Route::currentRouteName()) }}"]').addClass('active');  //一级栏目[不含二级链接]高亮
+          $('.sidebar-menu>li').find('a[href="{{ cur_nav(Route::currentRouteName()) }}"]').closest('li').addClass('active');  //一级栏目[不含二级链接]高亮
 
           @section('filledScript')
           @show{{-- 在document ready 里面填充一些JS代码 --}}

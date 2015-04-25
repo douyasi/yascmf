@@ -1,17 +1,28 @@
-@extends('layout.backend')
-@section('main_content')
+@extends('layout._back')
+
+@section('content-header')
 @parent
-					<!--面包屑导航 start-->
-					<div class="breadcrumb_nav">
-						<a href="{{ route('admin') }}"><i class="fa fa-home fa-fw"></i>Home</a>  &gt;  <a href="{{ route('admin.console.index') }}">内容管理</a>  &gt;  标签
-					</div>
-					<!--面包屑导航 end-->
-					
-					<!--cmf主体区域 start-->
-					<div class="main_cmf_content">
-						<div class="cmf_cont">
-							<p><span class="text_bold">等待后续开发...</span></p>
-						</div>
-					</div>
-					<!--cms主体区域 end-->
+          <h1>
+            标签
+            <small></small>
+          </h1>
+          <ol class="breadcrumb">
+            <li><a href="{{ route('admin') }}"><i class="fa fa-dashboard"></i> 主页</a></li>
+            <li class="active">标签</li>
+          </ol>
+@stop
+
+@section('content')
+
+              <div class="box box-primary">
+
+                <div class="box-header with-border">
+                  <h3 class="box-title">标签</h3>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                  <p>等待后续开发...</p>
+                </div><!-- /.box-body -->
+
+              </div>
+
 @stop

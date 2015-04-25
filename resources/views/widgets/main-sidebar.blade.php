@@ -68,8 +68,8 @@
             <!--无子节点的一级导航节点-->
             <li><a href="#"><i class='fa fa-link'></i> <span>友链</span></a></li>
             <li><a href="#"><i class='fa fa-book'></i> <span>写作</span></a></li>
-            <li><a href="#"><i class="fa fa-tags"></i> <span>标签</span></a></li>
-            
+            <li><a href="{{ route('admin.tag.index') }}"><i class="fa fa-tags"></i> <span>标签</span></a></li>
+
             <!--讨论 treeview-->
             <li class="treeview">
               <a href="#">
@@ -110,6 +110,7 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
+                <li><a href="{{ route('admin.flow') }}"><i class="fa fa-sitemap"></i>业务流程</a></li>
                 <li><a href="#"><i class="fa fa-envelope-o"></i>信息 <span class="label label-success pull-right">4</span></a></li>
                 <li><a href="#"><i class="fa fa-bell-o"></i>通知 <span class="label label-warning pull-right">10</span></a></li>
                 <li><a href="#"><i class="fa fa-flag-o"></i>任务 <span class="label label-danger pull-right">9</span></a></li>

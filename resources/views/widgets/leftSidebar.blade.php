@@ -74,7 +74,6 @@ var data = {
 			anchor: '{{ route('admin.business.index') }}', icon: 'fa-coffee', title: '业务管理', 
 			submenu: [
 				{link: '{{ route('admin.flow') }}', name: '业务流程'},
-				{link: '{{ route('admin.memo.index') }}', name: '我的备忘'}
 			]
 		},
 		{

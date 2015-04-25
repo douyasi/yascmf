@@ -53,7 +53,7 @@
                       </div>
                       <div class="form-group">
                         <label>缩略图  <a href="javascript:void(0);" class="uploadPic" data-id="thumb"><i class="fa fa-fw fa-picture-o" title="上传"></i></a>  <a href="javascript:void(0);" class="previewPic" data-id="thumb"><i class="fa fa-fw fa-eye" title="预览小图"></i></a></label>
-                        <input type="text" class="form-control" id="thumb" name="thumb" value="{{ Input::old('thumb', isset($data) ? $data->thumb : null ) }}" placeholder="缩略图地址：如{{ url('') }}/assets/img/yas_logo.png">  
+                        <input type="text" class="form-control" id="thumb" name="thumb" value="{{ Input::old('thumb', isset($data) ? $data->thumb : null ) }}" placeholder="缩略图地址：如{{ url('') }}/assets/img/yas_logo.png">
                       </div>
                       <div class="form-group">
                         <label>网址缩略名 <small class="text-red">*</small></label>
