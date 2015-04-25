@@ -31,12 +31,18 @@
                     <form action="{{ route('admin.fragment.index') }}" method="get">
                       <div class="input-group">
                         <input type="text" class="form-control input-sm pull-right" name="s_title" value="{{ Input::get('s_title') }}" style="width: 150px;" placeholder="搜索碎片标题">
-                        <input type="text" class="form-control input-sm pull-right" name="s_slug" value="{{ Input::get('s_title') }}" style="width: 150px;" placeholder="搜索碎片slug">
+                        <input type="text" class="form-control input-sm pull-right" name="s_slug" value="{{ Input::get('s_slug') }}" style="width: 150px;" placeholder="搜索碎片slug">
                         <div class="input-group-btn">
                           <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
                         </div>
                       </div>
                     </form>
+                  </div>
+                  <div class="box-tips clearfix">
+                    <p>
+                      <span class="color_orange">碎片</span>一般为简短内容片段，可在模版中直接调用，blade模版中调用方法为 <code>
+                        &#123;&#123; fragment($slug,$ret='') &#125;&#125; </code> 或 <code>&#123;!! fragment($slug,$ret='') !!&#125;</code>，具体查阅说明文档。
+                    </p>
                   </div>
                 </div><!-- /.box-header -->
                 <div class="box-body table-responsive no-padding">
@@ -126,7 +132,7 @@
         <!--jQuery 提交表单，实现DELETE删除资源-->
         //jQuery submit form
         $('.delete_item').click(function(){
-            var action = '{{ route('admin.page.index') }}';
+            var action = '{{ route('admin.fragment.index') }}';
             var id = $(this).data('id');
             var new_action = action + '/' + id;
             $('#hidden-delete-form').attr('action', new_action);

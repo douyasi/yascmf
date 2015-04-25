@@ -4457,3 +4457,7 @@ label.choice{
 .fail_mask p{
   margin: 0;
 }
+
+.box-header > .box-tips {
+  margin-top: 20px;
+}
