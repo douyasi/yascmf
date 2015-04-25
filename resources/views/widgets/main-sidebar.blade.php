@@ -94,11 +94,11 @@
                 <small class="label pull-right bg-red">5</small>
               </a>
               <ul class="treeview-menu">
-                <li><a href="#"><i class="fa fa-circle-o"></i>管理员</a></li>
+                <li><a href="{{ route('admin.user.index') }}"><i class="fa fa-circle-o"></i>管理员</a></li>
                 <li><a href="#"><i class="fa fa-circle-o"></i>注册用户</a></li>
                 <li><a href="#"><i class="fa fa-circle-o"></i>付费客户</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i>角色</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i>权限</a></li>
+                <li><a href="{{ route('admin.role.index') }}"><i class="fa fa-circle-o"></i>角色</a></li>
+                <li><a href="{{ route('admin.permission.index') }}"><i class="fa fa-circle-o"></i>权限</a></li>
               </ul>
             </li>
             <!--//用户管理 treeview-->
@@ -124,9 +124,9 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="#"><i class="fa fa-square-o"></i>系统配置</a></li>
-                <li><a href="#"><i class="fa fa-square-o"></i>动态设置</a></li>
-                <li><a href="#"><i class="fa fa-square-o"></i>操作日志</a></li>
+                <li><a href="{{ route('admin.system_option.index') }}"><i class="fa fa-square-o"></i>系统配置</a></li>
+                <li><a href="{{ route('admin.setting_type.index') }}"><i class="fa fa-square-o"></i>动态设置</a></li>
+                <li><a href="{{ route('admin.system_log.index') }}"><i class="fa fa-square-o"></i>系统日志</a></li>
                 <li><a href="#"><i class="fa fa-square-o"></i>邮件日志</a></li>
               </ul>
             </li>

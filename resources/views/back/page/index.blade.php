@@ -38,14 +38,14 @@
                     </form>
                   </div>
                 </div><!-- /.box-header -->
-                <div class="box-body table-responsive no-padding">
+                <div class="box-body table-responsive">
                   <div class="tablebox-controls">
                     <!-- Check all button -->
                     <button class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o" title="全选/反全选"></i></button>
                     <button class="btn btn-default btn-sm"><i class="fa fa-trash-o" title="删除"></i></button>
                     <button class="btn btn-default btn-sm"><i class="fa fa-refresh" title="刷新"></i></button>
                   </div>
-                  <table class="table table-hover">
+                  <table class="table table-hover table-bordered">
                     <tbody>
                       <!--tr-th start-->
                       <tr>
@@ -65,8 +65,8 @@
                             <a href="javascript:void(0);"><i class="fa fa-fw fa-link" title="预览"></i></a>  
                             <a href="javascript:void(0);"><i class="fa fa-fw fa-minus-circle delete_item" title="删除" data-id="{{ $page->id }}"></i></a>
                         </td>
-                        <td>{{ str_limit($page->title,36) }}</td>
-                        <td>
+                        <td class="text-muted">{{ str_limit($page->title,36) }}</td>
+                        <td class="text-green">
                           @if(empty($page->slug))
                           {{ $page->id }}
                           @else
@@ -116,7 +116,7 @@
             //Check all checkboxes
             $(".table-operation input[type='checkbox']").iCheck("check");
             $(".fa", this).removeClass("fa-square-o").addClass('fa-check-square-o');
-          }          
+          }
           $(this).data("clicks", !clicks);
         });
 
