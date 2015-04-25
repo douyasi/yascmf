@@ -1,113 +1,135 @@
-@extends('layout.backend')
-@section('main_content')
+@extends('layout._back')
+
+@section('content-header')
 @parent
-					<!--@表单验证等提示信息栏 START-->
-					<div class="validation_tips_area" style="display: none;">
-					</div>
-					<!--@表单验证等提示信息栏 END /-->
-
-					<!--面包屑导航 start-->
-					<div class="breadcrumb_nav">
-						<a href="{{ route('admin') }}"><i class="fa fa-home fa-fw"></i>Home</a>  &gt;  <a href="{{ route('admin.article.index') }}">内容管理</a>  &gt;  碎片
-						<!--筛选搜索-->
-						<div class="search_box">
-							<form action="{{ route('admin.fragment.index') }}" method="get">
-								<input type="text" name="s_title" value="{{ Input::get('s_title') }}" placeholder="碎片标题">
-								<input type="text" name="s_slug" value="{{ Input::get('s_slug') }}" placeholder="碎片slug">
-								<input type="submit" class="flat_btn yas_green" value="搜索">
-							</form>
-						</div>
-						<!--筛选搜索 end-->
-					</div>
-					<!--面包屑导航 end-->
-					
-					<!--cmf主体区域 start-->
-					<div class="main_cmf_content">
-						<form id="form_table" method="post" action="">
-							<div class="cmf_cont">
-								<p>
-									<span class="color_orange">碎片</span>一般为简短内容片段，可在模版中直接调用，blade模版中调用方法为 
-									<em>{</em><em>{</em></em> fragment($slug,$ret='') <em>}</em><em>}</em> 或 <em>{</em><em>!!</em></em> fragment($slug,$ret='') <em>!!</em><em>}</em>，具体查阅说明文档。
-								</p>
-								<p>
-									<a href="{{ route('admin.fragment.create') }}"><i class="fa fa-fw fa-plus-circle" alt="新增" title="新增"></i>新增碎片</a>
-								</p>
-								<table class="yas_table yas_table_noborder">
-									<thead>
-										<tr>
-											<th width="5%">选择</th>
-											<th width="10%">操作</th>
-											<th width="25%">标题</th>
-											<th width="20%">slug（碎片标识符）</th>
-											<th width="20%">创建时间</th>
-											<th width="20%">最后修改时间</th>
-										</tr>
-									</thead>
-									<tbody>
-
-										@foreach ($fragments as $fra)
-										<tr>
-											<td class="text_center">
-												<input type="checkbox" value="{{ $fra->id }}" name="checkbox[]">
-											</td>
-											<td><a href="{{ route('admin.fragment.index') }}/{{ $fra->id }}/edit"><i class="fa fa-fw fa-pencil" alt="修改" title="修改"></i></a>  <a href=""><i class="fa fa-fw fa-link" alt="预览" title="预览"></i></a>  <a href="javascript:void();"><i class="fa fa-fw fa-minus-circle delete_item" alt="删除" title="删除" data-id="{{ $fra->id }}"></i></a></td>
-											<td>{{ str_limit($fra->title,25) }}</td>
-											<td class="color_orange">
-												{{ $fra->slug }}
-											</td>
-											<td>
-												{{ $fra->created_at }}
-											</td>
-											<td>{{ $fra->updated_at }}</td>
-										</tr>
-										@endforeach
-
-									</tbody>
-								</table>
-								<div class="cms_func">
-									<div class="form_buttons">
-											<input type="checkbox" id="check_all" class="checkall_box" title="全选"><label for="check_all" class="cursor_p">全选</label>
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-											<a href="#"><i class="fa fa-fw fa-remove" alt="删除" title="删除"></i>删除所选</a>
-											
-									</div>
-								</div>
-								<div class="yas_page_container">
-									{!! $links !!}
-								</div>
-							</div>
-						</form>
-					</div>
-					<!--cms主体区域 end-->
-
+          <h1>
+            内容管理
+            <small>碎片</small>
+          </h1>
+          <ol class="breadcrumb">
+            <li><a href="{{ route('admin') }}"><i class="fa fa-dashboard"></i> 主页</a></li>
+            <li class="active">内容管理 - 碎片</li>
+          </ol>
 @stop
 
-@section('endMainCon')
-	<link href="{{ asset('assets/lib/iCheck/skins/square/red.css') }}" rel="stylesheet">
-	<script src="{{ asset('assets/lib/iCheck/icheck.min.js') }}"></script>
+@section('content')
+
+              @if(Session::has('message'))
+                <div class="alert alert-success alert-dismissable">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                  <h4>  <i class="icon fa fa-check"></i> 提示！</h4>
+                  {{ Session::get('message') }}
+                </div>
+              @endif
+
+              <a href="{{ route('admin.fragment.create') }}" class="btn btn-primary margin-bottom">新增碎片</a>
+
+              <div class="box box-primary">
+                <div class="box-header with-border">
+                  <h3 class="box-title">碎片列表</h3>
+                  <div class="box-tools">
+                    <form action="{{ route('admin.fragment.index') }}" method="get">
+                      <div class="input-group">
+                        <input type="text" class="form-control input-sm pull-right" name="s_title" value="{{ Input::get('s_title') }}" style="width: 150px;" placeholder="搜索碎片标题">
+                        <input type="text" class="form-control input-sm pull-right" name="s_slug" value="{{ Input::get('s_title') }}" style="width: 150px;" placeholder="搜索碎片slug">
+                        <div class="input-group-btn">
+                          <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div><!-- /.box-header -->
+                <div class="box-body table-responsive no-padding">
+                  <div class="tablebox-controls">
+                    <!-- Check all button -->
+                    <button class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o" title="全选/反全选"></i></button>
+                    <button class="btn btn-default btn-sm"><i class="fa fa-trash-o" title="删除"></i></button>
+                    <button class="btn btn-default btn-sm"><i class="fa fa-refresh" title="刷新"></i></button>
+                  </div>
+                  <table class="table table-hover">
+                    <tbody>
+                      <!--tr-th start-->
+                      <tr>
+                        <th>选择</th>
+                        <th>操作</th>
+                        <th>标题</th>
+                        <th>slug（碎片标识符）</th>
+                        <th>创建时间</th>
+                        <th>最后修改时间</th>
+                      </tr>
+                      <!--tr-th end-->
+
+                      @foreach ($fragments as $fra)
+                      <tr>
+                        <td class="table-operation"><input type="checkbox" value="{{ $fra->id }}" name="checkbox[]"></td>
+                        <td>
+                            <a href="{{ route('admin.fragment.index') }}/{{ $fra->id }}/edit"><i class="fa fa-fw fa-pencil" title="修改"></i></a>  
+                            <a href="javascript:void(0);"><i class="fa fa-fw fa-link" title="预览"></i></a>  
+                            <a href="javascript:void(0);"><i class="fa fa-fw fa-minus-circle delete_item" title="删除" data-id="{{ $fra->id }}"></i></a>
+                        </td>
+                        <td>{{ str_limit($fra->title,36) }}</td>
+                        <td>
+                          @if(empty($fra->slug))
+                          {{ $fra->id }}
+                          @else
+                          {{ $fra->slug }}
+                          @endif
+                        </td>
+                        <td>{{ $fra->created_at }}</td>
+                        <td>{{ $fra->updated_at }}</td>
+                      </tr>
+                      @endforeach
+
+                    </tbody>
+                  </table>
+                </div><!-- /.box-body -->
+                <div class="box-footer clearfix">
+                  {!! $fragments->render() !!}
+                </div>
+
+                <!--隐藏型删除表单-->
+                {!! Form::open( array('url' => route('admin.fragment.index'), 'method' => 'delete', 'id' => 'hidden-delete-form') ) !!}
+                {!! Form::close() !!}
+
+              </div>
 @stop
 
-@section('iCheck')
-	/*iCheck组件*/
-	$('input').iCheck({
-		checkboxClass: 'icheckbox_square-red',
-		radioClass: 'iradio_square-red',
-		increaseArea: '20%'
-	});
-
-	/*响应全选,依赖于iCheck组件*/
-
-	$('input#check_all').on('ifChecked', function(event){
-		$('input[name="checkbox[]"]').iCheck('check');
-	});
-	$('input#check_all').on('ifUnchecked', function(event){
-		$('input[name="checkbox[]"]').iCheck('uncheck');
-	});
+@section('extraPlugin')
+<!--引入iCheck组件-->
+<script src="{{ asset('plugins/iCheck/icheck.min.js') }}" type="text/javascript"></script>
 @stop
 
-@section('delete_item')
+@section('filledScript')
+        <!--启用iCheck对checkboxes的响应-->
+        //Enable iCheck plugin for checkboxes
+        //iCheck for checkbox and radio inputs
+        $('.table-operation input[type="checkbox"]').iCheck({
+          checkboxClass: 'icheckbox_flat-blue',
+          radioClass: 'iradio_flat-blue'
+        });
 
-	@include('scripts.endBuildHtml')
-	@include('scripts.endDeleteItem', ['_url' => route('admin.fragment.index')])
+        //Enable check and uncheck all functionality
+        $(".checkbox-toggle").click(function () {
+          var clicks = $(this).data('clicks');
+          if (clicks) {
+            //Uncheck all checkboxes
+            $(".table-operation input[type='checkbox']").iCheck("uncheck");
+            $(".fa", this).removeClass("fa-check-square-o").addClass('fa-square-o');
+          } else {
+            //Check all checkboxes
+            $(".table-operation input[type='checkbox']").iCheck("check");
+            $(".fa", this).removeClass("fa-square-o").addClass('fa-check-square-o');
+          }          
+          $(this).data("clicks", !clicks);
+        });
 
+        <!--jQuery 提交表单，实现DELETE删除资源-->
+        //jQuery submit form
+        $('.delete_item').click(function(){
+            var action = '{{ route('admin.page.index') }}';
+            var id = $(this).data('id');
+            var new_action = action + '/' + id;
+            $('#hidden-delete-form').attr('action', new_action);
+            $('#hidden-delete-form').submit();
+        });
 @stop

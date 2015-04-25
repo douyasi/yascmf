@@ -95,16 +95,12 @@
   <script src="{{ asset('plugins/layer/layer.min.js') }}"></script>
   <!--引入iCheck组件-->
   <script src="{{ asset('plugins/iCheck/icheck.min.js') }}" type="text/javascript"></script>
-  <!--引入Chosen组件-->
-  @include('scripts.endChosen')
-
 
 @stop
 
 
 @section('filledScript')
         <!--启用iCheck对checkboxes的响应-->
-        
         $('input[type="radio"]').iCheck({
           radioClass: 'iradio_flat-blue',
           increaseArea: '20%' // optional

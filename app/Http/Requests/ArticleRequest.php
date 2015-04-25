@@ -53,7 +53,7 @@ class ArticleRequest extends Request
             'slug.required'    => '请填写缩略名',
             'slug.max'          => '缩略名过长',
             'slug.unique'      => '已有同名缩略名',
-            'slug.eng_alpha_dash'  => '缩略名只能数字、字母、下划线与横杠(0-9A-Za-z_-)组合',
+            'slug.eng_alpha_dash'  => '缩略名只能数字、字母、下划线与横杠（0-9A-Za-z_-）组合',
             'category_id.required' => '请选择文章分类',
             'category_id.exists' => '不存在该文章分类',
             'content.required' => '请填写文章正文',

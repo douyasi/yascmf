@@ -4,6 +4,7 @@ use Douyasi\Http\Requests\FragmentRequest;
 use Douyasi\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Douyasi\Repositories\ContentRepository;
+use Cache;
 
 /**
  * 内容碎片资源控制器
@@ -43,11 +44,10 @@ class AdminFragmentController extends BackController
         //
         $data = [
             's_title' => $request->input('s_title'),
-            's_slug' => $request->input('s_slug'),
+            's_slug'  => $request->input('s_slug'),
         ];
-        $fragments = $this->content->index($data, 'fragment');
-        $links = page_links($fragments, $data);
-        return view('back.fragment.index', compact('fragments', 'links'));
+        $fragments = $this->content->index($data, 'fragment', Cache::get('page_size', '10'));
+        return view('back.fragment.index', compact('fragments'));
     }
 
 
@@ -70,25 +70,13 @@ class AdminFragmentController extends BackController
     public function store(FragmentRequest $request)
     {
         //
-        if ($request->is_ajax()) {
-            $validator = $request->validate('store');
-            $data = $request->data('store');
-            $json = $request->response();
-            $json = array_replace($json, ['operation' => '添加碎片']);
-            if ($validator->passes()) {
-                $content = $this->content->store($data, 'fragment', user('id'));
-                if ($content->id) {
-                    $json = array_replace($json, ['status' => 1, 'info' => '成功']);
-                } else {
-                    $info = '失败原因为：<span class="text_error">数据库操作返回异常</span>';
-                    $json = array_replace($json, ['info' => $info]);
-                }
-            } else {
-                $json = format_json_message($validator->messages(), $json);
-            }
-            return response()->json($json);
-        } else {
-            return view('back.exceptions.jump', ['exception' => '非法请求，不予处理！']);
+        $data = $request->all();
+
+        $content = $this->content->store($data, 'fragment', user('id'));
+        if ($content->id) {  //添加成功
+            return redirect()->route('admin.fragment.index')->with('message', '成功新增碎片！');
+        } else {  //添加失败
+            return redirect()->back()->withInput($request->input())->with('fail', '数据库操作返回异常！');
         }
     }
 
@@ -102,7 +90,6 @@ class AdminFragmentController extends BackController
     {
         //
         $fragment = $this->content->edit($id, 'fragment');
-        is_null($fragment) and abort(404);
         return view('back.fragment.edit', ['data' => $fragment]);
     }
 
@@ -116,22 +103,9 @@ class AdminFragmentController extends BackController
     public function update(FragmentRequest $request, $id)
     {
         //
-        if ($request->is_ajax() && $request->is_method('put')) {
-            $validator = $request->validate('update');
-            $data = $request->data('update');
-            $json = $request->response();
-            $json = array_replace($json, ['operation' => '修改碎片']);
-
-            if ($validator->passes()) {
-                $this->content->update($id, $data, 'fragment');
-                $json = array_replace($json, ['status' => 1, 'info' => '成功']);
-            } else {
-                $json = format_json_message($validator->messages(), $json);
-            }
-            return response()->json($json);
-        } else {
-            return view('back.exceptions.jump', ['exception' => '非法请求，不予处理！']);
-        }
+        $data = $request->all();
+        $this->content->update($id, $data, 'fragment');
+        return redirect()->route('admin.fragment.index')->with('message', '修改碎片成功！');
     }
 
 
@@ -141,20 +115,10 @@ class AdminFragmentController extends BackController
      * @param  int  $id
      * @return Response
      */
-    public function destroy(FragmentRequest $request, $id)
+    public function destroy($id)
     {
         //
-        if ($request->is_ajax() && $request->is_method('delete')) {
-            $this->content->destroy($id, 'fragment');
-            $json = [
-                'status' => 1,
-                'info' => '成功',
-                'operation' => '删除删除',
-                'url' => route('admin.fragment.index'),
-            ];
-            return response()->json($json);
-        } else {
-            return view('back.exceptions.jump', ['exception' => '非法请求，不予处理！']);
-        }
+        $this->content->destroy($id, 'fragment');
+        return redirect()->route('admin.fragment.index')->with('message', '删除碎片成功！');
     }
 }

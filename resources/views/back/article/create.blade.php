@@ -114,7 +114,6 @@
 
 @section('filledScript')
         <!--启用iCheck对checkboxes的响应-->
-        
         $('input[type="radio"]').iCheck({
           radioClass: 'iradio_flat-blue',
           increaseArea: '20%' // optional

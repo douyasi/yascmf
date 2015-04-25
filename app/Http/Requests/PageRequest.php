@@ -52,7 +52,7 @@ class PageRequest extends Request
             'slug.required'       => '请填写缩略名',
             'slug.max'            => '缩略名过长',
             'slug.unique'         => '已有同名缩略名',
-            'slug.eng_alpha_dash' => '缩略名只能数字、字母、下划线与横杠(0-9A-Za-z_-)组合',
+            'slug.eng_alpha_dash' => '缩略名只能数字、字母、下划线与横杠（0-9A-Za-z_-）组合',
             'content.required'    => '请填写单页正文',
             'content.min'         => '单页正文过短，长度不得少于20',
             'is_top.boolean'      => '是否置顶必须为布尔值',
