@@ -118,15 +118,15 @@
                   <!-- The user image in the navbar-->
                   <img src="{{ asset('dist/img/20150417113714.jpg') }}" class="user-image" alt="User Image"/>
                   <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                  <span class="hidden-xs">飞扬</span>
+                  <span class="hidden-xs">{{ user('realname') }}</span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- The user image in the menu -->
                   <li class="user-header">
                     <img src="{{ asset('dist/img/20150417113714.jpg') }}" class="img-circle" alt="User Image" />
                     <p>
-                      飞扬 - PHP程序员
-                      <small>2012-04加入</small>
+                      {{ user('realname') }} - {{ user('nickname') }}
+                      <small>{{ user('object')->created_at->format('Y-m') }}加入</small>
                     </p>
                   </li>
                   <!-- Menu Body -->
@@ -144,10 +144,10 @@
                   <!-- Menu Footer-->
                   <li class="user-footer">
                     <div class="pull-left">
-                      <a href="#" class="btn btn-default btn-flat">个人资料</a>
+                      <a href="{{ route('admin.me.index') }}" class="btn btn-default btn-flat">个人资料</a>
                     </div>
                     <div class="pull-right">
-                      <a href="#" class="btn btn-default btn-flat">退出</a>
+                      <a href="{{ route('logout') }}" class="btn btn-default btn-flat">退出</a>
                     </div>
                   </li>
                 </ul>

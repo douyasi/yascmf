@@ -12,7 +12,7 @@
               <img src="{{ asset('dist/img/20150417113714.jpg') }}" class="img-circle" alt="User Image" />
             </div>
             <div class="pull-left info">
-              <p>飞扬</p>
+              <p>{{ user('realname') }}</p>
               <!-- Status -->
               <a href="#"><i class="fa fa-circle text-success"></i> 在线</a>
             </div>

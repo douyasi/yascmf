@@ -72,7 +72,7 @@ class DouyasiValidator extends Validator
     public function validateSelfUrl($attribute, $value)
     {
         $domain = url('');
-        return (stripos($value, $domian) === false) ? false: true;
+        return (stripos($value, $domain) === false) ? false: true;
     }
 
     /**

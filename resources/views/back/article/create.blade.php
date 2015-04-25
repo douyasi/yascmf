@@ -1,133 +1,124 @@
-@extends('layout.backend')
-@section('main_content')
+@extends('layout._back')
+
+@section('content-header')
 @parent
-					<!--@表单验证等提示信息栏 START-->
-					<div class="validation_tips_area" style="display: none;">
-					</div>
-					<!--@表单验证等提示信息栏 END /-->
-					
-					
-					<!--面包屑导航 start-->
-					<div class="breadcrumb_nav">
-						<a href="{{ route('admin') }}"><i class="fa fa-home fa-fw"></i>Home</a>  &gt;  <a href="{{ route('admin.article.index') }}">内容管理</a>  &gt;  撰写新文章
-					</div>
-					<!--面包屑导航 end-->
-					
-					<!--nav_tabs start-->
-					<div class="nav_tabs">
-						<ul class="cf">
-							<li class="active"><a href="javascript:void(0);">主要内容</a></li>
-							<li><a href="javascript:void(0);">附加内容</a></li>
-						</ul>
-					</div>
-					<!--nav_tabs end-->
+          <h1>
+            内容管理
+            <small>文章</small>
+          </h1>
+          <ol class="breadcrumb">
+            <li><a href="{{ route('admin') }}"><i class="fa fa-dashboard"></i> 主页</a></li>
+            <li><a href="{{ route('admin.article.index') }}">内容管理 - 文章</a></li>
+            <li class="active">撰写新文章</li>
+          </ol>
+@stop
 
-					<!--为了实现restful路由，form表单会默认构造隐藏表域<input type="hidden" name="_method" value="PUT|DELETE">-->
-					<!--表单主体区域 start-->
-					<div class="main_form_content">
-						<!--form start-->
-						{!! Form::open( array('url' => route('admin.article.store'), 'method' => 'post', 'id' => 'addArticleForm') ) !!}
-							<!--tab_content start-->
-							<div class="tab_content">
+@section('content')
 
-								<div class="tab_pane active">
-									<ul>
-										<li>
-											<label class="description" for="title">标题  <span class="required">(*)</span></label>
-											<div class="form_item">
-												<input type="text" id="title" name="title" autocomplete="off" value="" placeholder="标题">
-											</div>
-										</li>
-										<li>
-											<label class="description" for="thumb">缩略图  <span class="tips">某些前端模版可能需要缩略图</span></label>
-											<div class="form_item">
-												<input type="text" id="thumb" name="thumb" value="" placeholder="缩略图地址：如{{ url('') }}/assets/img/yas_logo.png">  <a href="javascript:void(0);" class="uploadPic" data-id="thumb"><i class="fa fa-fw fa-picture-o" title="上传"></i></a>  <a href="javascript:void(0);" class="previewPic" data-id="thumb"><i class="fa fa-fw fa-eye" title="预览小图"></i></a>
-											</div>
-										</li>
-										<li>
-											<label class="description">分类  <span class="required">(*)</span></label>
-											<div class="form_item">
-												<select data-placeholder="选择文章分类..." class="chosen-select" style="width:350px;" name="category_id">
-													@foreach ($categories as $category)
-														<option value="{{ $category->id }}">{{ $category->name }}</option>
-													@endforeach
-												</select>
-											</div>
-										</li>
+          @if(Session::has('fail'))
+            <div class="alert alert-warning alert-dismissable">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+              <h4>  <i class="icon icon fa fa-warning"></i> 提示！</h4>
+              {{ Session::get('fail') }}
+            </div>
+          @endif
 
-										<li>
-											<label class="description" for="ckeditor">正文  <span class="required">(*)</span>  <span class="tips">CKEditor编辑器</span></label>
-											<div class="form_item">
-												<textarea id="ckeditor" name="content"></textarea>
-											</div>
-											@include('scripts.endCKEditor'){{-- 引入CKEditor编辑器相关JS依赖 --}}
-										</li>
-									</ul>
-								</div>
-								
-								<div class="tab_pane">
-									<ul>
-										<li>
-											<label class="description" for="outer_link">外链地址  <span class="tips">如文章为转载，请在此处填写原始链接地址</span></label>
-											<div class="form_item">
-												<input type="text" id="outer_link" name="outer_link" value="" placeholder="http://example.com/">
-											</div>
-										</li>
-										<li>
-											<label class="description">是否置顶</label>
-											<div class="form_item">
-												<input type="radio" name="is_top" value="0" checked>
-												<label class="choice" for="radiogroup">否</label>
-												<input type="radio" name="is_top" value="1">
-												<label class="choice" for="radiogroup">是</label>
-											</div>
-										</li>
-									</ul>
-								</div>
-								
-							</div>
-							<!--tab_content end-->
-							
-							<!--form_control start-->
-							<div class="form_buttons">
-								<input class="flat_btn yas_green" type="submit" id="publishArticleSubmit" name="submit" value="发布文章">
-							</div>
-							<!--form_control end-->
-						{!! Form::close() !!}
-						<!--form end-->
-					</div>
-					<!--表单主体区域 end-->
-					<div id="layerPreviewPic" class="fn-hide">
-						
-					</div>
+          @if($errors->any())
+            <div class="alert alert-danger alert-dismissable">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                  <h4><i class="icon fa fa-ban"></i> 警告！</h4>
+                  <ul>
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                  </ul>
+            </div>
+          @endif
+
+              <h2 class="page-header">撰写新文章</h2>
+              {!! Form::open( array('url' => route('admin.article.store'), 'method' => 'post', 'id' => 'addArticleForm') ) !!}
+              <div class="nav-tabs-custom">
+                  
+                  <ul class="nav nav-tabs">
+                    <li class="active"><a href="#tab_1" data-toggle="tab" aria-expanded="true">主要内容</a></li>
+                    <li class=""><a href="#tab_2" data-toggle="tab" aria-expanded="false">附加内容</a></li>
+                  </ul>
+
+                  <div class="tab-content">
+                    
+                    <div class="tab-pane active" id="tab_1">
+                      <div class="form-group">
+                        <label>标题 <small class="text-red">*</small></label>
+                        <input type="text" class="form-control" name="title" autocomplete="off" value="{{ Input::old('title') }}" placeholder="标题">
+                      </div>
+                      <div class="form-group">
+                        <label>缩略图  <a href="javascript:void(0);" class="uploadPic" data-id="thumb"><i class="fa fa-fw fa-picture-o" title="上传"></i></a>  <a href="javascript:void(0);" class="previewPic" data-id="thumb"><i class="fa fa-fw fa-eye" title="预览小图"></i></a></label>
+                        <input type="text" class="form-control" id="thumb" name="thumb" value="{{ Input::old('thumb') }}" placeholder="缩略图地址：如{{ url('') }}/assets/img/yas_logo.png">  
+                      </div>
+                      <div class="form-group">
+                        <label>分类 <small class="text-red">*</small></label>
+                        <div class="input-group">
+                          <select data-placeholder="选择文章分类..." class="chosen-select" style="min-width:200px;" name="category_id">
+                          @foreach ($categories as $category)
+                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                          @endforeach
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label>正文 <small class="text-red">*</small></label>
+                        <textarea class="form-control" id="ckeditor" name="content">{{ Input::old('content') }}</textarea>
+                        @include('scripts.endCKEditor'){{-- 引入CKEditor编辑器相关JS依赖 --}}
+                      </div>
+                    </div><!-- /.tab-pane -->
+                    <div class="tab-pane" id="tab_2">
+                      <div class="form-group">
+                        <label>外链地址</label>
+                        <input type="text" class="form-control" name="outer_link" value="{{ Input::old('outer_link') }}" placeholder="http://example.com/">
+                      </div>
+                      <div class="form-group">
+                        <label>是否置顶 <small class="text-red">*</small></label>
+                        <div class="input-group">
+                          <input type="radio" name="is_top" value="0" checked>
+                          <label class="choice" for="radiogroup">否</label>
+                          <input type="radio" name="is_top" value="1">
+                          <label class="choice" for="radiogroup">是</label>
+                        </div>
+                      </div>
+                    </div><!-- /.tab-pane -->
+
+                    <button type="submit" class="btn btn-primary">发布文章</button>
+
+                  </div><!-- /.tab-content -->
+                  
+              </div>
+              {!! Form::close() !!}
+          <div id="layerPreviewPic" class="fn-hide">
+            
+          </div>
 
 @stop
 
-@section('endMainCon')
-@parent
-	@include('scripts.endChosen')
-	<link href="{{ asset('assets/lib/iCheck/skins/square/red.css') }}" rel="stylesheet">
-	<script src="{{ asset('assets/lib/iCheck/icheck.min.js') }}"></script>{{-- 加载icheck插件 --}}
-	<script src="{{ asset('assets/lib/layer/layer.min.js') }}"></script>{{-- 加载layer插件 --}}
-	<script src="{{ asset('assets/lib/form/jquery.form.js') }}"></script>{{-- 加载jquery.form插件 --}}
+@section('extraPlugin')
+
+  <!--引入Layer组件-->
+  <script src="{{ asset('plugins/layer/layer.min.js') }}"></script>
+  <!--引入iCheck组件-->
+  <script src="{{ asset('plugins/iCheck/icheck.min.js') }}" type="text/javascript"></script>
+  <!--引入Chosen组件-->
+  @include('scripts.endChosen')
+
+
 @stop
 
-	@section('layer')
-	@include('scripts.endSinglePic') {{-- 引入单个图片上传与预览JS，依赖于Layer --}}
-	@stop
 
+@section('filledScript')
+        <!--启用iCheck对checkboxes的响应-->
+        
+        $('input[type="radio"]').iCheck({
+          radioClass: 'iradio_flat-blue',
+          increaseArea: '20%' // optional
+        });
 
-
-	@section('iCheck')
-		/*iCheck组件*/
-	$('input').iCheck({
-		checkboxClass: 'icheckbox_square-red',
-		radioClass: 'iradio_square-red',
-		increaseArea: '20%' // optional
-	});
-	@stop
-
-	@section('ajaxForm')
-	@include('scripts.endBuildHtml'){{-- 引入Build_Html JS方法 --}}
-	@include('scripts.endAjaxForm', ['_sub' => '#publishArticleSubmit', '_form' => '#addArticleForm', '_loc' => route('admin.article.index')])
-	@stop
+        @include('scripts.endSinglePic') {{-- 引入单个图片上传与预览JS，依赖于Layer --}}
+@stop

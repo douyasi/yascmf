@@ -85,21 +85,21 @@ class ContentRepository extends BaseRepository
      */
     private function saveContent($content, $inputs, $type = 'article', $user_id = '0')
     {
-        $content->title             = e($inputs['title']);
-        $content->content           = e($inputs['content']);
-        $content->thumb             = e($inputs['thumb']);
+        $content->title   = e($inputs['title']);
+        $content->content = e($inputs['content']);
+        $content->thumb   = e($inputs['thumb']);
         if ($type === 'article') {
-            $content->category_id  = e($inputs['category_id']);
-            $content->type          = 'article';
+            $content->category_id = e($inputs['category_id']);
+            $content->type        = 'article';
         } elseif ($type === 'page') {
-            $content->category_id  = 0;
-            $content->type          = 'page';
+            $content->category_id = 0;
+            $content->type        = 'page';
         } elseif ($type === 'fragment') {
-            $content->category_id  = 0;
-            $content->type          = 'fragment';
+            $content->category_id = 0;
+            $content->type        = 'fragment';
         }
-        if (array_key_exists('outer_link', $inputs)) {
-            $content->is_top            = e($inputs['is_top']);
+        if (array_key_exists('is_top', $inputs)) {
+            $content->is_top = e($inputs['is_top']);
         }
         if (array_key_exists('outer_link', $inputs)) {
             $content->outer_link = trim(e($inputs['outer_link']));

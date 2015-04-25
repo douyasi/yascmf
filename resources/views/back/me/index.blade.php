@@ -33,6 +33,7 @@
                     </ul>
               </div>
             @endif
+
               <div class="box box-primary">
 
                 <div class="box-header with-border">
@@ -40,12 +41,12 @@
                   <p>以下为您作为当前用户的个人资料，您仅可修改个人头像、昵称、真实姓名与登录密码。登录密码项留空，则不修改登录密码。</p>
                   <div class="basic_info bg-info">
                      <ul>
-                        <li>登录名：<span class="text-primary">{{ $input->username }}</span></li>
-                        <li>昵称：<span class="text-primary">{{ $input->nickname }}</span></li>
-                        <li>真实姓名：<span class="text-primary">{{ $input->realname }}</span></li>
-                        <li>电子邮件：<span class="text-primary">{{ $input->email }}</span></li>
-                        <li>手机号码：<b>{{ $input->phone }}</b></li>
-                        <li>通联地址：<b>{{ $input->address }}</b></li>
+                        <li>登录名：<span class="text-primary">{{ $me->username }}</span></li>
+                        <li>昵称：<span class="text-primary">{{ $me->nickname }}</span></li>
+                        <li>真实姓名：<span class="text-primary">{{ $me->realname }}</span></li>
+                        <li>电子邮件：<span class="text-primary">{{ $me->email }}</span></li>
+                        <li>手机号码：<b>{{ $me->phone }}</b></li>
+                        <li>通联地址：<b>{{ $me->address }}</b></li>
                     </ul>
                   </div>
                 </div><!-- /.box-header -->
@@ -53,12 +54,12 @@
                 {!! Form::open( array('url' => route('admin.me.update'), 'method' => 'put', 'id' => 'updateMeForm') ) !!}
                   <div class="box-body">
                     <div class="form-group">
-                      <label for="nickname">昵称 <small class="text-red">*</small></label>
-                      <input type="text" class="form-control" name="nickname" value="{{ $input->nickname }}" placeholder="昵称">
+                      <label>昵称 <small class="text-red">*</small></label>
+                      <input type="text" class="form-control" name="nickname" value="{{ $me->nickname }}" placeholder="昵称">
                     </div>
                     <div class="form-group">
                       <label>真实姓名 <small class="text-red">*</small></label>
-                      <input type="text" class="form-control" name="realname" autocomplete="off" value="{{ $input->realname }}" placeholder="真实姓名">
+                      <input type="text" class="form-control" name="realname" autocomplete="off" value="{{ $me->realname }}" placeholder="真实姓名">
                     </div>
                     <div class="form-group">
                       <label>登录密码</label>
@@ -70,11 +71,11 @@
                     </div>
                     <div class="form-group">
                       <label>手机号码</label>
-                      <input type="text" class="form-control" name="phone" value="{{ $input->phone }}" placeholder="手机号码">
+                      <input type="text" class="form-control" name="phone" value="{{ $me->phone }}" placeholder="手机号码">
                     </div>
                     <div class="form-group">
                       <label>通联地址</label>
-                      <input type="text" class="form-control" name="address" value="{{ $input->address }}" placeholder="通联地址">
+                      <input type="text" class="form-control" name="address" value="{{ $me->address }}" placeholder="通联地址">
                     </div>
                   </div><!-- /.box-body -->
 

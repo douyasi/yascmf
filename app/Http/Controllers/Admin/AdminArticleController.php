@@ -81,36 +81,13 @@ class AdminArticleController extends BackController
      */
     public function store(ArticleRequest $request)
     {
-        
-        //鉴权，这里需要手动对存储行为进行鉴权，如不需要可直接移除
-        if (($response = $request->make()) !== true) {
-            return $response;
-            die();
-        }
-        if ($request->is_ajax()) {
-            //判断是否ajax提交
+        $data = $request->all();  //获取请求过来的数据
 
-            $validator = $request->validate('store');  //获取Validator对象
-            $data = $request->data('store');  //获取请求过来的数据
-            $json = $request->response();
-            $json = array_replace($json, ['operation' => '添加文章']);
-
-            if ($validator->passes()) {
-                $content = $this->content->store($data, 'article', user('id'));  //使用仓库方法存储
-                if ($content->id) {  //添加成功
-                    $json = array_replace($json, ['status' => 1, 'info' => '成功']);
-                } else {  //添加失败
-                    $info = '失败原因为：<span class="text_error">数据库操作返回异常</span>';
-                    $json = array_replace($json, ['info' => $info]);
-                }
-            } else {
-                // 验证失败
-                $json = format_json_message($validator->messages(), $json);
-            }
-            return response()->json($json);
-        } else {
-            //非ajax请求抛出异常
-            return view('back.exceptions.jump', ['exception' => '非法请求，不予处理！']);
+        $content = $this->content->store($data, 'article', user('id'));  //使用仓库方法存储
+        if ($content->id) {  //添加成功
+            return redirect()->route('admin.article.index')->with('message', '成功发布新文章！');
+        } else {  //添加失败
+            return redirect()->back()->withInput($request->input())->with('fail', '数据库操作返回异常！');
         }
     }
 
@@ -126,7 +103,8 @@ class AdminArticleController extends BackController
         //
         $categories = $this->content->meta();
         $article = $this->content->edit($id, 'article');
-        is_null($article) and abort(404);
+        //已经findOrFail处理，如果不存在该id资源会抛出异常，再加is_null判定无意义
+        //is_null($article) and abort(404); 
         return view('back.article.edit', ['data' => $article, 'categories' => $categories]);
     }
 
@@ -141,22 +119,9 @@ class AdminArticleController extends BackController
     public function update(ArticleRequest $request, $id)
     {
         //
-        if ($request->is_ajax() && $request->is_method('put')) {
-            $validator = $request->validate('update');
-            $data = $request->data('update');
-            $json = $request->response();
-            $json = array_replace($json, ['operation' => '修改文章']);
-
-            if ($validator->passes()) {
-                $this->content->update($id, $data, 'article');
-                $json = array_replace($json, ['status' => 1, 'info' => '成功']);
-            } else {
-                $json = format_json_message($validator->messages(), $json);
-            }
-            return response()->json($json);
-        } else {
-            return view('back.exceptions.jump', ['exception' => '非法请求，不予处理！']);
-        }
+        $data = $request->all();
+        $this->content->update($id, $data, 'article');
+        return redirect()->route('admin.article.index')->with('message', '修改文章成功！');
     }
 
 
@@ -166,7 +131,7 @@ class AdminArticleController extends BackController
      * @param  int  $id
      * @return Response
      */
-    public function destroy(ArticleRequest $request, $id)
+    public function destroy($id)
     {
         //
         $this->content->destroy($id, 'article');

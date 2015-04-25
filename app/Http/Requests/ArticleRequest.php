@@ -2,7 +2,7 @@
 
 use Douyasi\Http\Requests\DouyasiRequest;
 
-class ArticleRequest extends DouyasiRequest
+class ArticleRequest extends Request
 {
 
     /**
@@ -22,7 +22,7 @@ class ArticleRequest extends DouyasiRequest
      * @param string $type 规则类型，'store'表示存储数据时规则，'update'表示更新数据时规则，'destroy'表示删除数据时规则（极少用到）
      * @return array
      */
-    public function rules($type = 'store')
+    public function rules()
     {
         $rules = [
             'title'       => 'required|max:80',
@@ -32,11 +32,11 @@ class ArticleRequest extends DouyasiRequest
             'outer_link'  => 'url_link',
             'thumb'       => 'self_url',
         ];
-        if ($type === 'update') {  //
+        if($this->segment(3)){
             $id = $this->segment(3) ? ',' . $this->segment(3) : '';
             $rules = array_add($rules, 'slug', 'required|max:30|eng_alpha_dash|unique:contents,slug'.$id);
-            //slug在添加时不予展示，修改时予以展示
         }
+        //slug在添加时不予展示，修改时予以展示
         return $rules;
     }
 
@@ -61,21 +61,6 @@ class ArticleRequest extends DouyasiRequest
             'is_top.boolean'   => '是否置顶必须为布尔值',
             'outer_link.url_link' => '外链地址不合法',
             'thumb.self_url'    => '缩略图地址必须在当前域名下',
-        ];
-    }
-
-    /**
-     * 自定义响应
-     *
-     * @return array 返回的数组将被JSON化作为响应
-     */
-    public function response()
-    {
-        return [
-            'status' => 0,
-            'info' => '失败',
-            'operation' => '文章操作',
-            'url' => route('admin.article.index'),
         ];
     }
 }

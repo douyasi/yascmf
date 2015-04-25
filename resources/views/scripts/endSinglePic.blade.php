@@ -33,7 +33,7 @@
 			var ele = $(this).data('id');
 			var pic_url = $.trim($('#'+ele).val());
 			if( pic_url.indexOf('{{ url('') }}') === -1){  //如果不是站内域名，不予预览
-				tmp = '<div style="max-width: 300px;background-color: #000;"><p style="margin:10px; color: #f00;">没有图片地址，或者图片地址为外链，暂时无法预览！</p></div>';
+				tmp = '<div style="max-width: 300px; background-color: #000; min-height: "><p style="margin:10px; color: #f00;">没有图片地址，或者图片地址为外链，暂时无法预览！</p></div>';
 			}
 			else{
 				tmp = '<div style="max-width: 300px;"><img src="' + pic_url + '" width="300" /></div>';

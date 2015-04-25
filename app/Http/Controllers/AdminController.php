@@ -107,7 +107,7 @@ class AdminController extends CommonController
                             $json = array_replace($json, ['status' => 0, 'info' => '失败原因为：<span class="text_error">文件校验失败</span>']);
                         }
                     } else {
-                        $json = array_replace($json, ['status' => 0, 'info' => '失败原因为：<span class="text_error">文件类型不允许,请上传常规的图片(bmp|gif|jpg|png)文件</span>']);
+                        $json = array_replace($json, ['status' => 0, 'info' => '失败原因为：<span class="text_error">文件类型不允许,请上传常规的图片（bmp|gif|jpg|png）文件</span>']);
                     }
                 } else {
                     $json = format_json_message($validator->messages(), $json);

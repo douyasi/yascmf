@@ -4368,6 +4368,92 @@ fieldset[disabled] .btn-vk.active {
 
 
 /*在AdminLTE基础上额外补充的一些样式*/
+
+/*列表table控件*/
 .tablebox-controls {
   padding: 5px;
+}
+
+/*表单控件*/
+.input-group {
+  position: relative;
+  display: table;
+  border-collapse: separate;
+}
+
+/*iCheck Label样式修正*/
+label.choice{
+  padding: 5px;
+}
+
+/*隐藏元素*/
+.fn-hide{
+  display: none;
+}
+
+/*修正layer弹出层背景色BUG*/
+.xubox_layer .xubox_main{
+  background-color: transparent !important;
+}
+
+/*slug样式*/
+.slug {
+  padding: 2px;
+  border: none;
+  background: #fffccc;
+  width: 100px;
+  color: #666;
+  word-break: break-all;
+}
+.url_slug {
+  word-break: break-word;
+  white-space: nowrap;
+}
+
+/*等宽字体样式*/
+.mono {
+  font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
+}
+
+/*layer弹出窗上传图片样式*/
+.validation_tips_area{
+  line-height: 36px;
+  background-color: #f6f6f6;
+  color: #666;
+  border-radius: 12px;
+}
+.validation_tips_area .tips_text{
+  margin: auto 20px;
+  font-size: 18px;
+  line-height: 36px;
+}
+.be_happy{
+  color: #051;
+}
+.be_sad{
+  color: #bb4848;
+}
+.small_text {
+  font-size: 12px;
+}
+.info_text {
+  color: #666;
+}
+.text_error{
+  color: #ff0;
+}
+/*错误信息遮盖层*/
+.fail_mask{
+  background-color: #c00;
+  color: #fff;
+  padding: 3px 30px 3px 10px;
+  font-size: 12px;
+  line-height: 20px;
+  min-width: 12px;
+  font-size: 12px;
+  border-radius: 3px;
+  box-shadow: 1px 1px 3px rgba(0,0,0,.3);
+}
+.fail_mask p{
+  margin: 0;
 }

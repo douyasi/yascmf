@@ -37,9 +37,8 @@ class AdminMeController extends BackController
      */
     public function getindex()
     {
-        //出于兼容Bootstrap后台框架考虑，表单数据使用$input传入，以便出错回调保留上次提交的数据
-        $input = user('object');
-        return view('back.me.index', compact('input'));
+        $me = user('object');
+        return view('back.me.index', compact('me'));
     }
 
 

@@ -33,8 +33,10 @@
     <!--
     <link href="{{ asset('dist/css/skins/skin-black.min.css') }}" rel="stylesheet" type="text/css" />
     -->
+    <link href="{{ asset('plugins/iCheck/all.css') }}" rel="stylesheet" type="text/css" />
+    <!--
     <link href="{{ asset('plugins/iCheck/flat/blue.css') }}" rel="stylesheet" type="text/css" />
-
+    -->
 @stop
 
 @section('head_js')
@@ -50,6 +52,21 @@
 @section('body_attr') class="skin-black sidebar-mini"@stop
 
 @section('body')
+
+<!--侦测是否启用JavaScript脚本-->
+<noscript>
+<style type="text/css">
+.noscript{ width:100%;height:100%;overflow:hidden;background:#000;color:#fff;position:absolute;z-index:99999999; background-color:#000;opacity:1.0;filter:alpha(opacity=100);margin:0 auto;top:0;left:0;}
+.noscript h1{font-size:36px;margin-top:50px;text-align:center;line-height:40px;}
+html {overflow-x:hidden;overflow-y:hidden;}/*禁止出现滚动条*/
+</style>
+<div class="noscript">
+<h1>
+您的浏览器不支持JavaScript，请启用后重试！
+</h1>
+</div>
+</noscript>
+
 <!--wrapper start-->
     <div class="wrapper">
 
@@ -115,9 +132,10 @@
     @section('extraPlugin')
     @show{{-- 引入额外依赖JS插件 --}}
 
-    <!--highlight main-sidebar-->
+    
     <script type="text/javascript">
       $(document).ready(function(){
+          <!--highlight main-sidebar-->
           {{-- URL::current() --}}
           {{-- Route::currentRouteName() --}}
 
