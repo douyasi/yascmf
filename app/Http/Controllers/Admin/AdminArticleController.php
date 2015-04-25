@@ -4,11 +4,7 @@ use Douyasi\Http\Requests\ArticleRequest;  //请求层
 use Douyasi\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Douyasi\Repositories\ContentRepository;  //模型仓库层
-
-/*
-#Laravel 5 推荐使用Request （facade），但Input仍然可以使用，这里我们使用服务容器自动注入
-use Input;
-*/
+use Cache;
 
 /**
  * 内容文章资源控制器
@@ -51,7 +47,7 @@ class AdminArticleController extends BackController
         ];
 
         //使用仓库方法获取文章列表
-        $articles = $this->content->index($data, 'article', env('PAGE_SIZE', 10));
+        $articles = $this->content->index($data, 'article', Cache::get('page_size', '10'));
 
         //注意：因为已经使用 Bootstrap 后台模版，故无须再传入自定义的分页样式
         //传入自定义的分页Presenter

@@ -86,7 +86,7 @@
                   {!! $articles->render() !!}
                 </div>
 
-                <!--隐藏型删除文章表单-->
+                <!--隐藏型删除表单-->
                 {!! Form::open( array('url' => route('admin.article.index'), 'method' => 'delete', 'id' => 'hidden-delete-form') ) !!}
                 {!! Form::close() !!}
 
@@ -122,7 +122,7 @@
           $(this).data("clicks", !clicks);
         });
 
-        <!--jQuery 提交表单，实现DELETE删除文章-->
+        <!--jQuery 提交表单，实现DELETE删除资源-->
         //jQuery submit form
         $('.delete_item').click(function(){
             var action = '{{ route('admin.article.index') }}';
