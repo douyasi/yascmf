@@ -148,8 +148,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
 #--------------------
 # 业务管理 START
 #--------------------
-	#备忘
-	Route::resource('memo', 'Admin\AdminMemoController');
 
 	#首页
 	Route::get('/business', ['as' => 'admin.business.index', 'uses' => 'Admin\AdminBusinessController@getIndex']);
