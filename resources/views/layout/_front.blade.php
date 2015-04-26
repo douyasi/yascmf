@@ -1,11 +1,13 @@
-@extends('layout.base')
+@extends('layout._base')
 
 @section('title') {{ isset($title) ? $title : '前台' }} - {{ Cache::get('website_title','芽丝博客') }} @stop
 
+@section('meta')
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+@stop
 
 @section('head_css')
-	<!--<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">-->
-	<link href="{{ asset('static/themes/yas_cerulean.min.css') }}" rel="stylesheet">
+	<link href="{{ asset('static/themes/simplex/bootstrap.min.css') }}" rel="stylesheet">
 	<link href="{{ asset('static/yas_blog.css') }}" rel="stylesheet">
 @parent
 @stop
@@ -19,7 +21,6 @@
 		<script src="{{ asset('static/js/html5shiv/dist/html5shiv.js') }}"></script>
 		<script src="{{ asset('static/js/respond/dest/respond.min.js') }}"></script>
 	<![endif]-->
-@parent
 @stop
 
 @section('body')
@@ -32,7 +33,6 @@
 @stop
 
 @section('afterBody')
-@parent
 	@section('bootstrapJS')
 	<script src="{{ asset('static/js/jquery-1.10.2.min.js') }}"></script>
 	<script src="{{ asset('static/js/bootstrap/dist/js/bootstrap.min.js') }}"></script>

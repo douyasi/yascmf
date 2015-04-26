@@ -1,8 +1,7 @@
-@extends('layout.frontend')
+@extends('layout._front')
 
 @section('bootstrapContent')
 @parent
-
 
 <div class="container" id="content">
 

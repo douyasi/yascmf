@@ -1,4 +1,4 @@
-@extends('layout.frontend')
+@extends('layout._front')
 
 @section('bootstrapContent')
 @parent

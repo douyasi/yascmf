@@ -21,6 +21,13 @@
           <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
 
+              <li>
+                <a href="{{ route('home') }}">
+                  <i class="fa fa-home" title="前台首页"></i>
+                  <span class="label label-info">H</span>
+                </a>
+              </li>
+
               <!-- Messages: style can be found in dropdown.less-->
               <li class="dropdown messages-menu">
                 <!-- Menu toggle button -->

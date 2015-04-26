@@ -126,7 +126,8 @@
               </a>
               <ul class="treeview-menu">
                 <li><a href="{{ route('admin.system_option.index') }}"><i class="fa fa-square-o"></i>系统配置</a></li>
-                <li><a href="{{ route('admin.setting_type.index') }}"><i class="fa fa-square-o"></i>动态设置</a></li>
+                <li><a href="{{ route('admin.setting_type.index') }}"><i class="fa fa-square-o"></i>动态设置分组</a></li>
+                <li><a href="{{ route('admin.setting.index') }}"><i class="fa fa-square-o"></i>动态设置</a></li>
                 <li><a href="{{ route('admin.system_log.index') }}"><i class="fa fa-square-o"></i>系统日志</a></li>
                 <li><a href="#"><i class="fa fa-square-o"></i>邮件日志</a></li>
               </ul>
