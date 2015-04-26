@@ -4,10 +4,16 @@ use Douyasi\Http\Requests\SettingTypeRequest;
 use Douyasi\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Douyasi\Repositories\SettingRepository;
+use Cache;
 
+/**
+ * 系统动态设置分组控制器
+ *
+ * @author raoyc <raoyc2009@gmail.com>
+ */
 class AdminSettingTypeController extends BackController
 {
-    
+
 /**
      * The SettingRepository instance.
      *
@@ -38,9 +44,8 @@ class AdminSettingTypeController extends BackController
             's_name' => $request->input('s_name'),
             's_value' => $request->input('s_value'),
         ];
-        $types = $this->setting->index($data, '');  //注意，第二个参数不为'setting'，取的是SettingType模型
-        $links = page_links($types, $data);
-        return view('back.setting_type.index', compact('types', 'links'));
+        $types = $this->setting->index($data, '', Cache::get('page_size', '10'));  //注意，第二个参数不为'setting'，取的是SettingType模型
+        return view('back.setting_type.index', compact('types'));
     }
 
 
@@ -62,26 +67,12 @@ class AdminSettingTypeController extends BackController
      */
     public function store(SettingTypeRequest $request)
     {
-        if ($request->is_ajax()) {
-            $validator = $request->validate('store');
-            $data = $request->data('store');
-            $json = $request->response();
-            $json = array_replace($json, ['operation' => '添加动态设置分组']);
-
-            if ($validator->passes()) {
-                $setting_type = $this->setting->store($data, '');  //注意，第二个参数不为'setting'，取的是SettingType模型
-                if ($setting_type->id) {
-                    $json = array_replace($json, ['status' => 1, 'info' => '成功']);
-                } else {
-                    $info = '失败原因为：<span class="text_error">数据库操作返回异常</span>';
-                    $json = array_replace($json, ['info' => $info]);
-                }
-            } else {
-                $json = format_json_message($validator->messages(), $json);
-            }
-            return response()->json($json);
+        $data = $request->all();
+        $setting_type = $this->setting->store($data, '');  //注意，第二个参数不为'setting'，取的是SettingType模型
+        if ($setting_type->id) {
+            return redirect()->route('admin.setting_type.index')->with('message', '成功新增动态设置分组！');
         } else {
-            return view('back.exceptions.jump', ['exception' => '非法请求，不予处理！']);
+            return redirect()->back()->withInput($request->input())->with('fail', '数据库操作返回异常！');
         }
     }
 
@@ -95,14 +86,12 @@ class AdminSettingTypeController extends BackController
     public function show($id)
     {
         //需关联查询
-        /*①查出是否有该分组id，不存在则抛出404*/
+        /*①查出是否有该分组id，不存在则抛出异常*/
         $type = $this->setting->getById($id);
-        is_null($type) and abort(404);
         /*②存在该分组id，则显示出该分组id下所有动态设置项*/
         $settings = $this->setting->show($id);
-        $links = page_links($settings);
         $typename = $type->name;
-        return view('back.setting.index', compact('settings', 'links', 'typename'));
+        return view('back.setting.index', compact('settings', 'typename'));
     }
 
 
@@ -115,7 +104,6 @@ class AdminSettingTypeController extends BackController
     public function edit($id)
     {
         $type = $this->setting->getById($id);
-        is_null($type) and abort(404);
         return view('back.setting_type.edit', ['data' => $type]);
     }
 
@@ -128,22 +116,9 @@ class AdminSettingTypeController extends BackController
      */
     public function update(SettingTypeRequest $request, $id)
     {
-        if ($request->is_ajax() && $request->is_method('put')) {
-            $validator = $request->validate('update');
-            $data = $request->data('update');
-            $json = $request->response();
-            $json = array_replace($json, ['operation' => '修改动态设置分组']);
-
-            if ($validator->passes()) {
-                $setting_type = $this->setting->update($id, $data, '');  //注意，第三个参数不为'setting'，取的是SettingType模型
-                $json = array_replace($json, ['status' => 1, 'info' => '成功']);
-            } else {
-                $json = format_json_message($validator->messages(), $json);
-            }
-            return response()->json($json);
-        } else {
-            return view('back.exceptions.jump', ['exception' => '非法请求，不予处理！']);
-        }
+        $data = $request->all();
+        $setting_type = $this->setting->update($id, $data, '');  //注意，第三个参数不为'setting'，取的是SettingType模型
+        return redirect()->route('admin.setting_type.index')->with('message', '修改动态设置分组成功！');
     }
 
 
@@ -153,24 +128,18 @@ class AdminSettingTypeController extends BackController
      * @param  int  $id
      * @return Response
      */
-    public function destroy(SettingTypeRequest $request, $id)
+    public function destroy($id)
     {
-        if ($request->is_ajax() && $request->is_method('delete')) {
-            $json = $request->response();
-            $json = array_replace($json, ['operation' => '删除动态设置分组']);
-            if ($id == 1) {
-                $json = array_replace($json, ['info' => '失败原因为：<span class="text_error">ID为1的默认动态设置分组不能被删除！</span>']);
-            } else {
-                if ($this->setting->hasSetting($id)) {
-                    $json = array_replace($json, ['info' => '失败原因为：<span class="text_error">该分组下还存在动态设置，不能被删除！</span>']);
-                } else {
-                    $this->setting->destroy($id, '');  //注意，第二个参数不为'setting'，取的是SettingType模型
-                    $json = array_replace($json, ['status'=>1, 'info' => '成功']);
-                }
-            }
-            return response()->json($json);
+        if ($id == 1) {
+            return redirect()->route('admin.setting_type.index')->with('fail', 'ID为1的默认动态设置分组不能被删除！！');
         } else {
-            return view('back.exceptions.jump', ['exception' => '非法请求，不予处理！']);
+            if ($this->setting->hasSetting($id)) {
+                return redirect()->route('admin.setting_type.index')->with('fail', '该分组下还存在设置项，不能被删除；请清空该分组下设置项后再试！！');
+            } else {
+                $this->setting->destroy($id, '');  //注意，第二个参数不为'setting'，取的是SettingType模型
+                return redirect()->route('admin.setting_type.index')->with('message', '删除动态设置分组成功！');
+            }
         }
+      
     }
 }

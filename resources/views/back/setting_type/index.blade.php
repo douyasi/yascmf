@@ -1,69 +1,94 @@
-@extends('layout.backend')
-@section('main_content')
+@extends('layout._back')
+
+@section('content-header')
 @parent
-					<!--@表单验证等提示信息栏 START-->
-					<div class="validation_tips_area" style="display: none;">
-					</div>
-					<!--@表单验证等提示信息栏 END /-->
+          <h1>
+            系统管理
+            <small>动态设置分组</small>
+          </h1>
+          <ol class="breadcrumb">
+            <li><a href="{{ route('admin') }}"><i class="fa fa-dashboard"></i> 主页</a></li>
+            <li class="active">系统管理 - 动态设置分组</li>
+          </ol>
+@stop
 
-					<!--面包屑导航 start-->
-					<div class="breadcrumb_nav">
-						<a href="{{ route('admin') }}"><i class="fa fa-home fa-fw"></i>Home</a>  &gt;  <a href="{{ route('admin.setting_type.index') }}">系统管理</a>  &gt;  动态设置分组
-						<!--筛选搜索-->
-						<div class="search_box">
-							<form action="{{ route('admin.setting_type.index') }}" method="get">
-								<input type="text" name="s_name" value="{{ Input::get('s_name') }}" placeholder="分组名">
-								<input type="text" name="s_value" value="{{ Input::get('s_value') }}" placeholder="分组值">
-								<input type="submit" class="flat_btn yas_green" value="搜索">
-							</form>
-						</div>
-						<!--筛选搜索 end-->
-					</div>
-					<!--面包屑导航 end-->
-					
-					<!--cmf主体区域 start-->
-					<div class="main_cmf_content">
-							<div class="cmf_cont">
-								<p>
-									<a href="{{ route('admin.setting_type.create') }}"><i class="fa fa-fw fa-plus-circle" alt="新增" title="新增"></i>新增动态设置分组</a>
-								</p>
-								<table class="yas_table yas_table_noborder">
-									<thead>
-										<tr>
-											<th width="10%">操作</th>
-											<th width="25%">分组名</th>
-											<th width="10%">分组值</th>
-											<th width="15%">排序</th>
-										</tr>
-									</thead>
-									<tbody>
+@section('content')
 
-										@foreach ($types as $type)
-										<tr>
-											<td><a href="{{ route('admin.setting_type.index') }}/{{ $type->id }}/edit"><i class="fa fa-fw fa-pencil" alt="修改" title="修改"></i></a>  <a href=""><i class="fa fa-fw fa-link" alt="预览" title="预览"></i></a>  <a href="javascript:void();"><i class="fa fa-fw fa-minus-circle delete_item" alt="删除" title="删除" data-id="{{ $type->id }}"></i></a></td>
-											<td><a href="{{ route('admin.setting_type.index') }}/{{ $type->id }}">{{ $type->name }}</a></td>
-											<td class="color_orange">
-											{{ $type->value }}
-											</td>
-											<td>
-											{{ $type->sort }}
-											</td>
-										</tr>
-										@endforeach
+              @if(Session::has('message'))
+                <div class="alert alert-success alert-dismissable">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                  <h4>  <i class="icon fa fa-check"></i> 提示！</h4>
+                  {{ Session::get('message') }}
+                </div>
+              @endif
 
-									</tbody>
-								</table>
-								<div class="yas_page_container">
-									{!! $links !!}
-								</div>
-							</div>
-					</div>
-					<!--cms主体区域 end-->
+              <a href="{{ route('admin.setting_type.create') }}" class="btn btn-primary margin-bottom">新增动态设置分组</a>
 
+              <div class="box box-primary">
+                <div class="box-header with-border">
+                  <h3 class="box-title">动态设置分组列表</h3>
+                  <div class="box-tools">
+                    <form action="{{ route('admin.setting_type.index') }}" method="get">
+                      <div class="input-group">
+                        <input type="text" class="form-control input-sm pull-right" name="s_value" value="{{ Input::get('s_value') }}" style="width: 150px;" placeholder="搜索分组值">
+                        <input type="text" class="form-control input-sm pull-right" name="s_name" value="{{ Input::get('s_name') }}" style="width: 150px;" placeholder="搜索分组名">
+                        <div class="input-group-btn">
+                          <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div><!-- /.box-header -->
+                <div class="box-body table-responsive">
+                  <table class="table table-hover table-bordered">
+                    <tbody>
+                      <!--tr-th start-->
+                      <tr>
+                        <th>操作</th>
+                        <th>分组名</th>
+                        <th>分组值</th>
+                        <th>排序</th>
+                      </tr>
+                      <!--tr-th end-->
+
+                      @foreach ($types as $type)
+                      <tr>
+                        <td>
+                            <a href="{{ route('admin.setting_type.index') }}/{{ $type->id }}/edit"><i class="fa fa-fw fa-pencil" title="修改"></i></a>  
+                            <a href="javascript:void(0);"><i class="fa fa-fw fa-link" title="预览"></i></a>  
+                            <a href="javascript:void(0);"><i class="fa fa-fw fa-minus-circle delete_item" title="删除" data-id="{{ $type->id }}"></i></a>
+                        </td>
+                        <td><a href="{{ route('admin.setting_type.index') }}/{{ $type->id }}">{{ $type->name }}</a></td>
+                        <td class="text-green">
+                          {{ $type->value }}
+                        </td>
+                        <td>{{ $type->sort }}</td>
+                      </tr>
+                      @endforeach
+
+                    </tbody>
+                  </table>
+                </div><!-- /.box-body -->
+                <div class="box-footer clearfix">
+                  {!! $types->render() !!}
+                </div>
+
+                <!--隐藏型删除表单-->
+                {!! Form::open( array('url' => route('admin.setting_type.index'), 'method' => 'delete', 'id' => 'hidden-delete-form') ) !!}
+                {!! Form::close() !!}
+
+              </div>
 @stop
 
 
-@section('delete_item')
-	@include('scripts.endBuildHtml')
-	@include('scripts.endDeleteItem', ['_url' => route('admin.setting_type.index')])
+@section('filledScript')
+        <!--jQuery 提交表单，实现DELETE删除资源-->
+        //jQuery submit form
+        $('.delete_item').click(function(){
+            var action = '{{ route('admin.setting_type.index') }}';
+            var id = $(this).data('id');
+            var new_action = action + '/' + id;
+            $('#hidden-delete-form').attr('action', new_action);
+            $('#hidden-delete-form').submit();
+        });
 @stop

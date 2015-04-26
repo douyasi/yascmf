@@ -114,7 +114,6 @@ class AdminCategoryController extends BackController
     {
         if ($id == 1) {
             return redirect()->route('admin.category.index')->with('fail', 'ID为1的默认分类不能被删除！！');
-            $json = array_replace($json, ['info' => '失败原因为：<span class="text_error">ID为1的默认分类不能被删除！</span>']);
         } else {
             if ($this->meta->hasContent('category', $id)) {
                 return redirect()->route('admin.category.index')->with('fail', '该分类下还存在文章，不能被删除；请清空该分类下文章后再试！！');

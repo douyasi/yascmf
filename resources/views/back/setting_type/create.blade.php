@@ -1,71 +1,66 @@
-@extends('layout.backend')
-@section('main_content')
+@extends('layout._back')
+
+@section('content-header')
 @parent
-					<!--@表单验证等提示信息栏 START-->
-					<div class="validation_tips_area" style="display: none;">
-					</div>
-					<!--@表单验证等提示信息栏 END /-->
-
-					<!--面包屑导航 start-->
-					<div class="breadcrumb_nav">
-						<a href="{{ route('admin') }}"><i class="fa fa-home fa-fw"></i>Home</a>  &gt;  <a href="{{ route('admin.setting_type.index') }}">系统管理</a>  &gt;新增动态设置分组
-					</div>
-					<!--面包屑导航 end-->
-					
-					<!--nav_tabs start-->
-					<div class="nav_tabs">
-						<ul class="cf">
-							<li class="active"><a href="javascript:void(0);">主要内容</a></li>
-						</ul>
-					</div>
-					<!--nav_tabs end-->
-					
-					<!--cmf主体区域 start-->
-					<div class="main_form_content">
-						<!--form start-->
-						{!! Form::open( array('url' => route('admin.setting_type.store'), 'method' => 'post', 'id' => 'addSettingTypeForm') ) !!}
-							<!--tab_content start-->
-							<div class="tab_content">
-								<div class="tab_pane active">
-									<ul>
-										<li>
-											<label class="description" for="name">动态设置分组名  <span class="required">(*)</span>  <span class="tips">动态设置分组名只能是全小写的英文字母与下划线（a-z_）组合</span></label>
-											<div class="form_item">
-												<input type="text" id="name" name="name" autocomplete="off" value="" placeholder="动态设置分组名">
-											</div>
-										</li>
-										<li>
-											<label class="description" for="value">动态设置分组值 <span class="required">(*)</span>  <span class="tips">动态设置分组值建议为中文</span></label>
-											<div class="form_item">
-												<input type="text" id="value" name="value" value="" placeholder="动态设置分组值">
-											</div>
-										</li>
-									</ul>
-								</div>
-							</div>
-							<!--tab_content end-->
-							
-							<!--form_control start-->
-							<div class="form_buttons">
-								<input class="flat_btn yas_green" type="submit" id="addSettingTypeSubmit" name="submit" value="添加">
-							</div>
-							<!--form_control end-->
-						{!! Form::close() !!}
-						<!--form end-->
-					</div>
-					<!--cms主体区域 end-->
-
+          <h1>
+            系统管理
+            <small>动态设置分组</small>
+          </h1>
+          <ol class="breadcrumb">
+            <li><a href="{{ route('admin') }}"><i class="fa fa-dashboard"></i> 主页</a></li>
+            <li><a href="{{ route('admin.page.index') }}">系统管理 - 动态设置分组</a></li>
+            <li class="active">新增动态设置分组</li>
+          </ol>
 @stop
 
-@section('endMainCon')
-@parent
-	@include('scripts.endChosen')
-	<script src="{{ asset('assets/lib/form/jquery.form.js') }}"></script>{{-- 加载jquery.form插件 --}}
+@section('content')
+
+          @if(Session::has('fail'))
+            <div class="alert alert-warning alert-dismissable">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+              <h4>  <i class="icon icon fa fa-warning"></i> 提示！</h4>
+              {{ Session::get('fail') }}
+            </div>
+          @endif
+
+          @if($errors->any())
+            <div class="alert alert-danger alert-dismissable">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                  <h4><i class="icon fa fa-ban"></i> 警告！</h4>
+                  <ul>
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                  </ul>
+            </div>
+          @endif
+
+              <h2 class="page-header">新增动态设置分组</h2>
+              {!! Form::open( array('url' => route('admin.setting_type.store'), 'method' => 'post', 'id' => 'addSettingTypeForm') ) !!}
+              <div class="nav-tabs-custom">
+                  
+                  <ul class="nav nav-tabs">
+                    <li class="active"><a href="#tab_1" data-toggle="tab" aria-expanded="true">主要内容</a></li>
+                  </ul>
+
+                  <div class="tab-content">
+                    
+                    <div class="tab-pane active" id="tab_1">
+                      <div class="form-group">
+                        <label>动态设置分组名 <small class="text-red">*</small> <span class="text-green small">只能全小写的英文字母与下划线（a-z_）组合</span></label>
+                        <input type="text" class="form-control" name="name" autocomplete="off" value="{{ Input::old('name') }}" placeholder="动态设置分组名">
+                      </div>
+                      <div class="form-group">
+                        <label>动态设置分组值 <small class="text-red">*</small> <span class="text-green small">建议中文</span></label>
+                        <input type="text" class="form-control" name="value" value="{{ Input::old('value') }}" placeholder="动态设置分组值">
+                      </div>
+                    </div><!-- /.tab-pane -->
+
+                    <button type="submit" class="btn btn-primary">新增动态设置分组</button>
+
+                  </div><!-- /.tab-content -->
+                  
+              </div>
+              {!! Form::close() !!}
+
 @stop
-
-	
-
-	@section('ajaxForm')
-		@include('scripts.endBuildHtml')
-		@include('scripts.endAjaxForm', ['_sub' => '#addSettingTypeSubmit', '_form' => '#addSettingTypeForm', '_loc' => route('admin.setting_type.index')])
-	@stop

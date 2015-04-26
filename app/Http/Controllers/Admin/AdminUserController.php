@@ -5,6 +5,7 @@ use Douyasi\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Douyasi\Logger\SystemLogger as SystemLogger;
 use Douyasi\Repositories\UserRepository;
+use Cache;
 
 /**
  * （管理型）用户资源控制器
@@ -46,7 +47,7 @@ class AdminUserController extends BackController
             's_name' => $request->input('s_name'),
             's_phone' => $request->input('s_phone'),
         ];
-        $users = $this->user->index($data, 'manager');
+        $users = $this->user->index($data, 'manager', Cache::get('page_size', '10'));
 
         return view('back.user.index', compact('users'));
     }
