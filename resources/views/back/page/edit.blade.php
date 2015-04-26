@@ -128,7 +128,7 @@
           }).width();
         }
 
-        <!--启用iCheck对checkboxes的响应-->
+        <!--启用iCheck响应checkbox与radio表单控件-->
         $('input[type="radio"]').iCheck({
           radioClass: 'iradio_flat-blue',
           increaseArea: '20%' // optional

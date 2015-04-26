@@ -12,7 +12,7 @@
 body {
 	font-size: 14px;
 	line-height: 20px;
-	font-family: "Helvetica Neue", Helvetica, "微软雅黑", "Microsoft Yahei", Georgia, Arial, sans-serif;
+	font-family: 'Helvetica Neue', Helvetica, Arial, '\5FAE\8F6F\96C5\9ED1', 'Hiragino Sans GB', sans-serif;
 	-webkit-font-smoothing: antialiased;
 }
 	</style>

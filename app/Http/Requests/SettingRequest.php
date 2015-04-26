@@ -40,17 +40,17 @@ class SettingRequest extends DouyasiRequest
     public function messages()
     {
         return [
-            'type_id.required'  => '请选择动态设置分组',
-            'type_id.exists'    => '不存在该动态设置分组',
-            'name.required'   => '请填写动态设置名',
-            'name.max'         => '动态设置名长度不要超出20',
-            'name.eng_alpha_dash'     => '详细设置名只能为数字、字母、下划线与横杠(0-9A-Za-z_-)组合',
-            'name.unique'       => '已存在同名的动态设置',
-            'value.required'    => '请填写动态设置值',
-            'value.max'          => '动态设置值长度不要超出10',
-            'value.alpha_dash'  => '动态设置值包含非常规字符',
-            'status.boolean'    => '状态必须是布尔值',
-            'sort.numeric'      => '排序必须是数字',
+            'type_id.required'    => '请选择动态设置分组',
+            'type_id.exists'      => '不存在该动态设置分组',
+            'name.required'       => '请填写动态设置名',
+            'name.max'            => '动态设置名长度不要超出20',
+            'name.eng_alpha_dash' => '详细设置名只能为数字、字母、下划线与横杠(0-9A-Za-z_-)组合',
+            'name.unique'         => '已存在同名的动态设置',
+            'value.required'      => '请填写动态设置值',
+            'value.max'           => '动态设置值长度不要超出10',
+            'value.alpha_dash'    => '动态设置值包含非常规字符',
+            'status.boolean'      => '状态必须是布尔值',
+            'sort.numeric'        => '排序必须是数字',
         ];
     }
 

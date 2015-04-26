@@ -19,7 +19,6 @@ class CategoryRequest extends Request
     /**
      * 自定义验证规则rules
      *
-     * @param string $type 规则类型，'store'表示存储数据时规则，'update'表示更新数据时规则，'destroy'表示删除数据时规则（极少用到）
      * @return array
      */
     public function rules()

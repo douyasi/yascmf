@@ -19,7 +19,6 @@ class ArticleRequest extends Request
     /**
      * 自定义验证规则rules
      *
-     * @param string $type 规则类型，'store'表示存储数据时规则，'update'表示更新数据时规则，'destroy'表示删除数据时规则（极少用到）
      * @return array
      */
     public function rules()
@@ -48,19 +47,19 @@ class ArticleRequest extends Request
     public function messages()
     {
         return [
-            'title.required'   => '请填写文章标题',
-            'title.max'         => '文章标题过长，建议长度不要超出60',
-            'slug.required'    => '请填写缩略名',
-            'slug.max'          => '缩略名过长',
-            'slug.unique'      => '已有同名缩略名',
+            'title.required'       => '请填写文章标题',
+            'title.max'            => '文章标题过长，建议长度不要超出60',
+            'slug.required'        => '请填写缩略名',
+            'slug.max'             => '缩略名过长',
+            'slug.unique'          => '已有同名缩略名',
             'slug.eng_alpha_dash'  => '缩略名只能数字、字母、下划线与横杠（0-9A-Za-z_-）组合',
             'category_id.required' => '请选择文章分类',
-            'category_id.exists' => '不存在该文章分类',
-            'content.required' => '请填写文章正文',
-            'content.min'      => '文章正文过短，长度不得少于20',
-            'is_top.boolean'   => '是否置顶必须为布尔值',
-            'outer_link.url_link' => '外链地址不合法',
-            'thumb.self_url'    => '缩略图地址必须在当前域名下',
+            'category_id.exists'   => '不存在该文章分类',
+            'content.required'     => '请填写文章正文',
+            'content.min'          => '文章正文过短，长度不得少于20',
+            'is_top.boolean'       => '是否置顶必须为布尔值',
+            'outer_link.url_link'  => '外链地址不合法',
+            'thumb.self_url'       => '缩略图地址必须在当前域名下',
         ];
     }
 }

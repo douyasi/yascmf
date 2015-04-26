@@ -1,88 +1,87 @@
-@extends('layout.backend')
-@section('main_content')
+@extends('layout._back')
+
+@section('content-header')
 @parent
-					<!--@表单验证等提示信息栏 START-->
-					<div class="validation_tips_area" style="display: none;">
-					</div>
-					<!--@表单验证等提示信息栏 END /-->
-					
-					
-					<!--面包屑导航 start-->
-					<div class="breadcrumb_nav">
-						<a href="{{ route('admin') }}"><i class="fa fa-home fa-fw"></i>Home</a>  &gt;  <a href="{{ route('admin.role.index') }}">角色(用户组)</a>  &gt;  新增角色
-					</div>
-					<!--面包屑导航 end-->
-					
-					<!--nav_tabs start-->
-					<div class="nav_tabs">
-						<ul class="cf">
-							<li class="active"><a href="javascript:void(0);">新增角色</a></li>
-						</ul>
-					</div>
-					<!--nav_tabs end-->
+          <h1>
+            用户管理
+            <small>角色</small>
+          </h1>
+          <ol class="breadcrumb">
+            <li><a href="{{ route('admin') }}"><i class="fa fa-dashboard"></i> 主页</a></li>
+            <li><a href="{{ route('admin.role.index') }}">用户管理 - 角色</a></li>
+            <li class="active">新增角色</li>
+          </ol>
+@stop
 
-					<!--为了实现restful路由，form表单会默认构造隐藏表域<input type="hidden" name="_method" value="PUT|DELETE">-->
-					<!--表单主体区域 start-->
-					<div class="main_form_content">
-						<!--form start-->
-						{!! Form::open( array('url' => route('admin.role.store'), 'method' => 'post', 'id' => 'addRoleForm') ) !!}
-							<!--tab_content start-->
-							<div class="tab_content">
+@section('content')
 
-								<div class="tab_pane active">
-									<ul>
-										<li>
-											<label class="description" for="name">角色(用户组)名  <span class="required">(*)</span>  <span class="tips">只能为英文单词，建议首字母大写</span></label>
-											<div class="form_item">
-												<input type="text" id="name" name="name" autocomplete="off" value="" placeholder="角色(用户组)名">
-											</div>
-										</li>
-										<li>
-											<label class="description">关联权限  <span class="required">(*)</span>  <span class="tips">请选择该角色关联的权限</span></label>
-											<div class="form_item">
-												@foreach($permissions as $per)
-												<input type="checkbox" name="permissions[]" value="{{ $per->id }}">
-												<label class="choice" for="permissions[]">{{ $per->display_name }}</label>
-												@endforeach
+          @if(Session::has('fail'))
+            <div class="alert alert-warning alert-dismissable">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+              <h4>  <i class="icon icon fa fa-warning"></i> 提示！</h4>
+              {{ Session::get('fail') }}
+            </div>
+          @endif
 
-											</div>
-										</li>
-								</div>
-								
-							</div>
-							<!--tab_content end-->
-							
-							<!--form_control start-->
-							<div class="form_buttons">
-								<input class="flat_btn yas_green" type="submit" id="addRoleSubmit" name="submit" value="新增角色">
-							</div>
-							<!--form_control end-->
-						{!! Form::close() !!}
-						<!--form end-->
-					</div>
-					<!--表单主体区域 end-->
+          @if($errors->any())
+            <div class="alert alert-danger alert-dismissable">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                  <h4><i class="icon fa fa-ban"></i> 警告！</h4>
+                  <ul>
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                  </ul>
+            </div>
+          @endif
 
+              <h2 class="page-header">新增角色</h2>
+              {!! Form::open( array('url' => route('admin.role.store'), 'method' => 'post', 'id' => 'addRoleForm') ) !!}
+              <div class="nav-tabs-custom">
+                  
+                  <ul class="nav nav-tabs">
+                    <li class="active"><a href="#tab_1" data-toggle="tab" aria-expanded="true">主要内容</a></li>
+                  </ul>
+
+                  <div class="tab-content">
+                    
+                    <div class="tab-pane active" id="tab_1">
+                      <div class="form-group">
+                        <label>角色(用户组)名 <small class="text-red">*</small> <span class="text-green small">只能为英文单词，建议首字母大写</span></label>
+                        <input type="text" class="form-control" name="name" autocomplete="off" value="{{ Input::old('name') }}" placeholder="角色(用户组)名">
+                      </div>
+                      <div class="form-group">
+                        <label>关联权限 <small class="text-red">*</small></label>
+                        <div class="input-group">
+                          @foreach($permissions as $per)
+                          <input type="checkbox" name="permissions[]" value="{{ $per->id }}">
+                          <label class="choice" for="permissions[]">{{ $per->display_name }}</label>
+                          @endforeach
+                        </div>
+                      </div>
+                    </div><!-- /.tab-pane -->
+
+                    <button type="submit" class="btn btn-primary">新增角色</button>
+
+                  </div><!-- /.tab-content -->
+                  
+              </div>
+              {!! Form::close() !!}
 
 @stop
 
-@section('endMainCon')
-@parent
-	<link href="{{ asset('assets/lib/iCheck/skins/square/red.css') }}" rel="stylesheet">
-	<script src="{{ asset('assets/lib/iCheck/icheck.min.js') }}"></script>{{-- 加载icheck插件 --}}
-	<script src="{{ asset('assets/lib/layer/layer.min.js') }}"></script>{{-- 加载layer插件 --}}
-	<script src="{{ asset('assets/lib/form/jquery.form.js') }}"></script>{{-- 加载jquery.form插件 --}}
+@section('extraPlugin')
+
+  <!--引入iCheck组件-->
+  <script src="{{ asset('plugins/iCheck/icheck.min.js') }}" type="text/javascript"></script>
+
 @stop
 
-	@section('iCheck')
-	/*iCheck组件*/
-	$('input').iCheck({
-		checkboxClass: 'icheckbox_square-red',
-		radioClass: 'iradio_square-red',
-		increaseArea: '20%' // optional
-	});
-	@stop
 
-	@section('ajaxForm')
-		@include('scripts.endBuildHtml')
-		@include('scripts.endAjaxForm', ['_sub' => '#addRoleSubmit', '_form' => '#addRoleForm', '_loc' => route('admin.role.index')])
-	@stop
+@section('filledScript')
+        <!--启用iCheck响应checkbox与radio表单控件-->
+        $('input[type="checkbox"]').iCheck({
+          checkboxClass: 'icheckbox_flat-blue',
+          increaseArea: '20%' // optional
+        });
+@stop

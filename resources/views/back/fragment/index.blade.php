@@ -106,7 +106,7 @@
 @stop
 
 @section('filledScript')
-        <!--启用iCheck对checkboxes的响应-->
+        <!--启用iCheck响应checkbox与radio表单控件-->
         //Enable iCheck plugin for checkboxes
         //iCheck for checkbox and radio inputs
         $('.table-operation input[type="checkbox"]').iCheck({

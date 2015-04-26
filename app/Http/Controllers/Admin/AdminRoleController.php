@@ -66,28 +66,12 @@ class AdminRoleController extends BackController
     public function store(RoleRequest $request)
     {
         //
-        if ($request->is_ajax()) {
-            $validator = $request->validate('store');
-            $data = $request->data('store');
-            $json = $request->response();
-            $json = array_replace($json, ['operation' => '添加角色']);
-
-            if ($validator->passes()) {
-                $role = $this->role->store($data);
-                if ($role->id) {  //添加成功
-                    $json = array_replace($json, ['status' => 1, 'info' => '成功']);
-                } else {  //添加失败
-                    $info = '失败原因为：<span class="text_error">数据库操作返回异常</span>';
-                    $json = array_replace($json, ['info' => $info]);
-                }
-            } else {
-                // 验证失败
-                $json = format_json_message($validator->messages(), $json);
-            }
-            return response()->json($json);
-        } else {
-            //非ajax请求抛出异常
-            return view('back.exceptions.jump', ['exception' => '非法请求，不予处理！']);
+        $data = $request->all();
+        $role = $this->role->store($data);
+        if ($role->id) {  //添加成功
+            return redirect()->route('admin.role.index')->with('message', '成功新增角色！');
+        } else {  //添加失败
+            return redirect()->back()->withInput($request->input())->with('fail', '数据库操作返回异常！');
         }
     }
 
@@ -102,9 +86,7 @@ class AdminRoleController extends BackController
     {
         //
         $role = $this->role->edit($id);
-        is_null($role) and abort(404);
         $permissions = $this->role->permission();
-        
         $cans = $this->role->getRoleCans($role);
 
         return view('back.role.edit', compact('role', 'permissions', 'cans'));
@@ -120,22 +102,9 @@ class AdminRoleController extends BackController
     public function update(RoleRequest $request, $id)
     {
         //
-        if ($request->is_ajax() && $request->is_method('put')) {
-            $validator = $request->validate('update');
-            $data = $request->data('update');
-            $json = $request->response();
-            $json = array_replace($json, ['operation' => '修改角色']);
-
-            if ($validator->passes()) {
-                $this->role->update($id, $data);
-                $json = array_replace($json, ['status' => 1, 'info' => '成功']);
-            } else {
-                $json = format_json_message($validator->messages(), $json);
-            }
-            return response()->json($json);
-        } else {
-            return view('back.exceptions.jump', ['exception' => '非法请求，不予处理！']);
-        }
+        $data = $request->all();
+        $this->role->update($id, $data);
+        return redirect()->route('admin.role.index')->with('message', '修改角色成功！');
     }
 
 
@@ -145,20 +114,10 @@ class AdminRoleController extends BackController
      * @param  int  $id
      * @return Response
      */
-    public function destroy(RoleRequest $request, $id)
+    public function destroy($id)
     {
         //
-        if ($request->is_ajax() && $request->is_method('delete')) {
-            $this->role->destroy($id);
-            $json = [
-                'status' => 1,
-                'info' => '成功',
-                'operation' => '删除角色',
-                'url' => route('admin.role.index'),
-            ];
-            return response()->json($json);
-        } else {
-            return view('back.exceptions.jump', ['exception' => '非法请求，不予处理！']);
-        }
+        $this->role->destroy($id);
+        return redirect()->route('admin.role.index')->with('message', '删除角色成功！');
     }
 }

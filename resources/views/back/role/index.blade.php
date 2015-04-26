@@ -1,57 +1,85 @@
-@extends('layout.backend')
-@section('main_content')
+@extends('layout._back')
+
+@section('content-header')
 @parent
-					<!--@表单验证等提示信息栏 START-->
-					<div class="validation_tips_area" style="display: none;">
-					</div>
-					<!--@表单验证等提示信息栏 END /-->
-
-					<!--面包屑导航 start-->
-					<div class="breadcrumb_nav">
-						<a href="{{ route('admin') }}"><i class="fa fa-home fa-fw"></i>Home</a>  &gt;  <a href="{{ route('admin.user.index') }}">用户管理</a>  &gt;  角色(用户组)
-					</div>
-					<!--面包屑导航 end-->
-					
-					<!--cmf主体区域 start-->
-					<div class="main_cmf_content">
-						<form id="form_table" method="post" action="">
-							<div class="cmf_cont">
-								<p class="text_bold color_orange">请在超级管理员协助下完成新增修改与删除角色（用户组）操作。</p>
-								<p>
-									<a href="{{ route('admin.role.create') }}"><i class="fa fa-fw fa-plus-circle" alt="新增" title="新增"></i>新增角色(用户组)</a>
-								</p>
-								<table class="yas_table yas_table_noborder">
-									<thead>
-										<tr>
-											<th width="10%">操作</th>
-											<th width="10%">编号</th>
-											<th width="20%">角色(用户组)名</th>
-											<th width="20%">创建日期</th>
-											<th width="20%">更新日期</th>
-										</tr>
-									</thead>
-									<tbody>
-
-										@foreach ($roles as $role)
-										<tr>
-											<td><a href="{{ route('admin.role.index') }}/{{ $role->id }}/edit"><i class="fa fa-fw fa-pencil" alt="修改" title="修改"></i></a>  <a href=""><i class="fa fa-fw fa-link" alt="预览" title="预览"></i></a>  <a href="javascript:void();"><i class="fa fa-fw fa-minus-circle delete_item" alt="删除" title="删除" data-id="{{ $role->id }}"></i></a></td>
-											<td>{{ $role->id }}</td>
-											<td class="color_orange">{{ $role->name }}</td>
-											<td>{{ $role->created_at }}</td>
-											<td>{{ $role->updated_at }}</td>
-										</tr>
-										@endforeach
-
-									</tbody>
-								</table>
-								<!--对于一般cms来说角色（用户组）数量较少，故略去分页与批量删除-->
-							</div>
-						</form>
-					</div>
-					<!--cms主体区域 end-->
+          <h1>
+            用户管理
+            <small>角色</small>
+          </h1>
+          <ol class="breadcrumb">
+            <li><a href="{{ route('admin') }}"><i class="fa fa-dashboard"></i> 主页</a></li>
+            <li class="active">用户管理 - 角色</li>
+          </ol>
 @stop
 
-@section('delete_item')
-	@include('scripts.endBuildHtml')
-	@include('scripts.endDeleteItem', ['_url' => route('admin.role.index')])
+@section('content')
+
+              @if(Session::has('message'))
+                <div class="alert alert-success alert-dismissable">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                  <h4>  <i class="icon fa fa-check"></i> 提示！</h4>
+                  {{ Session::get('message') }}
+                </div>
+              @endif
+
+              <a href="{{ route('admin.role.create') }}" class="btn btn-primary margin-bottom">新增角色</a>
+
+              <div class="box box-primary">
+                <div class="box-header with-border">
+                  <h3 class="box-title">碎片列表</h3>
+                  <div class="box-tips clearfix">
+                    <p class="text-red">
+                      请在超级管理员协助下完成新增修改与删除角色（用户组）操作。
+                    </p>
+                  </div>
+                </div><!-- /.box-header -->
+                <div class="box-body table-responsive">
+                  <table class="table table-hover table-bordered">
+                    <tbody>
+                      <!--tr-th start-->
+                      <tr>
+                        <th>操作</th>
+                        <th>编号</th>
+                        <th>角色（用户组）名</th>
+                        <th>创建日期</th>
+                        <th>更新日期</th>
+                      </tr>
+                      <!--tr-th end-->
+
+                      @foreach ($roles as $role)
+                      <tr>
+                        <td>
+                            <a href="{{ route('admin.role.index') }}/{{ $role->id }}/edit"><i class="fa fa-fw fa-pencil" title="修改"></i></a>  
+                            <a href="javascript:void(0);"><i class="fa fa-fw fa-link" title="预览"></i></a>  
+                            <a href="javascript:void(0);"><i class="fa fa-fw fa-minus-circle delete_item" title="删除" data-id="{{ $role->id }}"></i></a>
+                        </td>
+                        <td class="text-muted">{{ $role->id }}</td>
+                        <td class="text-green">{{ $role->name }}</td>
+                        <td>{{ $role->created_at }}</td>
+                        <td>{{ $role->updated_at }}</td>
+                      </tr>
+                      @endforeach
+
+                    </tbody>
+                  </table>
+                </div><!-- /.box-body -->
+
+                <!--隐藏型删除表单-->
+                {!! Form::open( array('url' => route('admin.role.index'), 'method' => 'delete', 'id' => 'hidden-delete-form') ) !!}
+                {!! Form::close() !!}
+
+              </div>
+@stop
+
+
+@section('filledScript')
+        <!--jQuery 提交表单，实现DELETE删除资源-->
+        //jQuery submit form
+        $('.delete_item').click(function(){
+            var action = '{{ route('admin.role.index') }}';
+            var id = $(this).data('id');
+            var new_action = action + '/' + id;
+            $('#hidden-delete-form').attr('action', new_action);
+            $('#hidden-delete-form').submit();
+        });
 @stop
