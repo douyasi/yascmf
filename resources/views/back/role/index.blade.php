@@ -26,7 +26,7 @@
 
               <div class="box box-primary">
                 <div class="box-header with-border">
-                  <h3 class="box-title">碎片列表</h3>
+                  <h3 class="box-title">角色列表</h3>
                   <div class="box-tips clearfix">
                     <p class="text-red">
                       请在超级管理员协助下完成新增修改与删除角色（用户组）操作。

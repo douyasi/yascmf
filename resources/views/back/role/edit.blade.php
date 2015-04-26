@@ -35,7 +35,7 @@
             </div>
           @endif
 
-              <h2 class="page-header">新增角色</h2>
+              <h2 class="page-header">修改角色</h2>
               {!! Form::open( array('url' => route('admin.role.update', $role->id), 'method' => 'put', 'id' => 'editRoleForm') ) !!}
               <div class="nav-tabs-custom">
                   
