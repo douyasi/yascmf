@@ -55,13 +55,28 @@ SESSION_DRIVER=file
 
 ###界面展示
 
-前台： （ 前台界面更多请查看[演示网站](http://www.yas.so/) ）  
-![front](http://douyasi.com/usr/uploads/2015/03/3488851921.jpg)  
+####前台
 
-后台：  （后台界面与当前版本存在配色差异）
-![ajax_success](http://www.yas.so/static/img/ajax_success.jpg)  
+在线演示网站为：http://www.yas.so 。
 
-![error](http://www.yas.so/static/img/error.jpg)  
+![20150426223732.jpg][1]
+
+![20150426223807.jpg][2]
+
+![20150426223857.jpg][3]
+
+
+####后台
+
+新的后台模版基于 [AdminLTE][4] ， 经过本人修改以适配当前系统 。
+`AdminLTE` 后台拥有 12 套配色皮肤，响应式布局，支持电脑、平板和手机各个终端。
+
+![20150426223913.jpg][5]
+
+![20150426223938.jpg][6]
+
+![20150426224002.jpg][7]
+
 
 ###源码学习
 
@@ -103,3 +118,12 @@ SESSION_DRIVER=file
 Email: raoyc <raoyc2009@gmail.com>  
 官网：http://douyasi.com | http://www.yas.so  
 QQ群：260655062
+
+
+  [1]: http://douyasi.com/usr/uploads/2015/04/3530676302.jpg
+  [2]: http://douyasi.com/usr/uploads/2015/04/2716073848.jpg
+  [3]: http://douyasi.com/usr/uploads/2015/04/913925879.jpg
+  [4]: https://github.com/almasaeed2010/AdminLTE
+  [5]: http://douyasi.com/usr/uploads/2015/04/2937226833.jpg
+  [6]: http://douyasi.com/usr/uploads/2015/04/1471181251.jpg
+  [7]: http://douyasi.com/usr/uploads/2015/04/2433451104.jpg
