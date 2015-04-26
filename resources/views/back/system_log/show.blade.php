@@ -1,101 +1,47 @@
-@extends('layout.backend')
-@section('main_content')
+@extends('layout._back')
+
+@section('content-header')
 @parent
-					<!--@表单验证等提示信息栏 START-->
-					<div class="validation_tips_area" style="display: none;">
-					</div>
-					<!--@表单验证等提示信息栏 END /-->
-					
-					
-					<!--面包屑导航 start-->
-					<div class="breadcrumb_nav">
-						<a href="{{ route('admin') }}"><i class="fa fa-home fa-fw"></i>Home</a>  &gt;  <a href="{{ route('admin.system_option.index') }}">系统管理</a>  &gt;  <a href="{{ route('admin.system_log.index') }}">系统日志</a>  &gt;  系统日志详情
-					</div>
-					<!--面包屑导航 end-->
-					
-					<!--nav_tabs start-->
-					<div class="nav_tabs">
-						<ul class="cf">
-							<li class="active"><a href="javascript:void(0);">查看系统日志</a></li>
-						</ul>
-					</div>
-					<!--nav_tabs end-->
-					<!--表单主体区域 start-->
-					<div class="main_form_content">
-						
-						<!--form start-->
+          <h1>
+            系统管理
+            <small>系统日志</small>
+          </h1>
+          <ol class="breadcrumb">
+            <li><a href="{{ route('admin') }}"><i class="fa fa-dashboard"></i> 主页</a></li>
+            <li class="active">系统管理 - 系统日志</li>
+          </ol>
+@stop
 
-							<!--tab_content start-->
-							<div class="tab_content">
+@section('content')
 
-								<div class="tab_pane active">
-									<ul>
-										<li>
-											<p>以下为本次<span class="color_orange">系统日志详情</span>。</p>
-										</li>
-										<li>
-											<div class="form_item">
-												<table class="yas_table yas_table_noborder" width="500">
-													<thead>
-														<tr>
-															<th width="20%">属性项</th>
-															<th width="60%">属性值</th>
-														</tr>
-													</thead>
-													<tbody>
-														<tr>
-															<td>ID</td>
-															<td><span class="text_bold">{{ $sys_log->id }}</span></td>
-														</tr>
-														<tr>
-															<td>操作者昵称</td>
-															<td><span class="text_bold">{{ $sys_log->user->nickname }}</span></td>
-														</tr>
-														<tr>
-															<td>操作者真实姓名</td>
-															<td><span class="text_bold">{{ $sys_log->user->realname }}</span></td>
-														</tr>
-														<tr>
-															<td>操作者IP</td>
-															<td><span class="text_bold">{{ $sys_log->operator_ip }}</span></td>
-														</tr>
-														<tr>
-															<td>操作类型</td>
-															<td>
-																<span class="text_bold">
-																@if(empty($sys_op))
-																{{ $sys_log->type }}
-																@else
-																{{ $sys_op[$sys_log->type] }}
-																@endif
-																</span>
-															</td>
-														</tr>
-														<tr>
-															<td>操作URL</td>
-															<td><span class="text_bold">{{ $sys_log->url }}</span> </td>
-														</tr>
-														<tr>
-															<td>操作内容</td>
-															<td><span class="text_bold">{{ $sys_log->content }}</span></td>
-														</tr>
+              <div class="box box-primary">
 
-														<tr>
-															<td>操作时间</td>
-															<td><span class="text_bold">{{ $sys_log->created_at }}</span></td>
-														</tr>
-														
-													</tbody>
-												</table>
-											</div>
-										</li>
-									</ul>
-								</div>
-							</div>
-							<!--tab_content end-->
-							
-					</div>
-					<!--表单主体区域 end-->
+                <div class="box-header with-border">
+                  <h3 class="box-title">查阅系统日志</h3>
+                  <p>以下为本条系统日志详情。</p>
+                  <div class="basic_info bg-info">
+                     <ul>
+                        <li>ID：<span class="text-muted">{{ $sys_log->id }}</span></li>
+                        <li>操作者昵称：<span class="text-green">{{ $sys_log->user->nickname }}</span></li>
+                        <li>操作者真实姓名：<span class="text-green">{{ $sys_log->user->realname }}</span></li>
+                        <li>
+                            操作类型：
+                            <span class="text-yellow">
+                            @if(empty($sys_op))
+                            {{ $sys_log->type }}
+                            @else
+                            {{ $sys_op[$sys_log->type] }}
+                            @endif
+                            </span>
+                        </li>
+                        <li>操作URL：<b>{{ $sys_log->url }}</b></li>
+                        <li>操作内容：<b class="text-red">{{ $sys_log->content }}</b></li>
+                        <li>操作时间：<span class="text-info">{{ $sys_log->created_at }}</span></li>
+                    </ul>
+                  </div>
+                </div><!-- /.box-header -->
+
+              </div>
 
 @stop
 
