@@ -4,12 +4,12 @@
 @parent
           <h1>
             系统管理
-            <small>单页</small>
+            <small>动态设置分组</small>
           </h1>
           <ol class="breadcrumb">
             <li><a href="{{ route('admin') }}"><i class="fa fa-dashboard"></i> 主页</a></li>
             <li><a href="{{ route('admin.page.index') }}">系统管理 - 动态设置分组</a></li>
-            <li class="active">新增动态设置分组</li>
+            <li class="active">修改动态设置分组</li>
           </ol>
 @stop
 

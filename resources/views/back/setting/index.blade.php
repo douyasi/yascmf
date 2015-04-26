@@ -1,106 +1,125 @@
-@extends('layout.backend')
-@section('main_content')
+@extends('layout._back')
+
+@section('content-header')
 @parent
-					<!--@表单验证等提示信息栏 START-->
-					<div class="validation_tips_area" style="display: none;">
-					</div>
-					<!--@表单验证等提示信息栏 END /-->
-
-					<!--面包屑导航 start-->
-					<div class="breadcrumb_nav">
-						<a href="{{ route('admin') }}"><i class="fa fa-home fa-fw"></i>Home</a>  &gt;  <a href="{{ route('admin.setting.index') }}">系统管理</a>  &gt;  动态设置
-						<!--筛选搜索-->
-						<div class="search_box">
-							<form action="{{ route('admin.setting.index') }}" method="get">
-								<input type="text" name="s_name" value="{{ Input::get('s_name','') }}" placeholder="名">
-								<input type="text" name="s_value" value="{{ Input::get('s_value','') }}" placeholder="值">
-								<input type="submit" class="flat_btn yas_green" value="搜索">
-							</form>
-						</div>
-						<!--筛选搜索 end-->
-					</div>
-					<!--面包屑导航 end-->
-					
-					<!--cmf主体区域 start-->
-					<div class="main_cmf_content">
-						<form id="form_table" method="post" action="">
-							<div class="cmf_cont">
-								<p>
-									{!! isset($typename) ? '在 <span class="color_orange">'.$typename.'</span> 分组下': '' !!}
-									<a href="{{ route('admin.setting.create', array('s_tid'=>Request::segment(3))) }}"><i class="fa fa-fw fa-plus-circle" alt="新增" title="新增"></i>新增动态设置</a>
-								</p>
-								<table class="yas_table yas_table_noborder">
-									<thead>
-										<tr>
-											<th width="5%">选择</th>
-											<th width="10%">操作</th>
-											<th width="40%">分组名/值</th>
-											<th width="20%">名</th>
-											<th width="20%">值</th>
-										</tr>
-									</thead>
-									<tbody>
-
-										@foreach ($settings as $set)
-										<tr>
-											<td class="text_center">
-												<input type="checkbox" value="{{ $set->id }}" name="checkbox[]">
-											</td>
-											<td><a href="{{ route('admin.setting.index') }}/{{ $set->id }}/edit"><i class="fa fa-fw fa-pencil" alt="修改" title="修改"></i></a>  <a href=""><i class="fa fa-fw fa-link" alt="预览" title="预览"></i></a>  <a href="javascript:void();"><i class="fa fa-fw fa-minus-circle delete_item" alt="删除" title="删除" data-id="{{ $set->id }}"></i></a></td>
-											<td>
-												<a href="{{ route('admin.setting_type.index') }}/{{ $set->tid }}">{{ $set->tname }}/{{ $set->tvalue }}</a>
-											</td>
-											<td>{{ $set->name }}</td>
-											<td class="color_orange">
-												{{ $set->value }}
-											</td>
-										</tr>
-										@endforeach
-
-									</tbody>
-								</table>
-								<div class="cms_func">
-									<div class="form_buttons">
-											<input type="checkbox" id="check_all" class="checkall_box" title="全选"><label for="check_all" class="cursor_p">全选</label>
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-											<a href="#"><i class="fa fa-fw fa-remove" alt="删除" title="删除"></i>删除所选</a>
-											
-									</div>
-								</div>
-								<div class="yas_page_container">
-									{!! $links !!}
-								</div>
-							</div>
-						</form>
-					</div>
-					<!--cms主体区域 end-->
-
+          <h1>
+            系统管理
+            <small>动态设置</small>
+          </h1>
+          <ol class="breadcrumb">
+            <li><a href="{{ route('admin') }}"><i class="fa fa-dashboard"></i> 主页</a></li>
+            <li class="active">系统管理 - 动态设置</li>
+          </ol>
 @stop
 
-@section('endMainCon')
-	<link href="{{ asset('assets/lib/iCheck/skins/square/red.css') }}" rel="stylesheet">
-	<script src="{{ asset('assets/lib/iCheck/icheck.min.js') }}"></script>
+@section('content')
+
+              @if(Session::has('message'))
+                <div class="alert alert-success alert-dismissable">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                  <h4>  <i class="icon fa fa-check"></i> 提示！</h4>
+                  {{ Session::get('message') }}
+                </div>
+              @endif
+
+              <a href="{{ route('admin.setting.create', array('s_tid' => Request::segment(3))) }}" class="btn btn-primary margin-bottom">新增动态设置</a>
+
+              <div class="box box-primary">
+                <div class="box-header with-border">
+                  <h3 class="box-title">动态设置列表</h3>
+                  <div class="box-tools">
+                    <form action="{{ route('admin.setting.index') }}" method="get">
+                      <div class="input-group">
+                        <input type="text" class="form-control input-sm pull-right" name="s_value" value="{{ Input::get('s_value') }}" style="width: 150px;" placeholder="搜索值">
+                        <input type="text" class="form-control input-sm pull-right" name="s_name" value="{{ Input::get('s_name') }}" style="width: 150px;" placeholder="搜索名">
+                        <div class="input-group-btn">
+                          <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div><!-- /.box-header -->
+                <div class="box-body table-responsive">
+                  <table class="table table-hover table-bordered">
+                    <tbody>
+                      <!--tr-th start-->
+                      <tr>
+                        <th>选择</th>
+                        <th>操作</th>
+                        <th>分组名/值</th>
+                        <th>名</th>
+                        <th>值</th>
+                      </tr>
+                      <!--tr-th end-->
+
+                      @foreach ($settings as $set)
+                      <tr>
+
+                        <td class="table-operation"><input type="checkbox" value="{{ $set->id }}" name="checkbox[]"></td>
+                        <td>
+                            <a href="{{ route('admin.setting.index') }}/{{ $set->id }}/edit"><i class="fa fa-fw fa-pencil" title="修改"></i></a>  
+                            <a href="javascript:void(0);"><i class="fa fa-fw fa-link" title="预览"></i></a>  
+                            <a href="javascript:void(0);"><i class="fa fa-fw fa-minus-circle delete_item" title="删除" data-id="{{ $set->id }}"></i></a>
+                        </td>
+                        <td>
+                          <a href="{{ route('admin.setting_type.index') }}/{{ $set->tid }}">{{ $set->tname }}/{{ $set->tvalue }}</a>
+                        </td>
+                        <td class="text-red">{{ $set->name }}</td>
+                        <td class="text-green">{{ $set->value }}</td>
+                      </tr>
+                      @endforeach
+
+                    </tbody>
+                  </table>
+                </div><!-- /.box-body -->
+                <div class="box-footer clearfix">
+                  {!! $settings->render() !!}
+                </div>
+
+                <!--隐藏型删除表单-->
+                {!! Form::open( array('url' => route('admin.setting.index'), 'method' => 'delete', 'id' => 'hidden-delete-form') ) !!}
+                {!! Form::close() !!}
+
+              </div>
 @stop
 
-@section('iCheck')
-	/*iCheck组件*/
-	$('input').iCheck({
-		checkboxClass: 'icheckbox_square-red',
-		radioClass: 'iradio_square-red',
-		increaseArea: '20%'
-	});
 
-	/*响应全选,依赖于iCheck组件*/
-
-	$('input#check_all').on('ifChecked', function(event){
-		$('input[name="checkbox[]"]').iCheck('check');
-	});
-	$('input#check_all').on('ifUnchecked', function(event){
-		$('input[name="checkbox[]"]').iCheck('uncheck');
-	});
+@section('extraPlugin')
+<!--引入iCheck组件-->
+<script src="{{ asset('plugins/iCheck/icheck.min.js') }}" type="text/javascript"></script>
 @stop
 
-@section('delete_item')
-	@include('scripts.endBuildHtml')
-	@include('scripts.endDeleteItem', ['_url' => route('admin.setting.index')])
+@section('filledScript')
+        <!--启用iCheck响应checkbox与radio表单控件-->
+        //Enable iCheck plugin for checkboxes
+        //iCheck for checkbox and radio inputs
+        $('.table-operation input[type="checkbox"]').iCheck({
+          checkboxClass: 'icheckbox_flat-blue',
+          radioClass: 'iradio_flat-blue'
+        });
+
+        //Enable check and uncheck all functionality
+        $(".checkbox-toggle").click(function () {
+          var clicks = $(this).data('clicks');
+          if (clicks) {
+            //Uncheck all checkboxes
+            $(".table-operation input[type='checkbox']").iCheck("uncheck");
+            $(".fa", this).removeClass("fa-check-square-o").addClass('fa-square-o');
+          } else {
+            //Check all checkboxes
+            $(".table-operation input[type='checkbox']").iCheck("check");
+            $(".fa", this).removeClass("fa-square-o").addClass('fa-check-square-o');
+          }
+          $(this).data("clicks", !clicks);
+        });
+
+        <!--jQuery 提交表单，实现DELETE删除资源-->
+        //jQuery submit form
+        $('.delete_item').click(function(){
+            var action = '{{ route('admin.setting.index') }}';
+            var id = $(this).data('id');
+            var new_action = action + '/' + id;
+            $('#hidden-delete-form').attr('action', new_action);
+            $('#hidden-delete-form').submit();
+        });
 @stop
