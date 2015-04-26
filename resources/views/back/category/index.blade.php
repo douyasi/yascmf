@@ -1,131 +1,94 @@
-@extends('layout.backend')
-@section('main_content')
+@extends('layout._back')
+
+@section('content-header')
 @parent
-					<!--@表单验证等提示信息栏 START-->
-					<div class="validation_tips_area" style="display: none;">
-					</div>
-					<!--@表单验证等提示信息栏 END /-->
-
-					<!--面包屑导航 start-->
-					<div class="breadcrumb_nav">
-						<a href="{{ route('admin') }}"><i class="fa fa-home fa-fw"></i>Home</a>  &gt;  <a href="{{ route('admin.article.index') }}">内容管理</a>  &gt;  分类
-
-					</div>
-					<!--面包屑导航 end-->
-					
-					<!--cmf主体区域 start-->
-					<div class="main_cmf_content">
-							<div class="cmf_cont">
-								<p>
-									<a href="javascript:void(0);" data-url="{{ route('admin.category.create') }}" class="category_add"><i class="fa fa-fw fa-plus-circle" alt="新增" title="新增"></i>新增分类</a>
-								</p>
-								<table class="yas_table yas_table_noborder">
-									<thead>
-										<tr>
-											<th width="20%">名称</th>
-											<th width="20%">操作</th>
-											<th width="20%">缩略名</th>
-											<th width="20%">文章数</th>
-										</tr>
-									</thead>
-									<tbody>
-
-										@foreach ($categories as $cat)
-										<tr>
-											<td><a href="javascript:category_edit({{ $cat->id }});">{{ $cat->name }}</a></td>
-											<td><a href="javascript:category_edit({{ $cat->id }});"><i class="fa fa-fw fa-pencil" alt="修改" title="修改"></i></a>  <a href=""><i class="fa fa-fw fa-link" alt="查看" title="查看"></i></a>  <a href="javascript:void(0);"><i class="fa fa-fw fa-minus-circle delete_item" alt="删除" title="删除" data-id="{{ $cat->id }}"></i></a></td>
-											<td class="color_orange">
-												@if(empty($cat->slug))
-												{{ $cat->id }}
-												@else
-												{{ $cat->slug }}
-												@endif
-											</td>
-											<td>{{ count( $cat->content()->get() ) }}  </td>
-										</tr>
-										@endforeach
-
-									</tbody>
-								</table>
-								<!--对于一般cms来说分类数量较少，故略去分页与批量删除-->
-							</div>
-
-					</div>
-					<!--cms主体区域 end-->
-
+          <h1>
+            内容管理
+            <small>分类</small>
+          </h1>
+          <ol class="breadcrumb">
+            <li><a href="{{ route('admin') }}"><i class="fa fa-dashboard"></i> 主页</a></li>
+            <li class="active">内容管理 - 分类</li>
+          </ol>
 @stop
 
-@section('endMainCon')
-	<script src="{{ asset('assets/lib/layer/layer.min.js') }}"></script>{{-- 加载layer插件 --}}
-	<script type="text/javascript">
-		function category_edit(id)
-		{
-			$.layer({
-				type : 2,
-				shade: [0.5, '#000',true],
-				border: [0],
-				title: false,
-				closeBtn: false,
-				shadeClose: true,
-				fix: false,
-				iframe : {src: '{{ route('admin.category.index') }}' + '/' + id + '/edit'},
-				area : ['600px' , '500px'],
-				offset : ['', ''],
-				success: function(layero){
-					//console.log(layero);
-					$(layero['selector'] + ' .xubox_main').css('border-radius','6px');
-					$(layero['selector'] + ' .xubox_iframe').css('border-radius','6px');
-					/*
-					$('#xubox_layer1 .xubox_main').css('border-radius','3px');
-					$('#xubox_layer1 .xubox_iframe').css('border-radius','3px');
-					*/
-				},
-				close : function(index){
-					layer.closeAll();
-				},
-				end : function(index){
-					location.reload();
-				}
-			});
-		}
-	</script>
+@section('content')
+
+              @if(Session::has('fail'))
+                <div class="alert alert-warning alert-dismissable">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                  <h4>  <i class="icon icon fa fa-warning"></i> 提示！</h4>
+                  {{ Session::get('fail') }}
+                </div>
+              @endif
+
+              @if(Session::has('message'))
+                <div class="alert alert-success alert-dismissable">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                  <h4>  <i class="icon fa fa-check"></i> 提示！</h4>
+                  {{ Session::get('message') }}
+                </div>
+              @endif
+
+              <a href="{{ route('admin.category.create') }}" class="btn btn-primary margin-bottom">新增分类</a>
+
+              <div class="box box-primary">
+                <div class="box-header with-border">
+                  <h3 class="box-title">分类列表</h3>
+                </div><!-- /.box-header -->
+                <div class="box-body table-responsive">
+                  <table class="table table-hover table-bordered">
+                    <tbody>
+                      <!--tr-th start-->
+                      <tr>
+                        <th>名称</th>
+                        <th>操作</th>
+                        <th>缩略名</th>
+                        <th>文章数</th>
+                      </tr>
+                      <!--tr-th end-->
+
+                      @foreach ($categories as $cat)
+                      <tr>
+                        <td class="text-muted">{{ $cat->name }}</td>
+                        <td>
+                            <a href="{{ route('admin.category.index') }}/{{ $cat->id }}/edit"><i class="fa fa-fw fa-pencil" title="修改"></i></a>  
+                            <a href="javascript:void(0);"><i class="fa fa-fw fa-link" title="查看"></i></a>  
+                            <a href="javascript:void(0);"><i class="fa fa-fw fa-minus-circle delete_item" title="删除" data-id="{{ $cat->id }}"></i></a>
+                        </td>
+                        <td class="text-green">
+                          @if(empty($cat->slug))
+                          {{ $cat->id }}
+                          @else
+                          {{ $cat->slug }}
+                          @endif
+                        </td>
+                        <td class="text-red">{{ count( $cat->content()->get() ) }}</td>
+                      </tr>
+                      @endforeach
+
+                    </tbody>
+                  </table>
+                </div><!-- /.box-body -->
+
+                <!--分类一般来说较少，故移除分页-->
+
+                <!--隐藏型删除表单-->
+                {!! Form::open( array('url' => route('admin.category.index'), 'method' => 'delete', 'id' => 'hidden-delete-form') ) !!}
+                {!! Form::close() !!}
+
+              </div>
 @stop
 
-@section('layer')
-	$('.category_add').click(function(){
-		$.layer({
-				type : 2,
-				shade: [0.5, '#000',true],
-				border: [0],
-				title: false,
-				closeBtn: false,
-				shadeClose: true,
-				fix: false,
-				iframe : {src: '{{ route('admin.category.create') }}'},
-				area : ['600px' , '500px'],
-				offset : ['', ''],
-				success: function(layero){
-					console.log(layero);
-					$(layero['selector'] + ' .xubox_main').css('border-radius','6px');
-					$(layero['selector'] + ' .xubox_iframe').css('border-radius','6px');
-					/*
-					$('#xubox_layer1 .xubox_main').css('border-radius','3px');
-					$('#xubox_layer1 .xubox_iframe').css('border-radius','3px');
-					*/
-				},
-				close : function(index){
-					layer.closeAll();
-				},
-				end : function(index){
-					location.reload();
-				}
-			});
-	});
-@stop
 
-@section('delete_item')
-
-	@include('scripts.endBuildHtml')
-	@include('scripts.endDeleteItem', ['_url' => route('admin.category.index')])
-
+@section('filledScript')
+        <!--jQuery 提交表单，实现DELETE删除资源-->
+        //jQuery submit form
+        $('.delete_item').click(function(){
+            var action = '{{ route('admin.category.index') }}';
+            var id = $(this).data('id');
+            var new_action = action + '/' + id;
+            $('#hidden-delete-form').attr('action', new_action);
+            $('#hidden-delete-form').submit();
+        });
 @stop

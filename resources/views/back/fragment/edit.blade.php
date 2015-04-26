@@ -48,7 +48,7 @@
                     <div class="tab-pane active" id="tab_1">
                       <div class="form-group">
                         <label>标题 <small class="text-red">*</small></label>
-                        <input type="text" class="form-control" name="title" autocomplete="off" value="{{ Input::old('title', isset($data) ? $data->title : null ) }}" placeholder="标题">
+                        <input type="text" class="form-control" name="title" autocomplete="off" value="{{ Input::old('title', isset($data) ? $data->title : null) }}" placeholder="标题">
                       </div>
                       <div class="form-group">
                         <label>slug（碎片标识符） <small class="text-red">*</small></label>

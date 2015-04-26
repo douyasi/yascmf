@@ -41,7 +41,6 @@
                   
                   <ul class="nav nav-tabs">
                     <li class="active"><a href="#tab_1" data-toggle="tab" aria-expanded="true">主要内容</a></li>
-                    <li class=""><a href="#tab_2" data-toggle="tab" aria-expanded="false">附加内容</a></li>
                   </ul>
 
                   <div class="tab-content">

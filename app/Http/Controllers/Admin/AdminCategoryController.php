@@ -66,28 +66,12 @@ class AdminCategoryController extends BackController
     public function store(CategoryRequest $request)
     {
         //
-        if ($request->is_ajax()) {
-            $validator = $request->validate('store');
-            $data = $request->data('store');
-            $json = $request->response();
-            $json = array_replace($json, ['operation' => '添加分类']);
-
-            if ($validator->passes()) {
-                $meta = $this->meta->store($data, 'category');
-                if ($meta->id) {
-                    $json = array_replace($json, ['status' => 1, 'info' => '成功']);
-                } else {  //添加失败
-                    $info = '失败原因为：<span class="text_error">数据库操作返回异常</span>';
-                    $json = array_replace($json, ['info' => $info]);
-                }
-            } else {
-                // 验证失败
-                $json = format_json_message($validator->messages(), $json);
-            }
-            return response()->json($json);
+        $data = $request->all();
+        $meta = $this->meta->store($data, 'category');
+        if ($meta->id) {
+            return redirect()->route('admin.category.index')->with('message', '成功新增分类！');
         } else {
-            //非ajax请求抛出异常
-            return view('back.exceptions.jump', ['exception' => '非法请求，不予处理！']);
+            return redirect()->back()->withInput($request->input())->with('fail', '数据库操作返回异常！');
         }
     }
 
@@ -102,7 +86,6 @@ class AdminCategoryController extends BackController
     {
         //
         $category = $this->meta->edit($id, 'category');
-        is_null($category) and abort(404);
         return view('back.category.edit', ['data' => $category]);
     }
 
@@ -115,22 +98,9 @@ class AdminCategoryController extends BackController
      */
     public function update(CategoryRequest $request, $id)
     {
-        if ($request->is_ajax() && $request->is_method('put')) {
-            $validator = $request->validate('update');
-            $data = $request->data('update');
-            $json = $request->response();
-            $json = array_replace($json, ['operation' => '修改分类']);
-
-            if ($validator->passes()) {
-                $this->meta->update($id, $data, 'category');
-                $json = array_replace($json, ['status' => 1, 'info' => '成功']);
-            } else {
-                $json = format_json_message($validator->messages(), $json);
-            }
-            return response()->json($json);
-        } else {
-            return view('back.exceptions.jump', ['exception' => '非法请求，不予处理！']);
-        }
+        $data = $request->all();
+        $this->meta->update($id, $data, 'category');
+        return redirect()->route('admin.category.index')->with('message', '修改分类成功！');
     }
 
 
@@ -140,25 +110,18 @@ class AdminCategoryController extends BackController
      * @param  int  $id
      * @return Response
      */
-    public function destroy(CategoryRequest $request, $id)
+    public function destroy($id)
     {
-        //
-        if ($request->is_ajax() && $request->is_method('delete')) {
-            $json = $request->response();
-            $json = array_replace($json, ['operation' => '删除分类']);
-            if ($id == 1) {
-                $json = array_replace($json, ['info' => '失败原因为：<span class="text_error">ID为1的默认分类不能被删除！</span>']);
-            } else {
-                if ($this->meta->hasContent('category', $id)) {
-                    $json = array_replace($json, ['info' => '失败原因为：<span class="text_error">该分类下还存在文章，不能被删除！</span>']);
-                } else {
-                    $this->meta->destroy($id, 'category');
-                    $json = array_replace($json, ['status'=>1, 'info' => '成功']);
-                }
-            }
-            return response()->json($json);
+        if ($id == 1) {
+            return redirect()->route('admin.category.index')->with('fail', 'ID为1的默认分类不能被删除！！');
+            $json = array_replace($json, ['info' => '失败原因为：<span class="text_error">ID为1的默认分类不能被删除！</span>']);
         } else {
-            return view('back.exceptions.jump', ['exception' => '非法请求，不予处理！']);
+            if ($this->meta->hasContent('category', $id)) {
+                return redirect()->route('admin.category.index')->with('fail', '该分类下还存在文章，不能被删除；请清空该分类下文章后再试！！');
+            } else {
+                $this->meta->destroy($id, 'category');
+                return redirect()->route('admin.category.index')->with('message', '删除分类成功！');
+            }
         }
     }
 }

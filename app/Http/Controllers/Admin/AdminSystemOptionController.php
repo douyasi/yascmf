@@ -2,7 +2,7 @@
 
 use Douyasi\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Douyasi\Cache\SystemOptionCache as SystemOptionCache;
+use Douyasi\Cache\SystemOptionCache;
 use Douyasi\Repositories\SystemOptionRepository;
 
 /**
