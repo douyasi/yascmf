@@ -4415,7 +4415,7 @@ label.choice{
   font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
 }
 
-/*layer弹出窗上传图片样式*/
+/*layer弹出窗上传图片样式 START*/
 .validation_tips_area{
   line-height: 36px;
   background-color: #f6f6f6;
@@ -4460,4 +4460,14 @@ label.choice{
 
 .box-header > .box-tips {
   margin-top: 20px;
+}
+/*layer弹出窗上传图片样式 END*/
+
+
+/*修正表格内容过长溢出问题*/
+td.overflow-hidden {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 350px;
 }
