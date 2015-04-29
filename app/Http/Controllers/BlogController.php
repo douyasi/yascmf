@@ -149,10 +149,10 @@ class BlogController extends CommonController
             //再次尝试移除'cat_'前缀之后来匹配
             $new_cslug = ltrim($cslug, 'cat_');
             if (ctype_digit($new_cslug)) {
-                $category = Meta::category()->find($new_slug);
+                $category = Meta::category()->find($new_cslug);
                 is_null($category) && abort(404);
                 $article = Content::article()
-                            ->where('category_id', '=', $new_slug)
+                            ->where('category_id', '=', $new_cslug)
                             ->where('slug', '=', $slug)
                             ->first();
                 if ($article) {
