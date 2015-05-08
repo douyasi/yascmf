@@ -23,8 +23,7 @@ class AdminUserController extends BackController
      */
     protected $user;
 
-    public function __construct(
-        UserRepository $user)
+    public function __construct(UserRepository $user)
     {
         parent::__construct();
         $this->user = $user;
