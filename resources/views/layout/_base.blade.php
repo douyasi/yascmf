@@ -1,6 +1,3 @@
-@section('hacker_header')
-@show{{-- 黑客头部申明区域 --}}
-
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
