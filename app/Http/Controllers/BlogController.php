@@ -42,7 +42,6 @@ class BlogController extends CommonController
     public function getIndex()
     {
         $articles = Content::article()->orderBy('created_at', 'desc')->paginate(10);
-        //$articles[7]->tag()->get();
         $title = '首页';
         $description = '芽丝内容管理框架';  //追加seo描述Meta信息
         return view('front.index', compact('articles', 'title', 'description'));
@@ -58,7 +57,7 @@ class BlogController extends CommonController
         $category = Meta::category()->where('slug', '=', $slug)->first();
         if ($category) {
             $title = '文章分类：'.$category->name;
-            $description = Cache::get('website_title', '芽丝博客').'-'.$title.'，  '.$category->description.'  本博客由 芽丝内容管理框架(YASCMF) 所驱动的博客，基于Laravel实现的内容管理框架，Github地址： https://github.com/douyasi/yascmf 。';
+            $description = Cache::get('website_title', '芽丝博客').'-'.$title.'，  '.$category->description.'芽丝内容管理框架';
             $articles = Content::article()
                             ->where('category_id', '=', $category->id)
                             ->orderBy('created_at', 'desc')
@@ -72,7 +71,7 @@ class BlogController extends CommonController
                 $category = Meta::category()->find($new_slug);
                 is_null($category) && abort(404);
                 $title = '文章分类：'.$category->name;
-                $description = Cache::get('website_title', '芽丝博客').'-'.$title.'，  '.$category->description.'  本博客由 芽丝内容管理框架(YASCMF) 所驱动的博客，基于Laravel实现的内容管理框架，Github地址： https://github.com/douyasi/yascmf 。';
+                $description = Cache::get('website_title', '芽丝博客').'-'.$title.'，  '.$category->description.'芽丝内容管理框架';
                 $articles = Content::article()
                             ->where('category_id', '=', $new_slug)
                             ->orderBy('created_at', 'desc')

@@ -2,23 +2,24 @@
 
 use Douyasi\Http\Requests\TagRequest;
 use Douyasi\Http\Controllers\Controller;
+use Douyasi\Repositories\ArticleTagRepository;  //模型仓库层
 use Illuminate\Http\Request;
-
+use Cache;
 /**
  * 标签资源控制器
- * TODO 暂未完善
- *
- * @author raoyc<raoyc2009@gmail.com>
  */
 class AdminTagController extends BackController
 {
 
-    public function __construct()
+    protected $article_tag;
+
+    public function __construct(ArticleTagRepository $article_tag)
     {
         parent::__construct();
         if (! user('object')->can('manage_contents')) {
             $this->middleware('deny403');
         }
+        $this->article_tag = $article_tag;
     }
     
     /**
@@ -28,8 +29,9 @@ class AdminTagController extends BackController
      */
     public function index()
     {
-        //
-        return view('back.tag.index');
+        $article_tag = $this->article_tag->index('article_tag','', Cache::get('page_size', '10'));
+        //var_dump($article_tag);exit;
+        return view('back.tag.index', compact('article_tag'));
     }
 
 
@@ -99,6 +101,6 @@ class AdminTagController extends BackController
      */
     public function destroy($id)
     {
-        //
+
     }
 }
