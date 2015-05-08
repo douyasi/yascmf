@@ -41,9 +41,10 @@ class BlogController extends CommonController
      */
     public function getIndex()
     {
-        $articles = Content::article()->orderBy('created_at', 'desc')->paginate(6);
+        $articles = Content::article()->orderBy('created_at', 'desc')->paginate(10);
+        //$articles[7]->tag()->get();
         $title = '首页';
-        $description = '芽丝内容管理框架，基于Laravel 5开发而成，它比较适合拿来做一些小众项目开发。目前框架实现了一个简单的内容管理系统（CMS），支持多种内容模型，文章、单页、分类、碎片与标签，您现在完全可以拿它来完成一个简单的博客网站，“芽丝博客”就是它所驱动的博客示例网站。Github地址： https://github.com/douyasi/yascmf 。';  //追加seo描述Meta信息
+        $description = '芽丝内容管理框架';  //追加seo描述Meta信息
         return view('front.index', compact('articles', 'title', 'description'));
     }
 

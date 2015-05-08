@@ -15,16 +15,11 @@
                                 <a href="{{ get_article_slug($art->slug, $art->id, $art->meta->slug, $art->meta->id) }}"><h2>{{ $art->title }}</h2></a>
                             </div>
                             <div class="yas_metas yas_tags">
-                                <!--标签模型暂未完善-->
-                                <!--
                                 <p>
-                                    <a href="" class="label label-default">Javascript</a>
-                                    <a href="#" class="label label-primary">Laravel</a>
-                                    <a href="#" class="label label-info">新浪</a>
-                                    <a href="#" class="label label-success">Javascript</a>
-                                    <a href="#" class="label label-danger">ORM</a>
+                                    @foreach($art->tag as $tag)
+                                    <a href="#" class="label label-success">{{$tag->tag_name}}</a>
+                                    @endforeach
                                 </p>
-                                -->
                             </div>
                         </div>
                     </div>
