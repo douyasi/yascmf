@@ -23,8 +23,7 @@ class AdminArticleController extends BackController
     protected $content;
 
 
-    public function __construct(
-        ContentRepository $content)
+    public function __construct(ContentRepository $content)
     {
         parent::__construct();
         $this->content = $content;
