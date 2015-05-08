@@ -2,7 +2,7 @@
 
 use Douyasi\Http\Requests;
 use Douyasi\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use Request;
 use Douyasi\Cache\DataCache as DataCache;
 use Douyasi\Models\Content as Content;
 use Douyasi\Models\Meta as Meta;
@@ -42,6 +42,7 @@ class BlogController extends CommonController
     public function getIndex()
     {
         $articles = Content::article()->orderBy('created_at', 'desc')->paginate(10);
+        //$articles[7]->tag()->get();
         $title = '首页';
         $description = '芽丝内容管理框架';  //追加seo描述Meta信息
         return view('front.index', compact('articles', 'title', 'description'));

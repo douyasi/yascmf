@@ -13,8 +13,8 @@ return [
 	|
 	*/
 
-	'fetch' => PDO::FETCH_CLASS,
 	//'fetch' => PDO::FETCH_ASSOC,
+	'fetch' => PDO::FETCH_ASSOC,
 	/*
 	|--------------------------------------------------------------------------
 	| Default Database Connection Name
