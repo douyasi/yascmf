@@ -46,7 +46,7 @@ class Content extends Eloquent
      * 分类
      * 模型对象关系：内容对应的分类[仅文章存在分类]
      *
-     * @return Illuminate\Database\Eloquent\Relations\BelongsTo
+     * return Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function meta()
     {
@@ -59,9 +59,12 @@ class Content extends Eloquent
      * 暂未完成 TODO
      * 模型对象关系：内容对应的标签[文章、单页等均存在标签]
      *
-     * @return Illuminate\Database\Eloquent\Relations\BelongsTo
+     * return Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function tag()
     {
+        //模型名 关联数据表名 主键 外键
+        //return $this->belongsToMany('Douyasi\Models\ArticleTag','article_tag_relate','article_id','tag_id');
+        return $this->belongsToMany('Douyasi\Models\ArticleTag');
     }
 }
