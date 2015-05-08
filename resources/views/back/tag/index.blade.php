@@ -29,6 +29,12 @@
                 <form action="{{ route('admin.tag.index') }}" method="get">
                     <div class="input-group">
                         <input type="text" class="form-control input-sm pull-right" name="s_name" value="{{ Input::get('s_name') }}" style="width: 150px;" placeholder="搜索标签名">
+            <h3 class="box-title">文章标签列表</h3>
+            <div class="box-tools">
+                <form action="{{ route('admin.tag.index') }}" method="get">
+                    <div class="input-group">
+                        <input type="text" class="form-control input-sm pull-right" name="s_name" value="{{ Input::get('s_name') }}" style="width: 150px;" placeholder="搜索用户登录名或昵称或真实姓名">
+                        <input type="text" class="form-control input-sm pull-right" name="s_phone" value="{{ Input::get('s_phone') }}" style="width: 150px;" placeholder="搜索用户手机号">
                         <div class="input-group-btn">
                             <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
                         </div>
@@ -61,6 +67,11 @@
                                 <li id="thumb{{$tag->id}}" style="display: none" value="{{$tag->tag_ico}}"></li>
                             </a>
                         </td>
+                        <td>{{ $tag->id }}</td>
+                        <td class="text-muted">{{ $tag->tag_name}}</td>
+                        <td class="text-green">
+                            {{ $tag->tag_name }}
+                        </td>
                     </tr>
                 @endforeach
                 </tbody>
@@ -76,6 +87,17 @@
         <!--隐藏型删除表单-->
         {!! Form::open( array('url' => route('admin.tag.index'), 'method' => 'delete', 'id' => 'hidden-delete-form') ) !!}
         {!! Form::close() !!}
+        <div class="box-footer clearfix">
+            {!! $article_tag->render() !!}
+        </div>
+
+        <!--隐藏型删除表单-->
+        {!! Form::open( array('url' => route('admin.tag.index'), 'method' => 'delete', 'id' => 'hidden-delete-form') ) !!}
+        {!! Form::close() !!}
+
+    </div>
+@stop
+
 
     </div>
 @stop

@@ -42,7 +42,6 @@ class BlogController extends CommonController
     public function getIndex()
     {
         $articles = Content::article()->orderBy('created_at', 'desc')->paginate(10);
-        //$articles[7]->tag()->get();
         $title = '首页';
         $description = '芽丝内容管理框架';  //追加seo描述Meta信息
         return view('front.index', compact('articles', 'title', 'description'));

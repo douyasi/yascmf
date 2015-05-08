@@ -77,10 +77,36 @@ class ArticleTagRepository extends BaseRepository
      * @param  string|int $user_id
      * return Douyasi\Models\Content
      */
-    private function saveContent($content, $inputs)
+    private function saveContent($content, $inputs, $type = 'article', $user_id = '0')
     {
         $content->tag_name  = e($inputs['tag_name']);
         $content->tag_ico   = e($inputs['tag_ico']);
+        $content->title   = e($inputs['title']);
+        $content->content = e($inputs['content']);
+        $content->thumb   = e($inputs['thumb']);
+        if ($type === 'article') {
+            $content->category_id = e($inputs['category_id']);
+            $content->type        = 'article';
+        } elseif ($type === 'page') {
+            $content->category_id = 0;
+            $content->type        = 'page';
+        } elseif ($type === 'fragment') {
+            $content->category_id = 0;
+            $content->type        = 'fragment';
+        }
+        if (array_key_exists('is_top', $inputs)) {
+            $content->is_top = e($inputs['is_top']);
+        }
+        if (array_key_exists('outer_link', $inputs)) {
+            $content->outer_link = trim(e($inputs['outer_link']));
+        }
+        if (array_key_exists('slug', $inputs)) {
+            $content->slug = e($inputs['slug']) ;
+        }
+        if ($user_id) {
+            $content->user_id = $user_id;
+        }
+
         $content->save();
 
         return $content;
@@ -105,8 +131,10 @@ class ArticleTagRepository extends BaseRepository
         }
         $data = array_add($data, 's_name', '');
         //.lprint_r($data);exit;
+        $ret = $this->model->where('tag_name', 'like', '%'.e($data['s_name']).'%');
+        //$data = array_add($data, 's_name', '');
         $ret = $this->model
-               ->where('tag_name', 'like', '%'.e($data['s_name']).'%')
+               //->where('tag_name', 'like', '%'.e($data['s_name']).'%')
                ->paginate($size);
 
         return $ret;
@@ -120,11 +148,14 @@ class ArticleTagRepository extends BaseRepository
      * @param  string|int $user_id 管理用户id
      * return Douyasi\Models\Content
      */
-    public function store($inputs, $user_id = '0')
+
+    public function store($inputs, $type = 'article', $user_id = '0')
     {
         $content = new $this->model;
         $types = $this->getModelTypes();
-        $content = $this->saveContent($content,$inputs,$types,$user_id);
+        if (in_array($type, $types)) {
+            $content = $this->saveContent($content, $inputs, $type, $user_id);
+        }
         return $content;
     }
 
@@ -135,10 +166,15 @@ class ArticleTagRepository extends BaseRepository
      * @param  string $type 内容模型类型,extra
      * return Illuminate\Support\Collection
      */
-    public function edit($id, $type = '')
+    public function edit($id, $type = 'article')
     {
-
-        $content = $this->model->findOrFail($id);
+        if ($type === 'page') {
+            $content = $this->model->page()->findOrFail($id);
+        } elseif ($type === 'fragment') {
+            $content = $this->model->fragment()->findOrFail($id);
+        } else {
+            $content = $this->model->article()->findOrFail($id);
+        }
         return $content;
     }
 
@@ -154,6 +190,16 @@ class ArticleTagRepository extends BaseRepository
     {
         $content = $this->model->findOrFail($id);
         $this->saveContent($content, $inputs);
+        if ($type === 'page') {
+            $content = $this->model->page()->findOrFail($id);
+            $content = $this->saveContent($content, $inputs, 'page');
+        } elseif ($type === 'fragment') {
+            $content = $this->model->fragment()->findOrFail($id);
+            $content = $this->saveContent($content, $inputs, 'fragment');
+        } else {
+            $content = $this->model->article()->findOrFail($id);
+            $content = $this->saveContent($content, $inputs, 'article');
+        }
     }
 
     /**
@@ -163,9 +209,15 @@ class ArticleTagRepository extends BaseRepository
      * @param  string $type
      * @return void
      */
-    public function destroy($id, $type = '')
+    public function destroy($id, $type = 'article')
     {
-        $content = $this->model->findOrFail($id);
+        if ($type === 'page') {
+            $content = $this->model->page()->findOrFail($id);
+        } elseif ($type === 'fragment') {
+            $content = $this->model->fragment()->findOrFail($id);
+        } else {
+            $content = $this->model->article()->findOrFail($id);
+        }
         $content->delete();
     }
     #********
