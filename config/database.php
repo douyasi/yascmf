@@ -60,7 +60,7 @@ return [
 			'password'  => env('DB_PASSWORD', ''),
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
-			'prefix'    => env('DB_PREFIX', 'yascmf_'),
+			'prefix'    => env('DB_PREFIX', 'yascmf_'),//表前缀
 			'strict'    => false,
 		],
 
