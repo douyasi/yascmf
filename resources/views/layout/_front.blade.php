@@ -10,7 +10,7 @@
     |_|/_/    \_\|_____/  \_____||_|  |_||_|     
                                                  
     ASCII text from http://patorjk.com/software/taag/#p=display&h=1&v=0&f=Big&t=YASCMF
-    Template from https://almsaeedstudio.com/
+    Theme from Bootswatch <http://bootswatch.com/>.
     modified by raoyc<raoyc2009@gmail.com>
 -->
 @stop
