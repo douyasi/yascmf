@@ -6,9 +6,9 @@
 <head>
     <meta charset="UTF-8">
     <title>@section('title') YASCMF - YASCMF @show{{-- 页面标题 --}}</title>
-    <meta name="description" content="YASCMF AdminLTE" />
-    <meta name="keywords" content="YASCMF,AdminLTE" />
-    <meta name="author" content="" />
+    <meta name="description" content="{{ isset($description) ? $description : 'YASCMF AdminLTE' }}" />
+    <meta name="keywords" content="YASCMF,AdminLTE,{{ Cache::get('website_keywords') }}" />
+    <meta name="author" content="{{ Cache::get('system_author_website') }}" />
     <meta name="renderer" content="webkit">{{-- 360浏览器使用webkit内核渲染页面 --}}
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />{{-- IE(内核)浏览器优先使用高版本内核 --}}
 
