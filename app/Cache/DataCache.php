@@ -3,6 +3,7 @@
 use Cache;
 use DB;
 use Config;
+use PhpSpec\Exception\Exception;
 
 /**
  * Class DataCache
