@@ -27,13 +27,14 @@ class AdminTagController extends BackController
      *
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $article_tag = $this->article_tag->index('article_tag','', Cache::get('page_size', '10'));
-        //var_dump($article_tag);exit;
+        $data = [
+            's_name' => $request->input('s_name'),
+        ];
+        $article_tag = $this->article_tag->index($data,'', Cache::get('page_size', '10'));
         return view('back.tag.index', compact('article_tag'));
     }
-
 
     /**
      * Show the form for creating a new resource.
@@ -42,18 +43,26 @@ class AdminTagController extends BackController
      */
     public function create()
     {
-        //
+        //需传递分类信息进去
+        //$categories = $this->content->meta();
+        //echo "aa";exit;
+        return view('back.tag.create');
     }
-
 
     /**
      * Store a newly created resource in storage.
      *
      * @return Response
      */
-    public function store()
+    public function store(TagRequest $request)
     {
-        //
+        $data    = $request->all();  //获取请求过来的数据
+        $content = $this->article_tag->store($data);
+        if ($content->id) {  //添加成功
+            return redirect()->route('admin.tag.index')->with('message', '添加新标签成功！');
+        } else {  //添加失败
+            return redirect()->back()->withInput($request->input())->with('fail', '数据库操作返回异常！');
+        }
     }
 
 
@@ -77,7 +86,8 @@ class AdminTagController extends BackController
      */
     public function edit($id)
     {
-        //
+        $article_tag = $this->article_tag->edit($id);
+        return view('back.tag.edit', ['data'=>$article_tag]);
     }
 
 
@@ -87,9 +97,11 @@ class AdminTagController extends BackController
      * @param  int  $id
      * @return Response
      */
-    public function update($id)
+    public function update(TagRequest $request,$id)
     {
-        //
+        $data = $request->all();
+        $this->article_tag->update($id, $data);
+        return redirect()->route('admin.tag.index')->with('message', '修改标签成功！');
     }
 
 
@@ -101,6 +113,7 @@ class AdminTagController extends BackController
      */
     public function destroy($id)
     {
-
+        $this->article_tag->destroy($id);
+        return redirect()->route('admin.tag.index')->with('message', '删除标签成功！');
     }
 }
