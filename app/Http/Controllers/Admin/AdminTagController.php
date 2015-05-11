@@ -32,7 +32,6 @@ class AdminTagController extends BackController
         $data = [
             's_name' => $request->input('s_name'),
         ];
-        $article_tag = $this->article_tag->index($data,'', Cache::get('page_size', '10'));
         $article_tag = $this->article_tag->index('article_tag','', Cache::get('page_size', '10'));
         //var_dump($article_tag);exit;
         return view('back.tag.index', compact('article_tag'));

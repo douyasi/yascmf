@@ -77,7 +77,7 @@ class ArticleTagRepository extends BaseRepository
      * @param  string|int $user_id
      * return Douyasi\Models\Content
      */
-    private function saveContent($content, $inputs, $type = 'article', $user_id = '0')
+    private function saveContent($content, $inputs,$user_id)
     {
         $content->tag_name  = e($inputs['tag_name']);
         $content->tag_ico   = e($inputs['tag_ico']);
@@ -134,7 +134,7 @@ class ArticleTagRepository extends BaseRepository
         $ret = $this->model->where('tag_name', 'like', '%'.e($data['s_name']).'%');
         //$data = array_add($data, 's_name', '');
         $ret = $this->model
-               //->where('tag_name', 'like', '%'.e($data['s_name']).'%')
+               ->where('tag_name', 'like', '%'.e($data['s_name']).'%')
                ->paginate($size);
 
         return $ret;
@@ -153,9 +153,7 @@ class ArticleTagRepository extends BaseRepository
     {
         $content = new $this->model;
         $types = $this->getModelTypes();
-        if (in_array($type, $types)) {
-            $content = $this->saveContent($content, $inputs, $type, $user_id);
-        }
+        $content = $this->saveContent($content,$inputs,$types,$user_id);
         return $content;
     }
 
@@ -166,15 +164,10 @@ class ArticleTagRepository extends BaseRepository
      * @param  string $type 内容模型类型,extra
      * return Illuminate\Support\Collection
      */
-    public function edit($id, $type = 'article')
+    public function edit($id, $type = '')
     {
-        if ($type === 'page') {
-            $content = $this->model->page()->findOrFail($id);
-        } elseif ($type === 'fragment') {
-            $content = $this->model->fragment()->findOrFail($id);
-        } else {
-            $content = $this->model->article()->findOrFail($id);
-        }
+
+        $content = $this->model->findOrFail($id);
         return $content;
     }
 
@@ -209,15 +202,9 @@ class ArticleTagRepository extends BaseRepository
      * @param  string $type
      * @return void
      */
-    public function destroy($id, $type = 'article')
+    public function destroy($id, $type = '')
     {
-        if ($type === 'page') {
-            $content = $this->model->page()->findOrFail($id);
-        } elseif ($type === 'fragment') {
-            $content = $this->model->fragment()->findOrFail($id);
-        } else {
-            $content = $this->model->article()->findOrFail($id);
-        }
+        $content = $this->model->findOrFail($id);
         $content->delete();
     }
     #********
