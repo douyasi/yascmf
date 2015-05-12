@@ -66,6 +66,16 @@
                         </div>
                       </div>
                       <div class="form-group">
+                          <label>标签 <small class="text-red">*</small></label>
+                          <div class="input-group">
+                              <select data-placeholder="选择文章分类..." class="chosen-select" style="min-width:200px;" name="article_tag">
+                              @foreach ($tags as $tag)
+                                <option value="{{ $tag->id }}">{{ $tag->tag_name }}</option>
+                              @endforeach
+                              </select>
+                          </div>
+                      </div>
+                      <div class="form-group">
                         <label>正文 <small class="text-red">*</small></label>
                         <textarea class="form-control" id="ckeditor" name="content">{{ Input::old('content') }}</textarea>
                         @include('scripts.endCKEditor'){{-- 引入CKEditor编辑器相关JS依赖 --}}

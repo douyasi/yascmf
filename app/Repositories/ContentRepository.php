@@ -2,7 +2,7 @@
 
 use Douyasi\Models\Content;
 use Douyasi\Models\Meta;
-
+use Douyasi\Models\ArticleTag;
 /**
  * 内容仓库ContentRepository
  *
@@ -12,25 +12,26 @@ class ContentRepository extends BaseRepository
 {
 
     /**
-     * The Meta instance.
-     *
-     * @var Douyasi\Models\Meta
+     * The Meta&tag instance.
+     * var Douyasi\Models\Meta
+     * var Douyasi\Models\ArticleTag
      */
     protected $meta;
+
+    protected $articleTag;
 
     /**
      * Create a new ContentRepository instance.
      *
-     * @param  Douyasi\Models\Content $content
-     * @param  Douyasi\Models\Meta $meta
+     * param  Douyasi\Models\Content $content
+     * param  Douyasi\Models\Meta $meta
      * @return void
      */
-    public function __construct(
-        Content $content,
-        Meta $meta)
+    public function __construct(Content $content, Meta $meta,ArticleTag $articleTag)
     {
-        $this->model = $content;
-        $this->meta = $meta;
+        $this->model      = $content;
+        $this->meta       = $meta;
+        $this->articleTag = $articleTag;
     }
 
     /**
@@ -51,7 +52,7 @@ class ContentRepository extends BaseRepository
      * 获取所有Meta元数据
      *
      * @param  string $type 元模型类型 分类category,标签tag
-     * @return Illuminate\Support\Collection
+     * return Illuminate\Support\Collection
      */
     public function meta($type = 'category')
     {
@@ -67,21 +68,42 @@ class ContentRepository extends BaseRepository
      * 获取特定slug碎片
      *
      * @param  string $slug 碎片slug
-     * @return Illuminate\Support\Collection
+     * return Illuminate\Support\Collection
      */
     public function fragment($slug)
     {
         return $this->model->where('slug', '=', e($slug))->fragment()->first();
     }
 
+    /*
+     *  获取所有的文章标签
+     */
+    public function tag()
+    {
+       $article_tag = $this->articleTag->get();
+       return $article_tag;
+    }
+
+    /*
+     * 存储关联的标签
+     * @param tag_id
+     * @param content_id
+     * 新增多对多关联模型 ( Many To Many )
+     * content has many tags
+     */
+    public function saveTagRelate($content,$tag_id){
+        $content->tag()->attach($tag_id);
+    }
+
+
     /**
      * 创建或更新内容
      *
-     * @param  Douyasi\Models\Content $content
+     * param  Douyasi\Models\Content $content
      * @param  array $inputs
      * @param  string $type
      * @param  string|int $user_id
-     * @return Douyasi\Models\Content
+     * return Douyasi\Models\Content
      */
     private function saveContent($content, $inputs, $type = 'article', $user_id = '0')
     {
@@ -113,6 +135,7 @@ class ContentRepository extends BaseRepository
 
         $content->save();
 
+        $this->saveTagRelate($content,e($inputs['article_tag']));
         return $content;
     }
 
@@ -126,7 +149,7 @@ class ContentRepository extends BaseRepository
      * @param  array $data
      * @param  string $type 内容模型类型 文章article,单页page,碎片fragment
      * @param  string $size 分页大小
-     * @return Illuminate\Support\Collection
+     * return Illuminate\Support\Collection
      */
     public function index($data = [], $type = 'article', $size = '10')
     {
@@ -163,7 +186,7 @@ class ContentRepository extends BaseRepository
      * @param  array $inputs
      * @param  string $type 内容模型类型 文章article,单页page,碎片fragment
      * @param  string|int $user_id 管理用户id
-     * @return Douyasi\Models\Content
+     * return Douyasi\Models\Content
      */
     public function store($inputs, $type = 'article', $user_id = '0')
     {
@@ -180,7 +203,7 @@ class ContentRepository extends BaseRepository
      *
      * @param  int $id
      * @param  string $type 内容模型类型 文章article,单页page,碎片fragment
-     * @return Illuminate\Support\Collection
+     * return Illuminate\Support\Collection
      */
     public function edit($id, $type = 'article')
     {

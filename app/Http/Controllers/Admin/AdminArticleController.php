@@ -18,7 +18,7 @@ class AdminArticleController extends BackController
     /**
      * The ContentRepository instance.
      *
-     * @var Douyasi\Repositories\ContentRepository
+     * var Douyasi\Repositories\ContentRepository
      */
     protected $content;
 
@@ -63,9 +63,10 @@ class AdminArticleController extends BackController
      */
     public function create()
     {
-        //需传递分类信息进去
+        //需传递分类信息&标签进去
         $categories = $this->content->meta();
-        return view('back.article.create', compact('categories'));
+        $tags       = $this->content->tag();
+        return view('back.article.create', compact('categories','tags'));
     }
 
 
