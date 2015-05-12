@@ -105,6 +105,7 @@ class ContentRepository extends BaseRepository
         $content->tag()->detach($tag_arr);
     }
 
+
     /**
      * 创建或更新内容
      *
@@ -146,6 +147,7 @@ class ContentRepository extends BaseRepository
         if(isset($inputs['article_tag'])){
             $this->saveTagRelate($content,$inputs['article_tag']);
         }
+        $this->saveTagRelate($content,e($inputs['article_tag']));
         return $content;
     }
 

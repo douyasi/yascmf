@@ -10,6 +10,7 @@ use Douyasi\Models\User;
 use Douyasi\Services\Registrar;
 use Douyasi\Cache\DataCache;
 use Cache;
+
 /**
  * 用户登录统一认证
  *
@@ -40,7 +41,7 @@ class AuthorityController extends CommonController
             'username' => $request->input('username'),
             'password' => $request->input('password'),
             //'user_type' => 'Manager',
-            'is_lock'=> 0,
+            'is_lock' => 0,
         ];
         /* Auth::attempt
          * Use Auth (实例)Illuminate\Auth\Guard
@@ -57,15 +58,15 @@ class AuthorityController extends CommonController
              * 如果不存在重新缓存
              */
             $user_id = user('id');
-            if(!Cache::get('SideBar'.$user_id)){
+            if (!Cache::get('SideBar' . $user_id)) {
                 DataCache::cacheSideBar();
             }
             return redirect()->intended(route('admin'));
         } else {
             // 登录失败，跳回
             return redirect()->back()
-                             ->withInput()
-                             ->withErrors(array('attempt' => '“用户名”或“密码”错误，请重新登录！'));  //回传错误信息
+                ->withInput()
+                ->withErrors(array('attempt' => '“用户名”或“密码”错误，请重新登录！'));  //回传错误信息
         }
     }
 
@@ -76,10 +77,12 @@ class AuthorityController extends CommonController
         return redirect()->to('/');
     }
 
-    public function getRegister(){
+    public function getRegister()
+    {
 
         return view('authority.register');
     }
+
     /**
      * Request
      * Illuminate/Support/MessageBag.php
@@ -89,11 +92,11 @@ class AuthorityController extends CommonController
     {
 
         $user = new User();
-        $user->username  = $request->input('username');
-        $user->password  = bcrypt($request->input('password'));
-        $user->email     = $request->input('email');
-        $user->nickname  = $request->input('nickname');
-        $user->realname  = $request->input('realname');
+        $user->username = $request->input('username');
+        $user->password = bcrypt($request->input('password'));
+        $user->email = $request->input('email');
+        $user->nickname = $request->input('nickname');
+        $user->realname = $request->input('realname');
         $user->save();
         return redirect()->route('login')->with('message', '注册成功！');
     }
