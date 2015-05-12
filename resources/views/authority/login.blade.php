@@ -2,19 +2,6 @@
 
 @section('hacker_header')
 <!--
- __     __         _____   _____  __  __  ______ 
- \ \   / / /\     / ____| / ____||  \/  ||  ____|
-  \ \_/ / /  \   | (___  | |     | \  / || |__   
-   \   / / /\ \   \___ \ | |     | |\/| ||  __|  
-    | | / ____ \  ____) || |____ | |  | || |     
-    |_|/_/    \_\|_____/  \_____||_|  |_||_|     
-                                                 
-    ASCII text from http://patorjk.com/software/taag/#p=display&h=1&v=0&f=Big&t=YASCMF
-    Template from https://almsaeedstudio.com/
-    modified by raoyc<raoyc2009@gmail.com>
--->
-
-<!--
 This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
 -->
@@ -70,7 +57,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         @endif
         {!! Form::open(array('route' => 'login', 'method' => 'post')) !!}
           <div class="form-group has-feedback">
-            <input type="text" class="form-control" maxlength="20" name="username" placeholder="用户名"/>
+            <input type="text" class="form-control" maxlength="20" name="username" placeholder="用户名" autocomplete="off"/>
             <span class="glyphicon glyphicon-user form-control-feedback"></span>
           </div>
           <div class="form-group has-feedback">
@@ -93,8 +80,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
         <div class="social-auth-links text-center">
           <p>- 或 -</p>
-          <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i>使用Facebook帐号登录</a>
-          <a href="#" class="btn btn-block btn-social btn-google-plus btn-flat"><i class="fa fa-google-plus"></i>使用Google+帐号登录</a>
+          <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i>使用QQ帐号登录</a>
+          <a href="#" class="btn btn-block btn-social btn-google-plus btn-flat"><i class="fa fa-google-plus"></i>使用WeiBo帐号登录</a>
         </div><!-- /.social-auth-links -->
 
         <a href="#">忘记密码</a><br>
@@ -124,14 +111,4 @@ scratch. This page gets rid of all links and provides the needed markup only.
 @stop
 
 @section('hacker_footer')
-<!--
-______                            _              _                                     _
-| ___ \                          | |            | |                                   | |
-| |_/ /___ __      __ ___  _ __  | |__   _   _  | |      __ _  _ __  __ _ __   __ ___ | |
-|  __// _ \\ \ /\ / // _ \| '__| | '_ \ | | | | | |     / _` || '__|/ _` |\ \ / // _ \| |
-| |  | (_) |\ V  V /|  __/| |    | |_) || |_| | | |____| (_| || |  | (_| | \ V /|  __/| |
-\_|   \___/  \_/\_/  \___||_|    |_.__/  \__, | \_____/ \__,_||_|   \__,_|  \_/  \___||_|
-                                          __/ |
-                                         |___/
--->
 @stop
