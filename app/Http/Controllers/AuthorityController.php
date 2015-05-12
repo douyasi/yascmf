@@ -16,6 +16,7 @@ class AuthorityController extends CommonController
 
     /**
      * 添加路由过滤中间件
+     * Douyasi\Http\Middleware\Visit
      */
     public function __construct()
     {
@@ -37,8 +38,15 @@ class AuthorityController extends CommonController
             'user_type' => 'Manager',
             'is_lock'=> 0,
         ];
+        /* Auth::attempt
+         * Use Auth (实例)Illuminate\Auth\Guard
+         * Attempt to authenticate a user using the given credentials.
+         * @param array $credentials = array()
+         * @param bool $remember = false
+         * @param bool $login = true
+         */
         if (Auth::attempt($credentials, $request->has('remember'))) {
-            event(new UserLogin(user('object')));  //触发登录事件
+            event(new UserLogin(user('object')));  //event 辅助方法触发登录事件
             return redirect()->intended(route('admin'));
         } else {
             // 登录失败，跳回
