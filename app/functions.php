@@ -318,3 +318,15 @@ if (! function_exists('fragment')) {
         }
     }
 }
+
+if (! function_exists('push_arr')) {
+
+    function push_arr($array,$key)
+    {
+        $new_array = array();
+        foreach($array as $k=>$v){
+            array_push($new_array,$v->$key);
+        }
+        return $new_array;
+    }
+}

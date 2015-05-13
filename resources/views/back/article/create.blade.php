@@ -65,15 +65,24 @@
                           </select>
                         </div>
                       </div>
-                      <div class="form-group">
+{{--                      <div class="form-group">
                           <label>标签 <small class="text-red">*</small></label>
                           <div class="input-group">
-                              <select data-placeholder="选择文章分类..." class="chosen-select" style="min-width:200px;" name="article_tag">
+                              <select data-placeholder="选择文章标签..." class="chosen-select" style="min-width:200px;" name="article_tag">
                               @foreach ($tags as $tag)
                                 <option value="{{ $tag->id }}">{{ $tag->tag_name }}</option>
                               @endforeach
                               </select>
                           </div>
+                      </div>--}}
+                      <div class="form-group">
+                          <label>标签 <small class="text-red">*</small></label>
+                          <br>
+                          @foreach ($tags as $tag)
+                          <label>
+                                <input type="checkbox" value="{{$tag->id}}" name="article_tag[]">{{$tag->tag_name}}
+                          </label>
+                          @endforeach
                       </div>
                       <div class="form-group">
                         <label>正文 <small class="text-red">*</small></label>
