@@ -77,6 +77,7 @@ class ContentRepository extends BaseRepository
 
     /*
      *  获取所有的文章标签
+     *  return array
      */
     public function tag()
     {
@@ -92,9 +93,17 @@ class ContentRepository extends BaseRepository
      * content has many tags
      */
     public function saveTagRelate($content,$tag_id){
+        $this->deleteContentTag($content);
         $content->tag()->attach($tag_id);
     }
 
+    /*
+     * 删除关联的文章标签
+     */
+    public function deleteContentTag($content){
+        $tag_arr = push_arr($content->tag(),'id');
+        $content->tag()->detach($tag_arr);
+    }
 
     /**
      * 创建或更新内容
@@ -134,8 +143,9 @@ class ContentRepository extends BaseRepository
         }
 
         $content->save();
-
-        $this->saveTagRelate($content,e($inputs['article_tag']));
+        if(isset($inputs['article_tag'])){
+            $this->saveTagRelate($content,$inputs['article_tag']);
+        }
         return $content;
     }
 
@@ -241,7 +251,7 @@ class ContentRepository extends BaseRepository
 
     /**
      * 删除内容
-     *
+     * 包括文章关联的标签
      * @param  int $id
      * @param  string $type 内容模型类型 文章article,单页page,碎片fragment
      * @return void
@@ -256,6 +266,7 @@ class ContentRepository extends BaseRepository
             $content = $this->model->article()->findOrFail($id);
         }
         $content->delete();
+        $this->deleteContentTag($content);
     }
     #********
     #* 资源 REST 相关的接口函数 END
