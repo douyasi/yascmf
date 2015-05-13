@@ -3,6 +3,7 @@
 use Douyasi\Models\Content;
 use Douyasi\Models\Meta;
 use Douyasi\Models\ArticleTag;
+
 /**
  * 内容仓库ContentRepository
  *
@@ -27,10 +28,10 @@ class ContentRepository extends BaseRepository
      * param  Douyasi\Models\Meta $meta
      * @return void
      */
-    public function __construct(Content $content, Meta $meta,ArticleTag $articleTag)
+    public function __construct(Content $content, Meta $meta, ArticleTag $articleTag)
     {
-        $this->model      = $content;
-        $this->meta       = $meta;
+        $this->model = $content;
+        $this->meta = $meta;
         $this->articleTag = $articleTag;
     }
 
@@ -81,8 +82,8 @@ class ContentRepository extends BaseRepository
      */
     public function tag()
     {
-       $article_tag = $this->articleTag->get();
-       return $article_tag;
+        $article_tag = $this->articleTag->get();
+        return $article_tag;
     }
 
     /*
@@ -92,7 +93,8 @@ class ContentRepository extends BaseRepository
      * 新增多对多关联模型 ( Many To Many )
      * content has many tags
      */
-    public function saveTagRelate($content,$tag_id){
+    public function saveTagRelate($content, $tag_id)
+    {
         $this->deleteContentTag($content);
         $content->tag()->attach($tag_id);
     }
@@ -100,11 +102,11 @@ class ContentRepository extends BaseRepository
     /*
      * 删除关联的文章标签
      */
-    public function deleteContentTag($content){
-        $tag_arr = push_arr($content->tag(),'id');
+    public function deleteContentTag($content)
+    {
+        $tag_arr = push_arr($content->tag(), 'id');
         $content->tag()->detach($tag_arr);
     }
-
 
     /**
      * 创建或更新内容
@@ -117,18 +119,18 @@ class ContentRepository extends BaseRepository
      */
     private function saveContent($content, $inputs, $type = 'article', $user_id = '0')
     {
-        $content->title   = e($inputs['title']);
+        $content->title = e($inputs['title']);
         $content->content = e($inputs['content']);
-        $content->thumb   = e($inputs['thumb']);
+        $content->thumb = e($inputs['thumb']);
         if ($type === 'article') {
             $content->category_id = e($inputs['category_id']);
-            $content->type        = 'article';
+            $content->type = 'article';
         } elseif ($type === 'page') {
             $content->category_id = 0;
-            $content->type        = 'page';
+            $content->type = 'page';
         } elseif ($type === 'fragment') {
             $content->category_id = 0;
-            $content->type        = 'fragment';
+            $content->type = 'fragment';
         }
         if (array_key_exists('is_top', $inputs)) {
             $content->is_top = e($inputs['is_top']);
@@ -137,17 +139,17 @@ class ContentRepository extends BaseRepository
             $content->outer_link = trim(e($inputs['outer_link']));
         }
         if (array_key_exists('slug', $inputs)) {
-            $content->slug = e($inputs['slug']) ;
+            $content->slug = e($inputs['slug']);
         }
         if ($user_id) {
             $content->user_id = $user_id;
         }
 
         $content->save();
-        if(isset($inputs['article_tag'])){
-            $this->saveTagRelate($content,$inputs['article_tag']);
+        if (isset($inputs['article_tag'])) {
+            $this->saveTagRelate($content, $inputs['article_tag']);
         }
-        $this->saveTagRelate($content,e($inputs['article_tag']));
+        $this->saveTagRelate($content, e($inputs['article_tag']));
         return $content;
     }
 
@@ -171,23 +173,25 @@ class ContentRepository extends BaseRepository
         if ($type === 'page') {
             $data = array_add($data, 's_title', '');
             $ret = $this->model->page()
-                                ->where('title', 'like', '%'.e($data['s_title']).'%')
-                                ->paginate($size);
+                ->where('title', 'like', '%' . e($data['s_title']) . '%')
+                ->paginate($size);
         } elseif ($type === 'fragment') {
             $data = array_add($data, 's_title', '');
             $data = array_add($data, 's_slug', '');
             $ret = $this->model->fragment()
-                                ->where('title', 'like', '%'.e($data['s_title']).'%')
-                                ->where('slug', 'like', '%'.e($data['s_slug']).'%')
-                                ->paginate($size);
+                ->where('title', 'like', '%' . e($data['s_title']) . '%')
+                ->where('slug', 'like', '%' . e($data['s_slug']) . '%')
+                ->paginate($size);
         } else {
             $data = array_add($data, 's_title', '');
             $ret = $this->model->article()
-                                ->where('title', 'like', '%'.e($data['s_title']).'%')
-                                ->with(array('meta'=>function ($query) {
-                                    $query->where('type', '=', 'CATEGORY');
-                                }))
-                                ->paginate($size);
+                ->where('title', 'like', '%' . e($data['s_title']) . '%')
+                ->with(array(
+                    'meta' => function ($query) {
+                        $query->where('type', '=', 'CATEGORY');
+                    }
+                ))
+                ->paginate($size);
         }
         return $ret;
     }
