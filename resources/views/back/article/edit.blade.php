@@ -76,6 +76,15 @@
                         </div>
                       </div>
                       <div class="form-group">
+                        <label>标签 <small class="text-red">*</small></label>
+                        <br>
+                        @foreach ($tags as $tag)
+                            <label>
+                                <input type="checkbox" value="{{$tag->id}}" name="article_tag[]" {{ in_array($tag->id,(Input::old('tag', isset($tag_arr) ? $tag_arr: null))) ? 'checked' : '' }}>{{$tag->tag_name}}
+                            </label>
+                        @endforeach
+                      </div>
+                      <div class="form-group">
                         <label>正文 <small class="text-red">*</small></label>
                         <textarea class="form-control" id="ckeditor" name="content">{{ Input::old('content', isset($data) ? $data->content : null) }}</textarea>
                         @include('scripts.endCKEditor'){{-- 引入CKEditor编辑器相关JS依赖 --}}

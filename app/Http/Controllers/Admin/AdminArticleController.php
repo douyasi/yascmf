@@ -96,12 +96,15 @@ class AdminArticleController extends BackController
      */
     public function edit($id)
     {
-        //
+
         $categories = $this->content->meta();
-        $article = $this->content->edit($id, 'article');
+        $tags       = $this->content->tag();
+        $article    = $this->content->edit($id, 'article');
+        $tag_list   = $article->tag;
+        $tag_arr    = push_arr($tag_list,'id');
         //已经findOrFail处理，如果不存在该id资源会抛出异常，再加is_null判定无意义
         //is_null($article) and abort(404); 
-        return view('back.article.edit', ['data' => $article, 'categories' => $categories]);
+        return view('back.article.edit', ['data' => $article, 'categories' => $categories,'tags'=>$tags,'tag_arr'=>$tag_arr]);
     }
 
 
