@@ -62,7 +62,7 @@
           //Boxed layout
           + "<div class='form-group'>"
           + "<label class='control-sidebar-subheading'>"
-          + "<input type='checkbox' data-layout='layout-boxed'class='pull-right'/> "
+          + "<input type='checkbox' data-layout='layout-boxed' class='pull-right'/> "
           + "盒式布局"
           + "</label>"
           + "<p>激活盒式布局</p>"
@@ -208,9 +208,10 @@
    * @param String cls the layout class to toggle
    * @returns void
    */
-  function change_layout(cls) {
+  function change_layout(cls,layout_prop) {
     $("body").toggleClass(cls);
     AdminLTE.layout.fixSidebar();
+    store(cls,layout_prop);
     //Fix the problem with right sidebar and layout boxed
     if (cls == "layout-boxed")
       AdminLTE.controlSidebar._fix($(".control-sidebar-bg"));
@@ -230,6 +231,37 @@
     store('skin', cls);
     return false;
   }
+  /**
+   * init layout
+   *
+   */
+
+   function init_layout()
+   {
+       var fixed                = get('fixed');
+       var control_sidebar_open = get('control-sidebar-open');
+       var layout_boxed         = get('layout-boxed');
+       var sidebar_collapse     = get('sidebar-collapse');
+       var layout_class         = '';
+       if(fixed=='true'){
+           layout_class += ' fixed';
+           $(".pull-right[data-layout='fixed']").prop('checked',true);
+       }
+       if(control_sidebar_open=='true'){
+           layout_class += ' control-sidebar-open';
+           $(".pull-right[data-layout='control-sidebar-open']").prop('checked',true);
+       }
+       if(layout_boxed=='true'){
+           layout_class += ' layout-boxed';
+           $(".pull-right[data-layout='layout-boxed']").prop('checked',true);
+       }
+       if(sidebar_collapse=='true'){
+           layout_class += ' sidebar-collapse';
+           $(".pull-right[data-layout='sidebar-collapse']").prop('checked',true);
+       }
+       $("body").addClass(layout_class);
+
+   }
 
   /**
    * Store a new settings in the browser
@@ -267,8 +299,10 @@
    */
   function setup() {
     var tmp = get('skin');
-    if (tmp && $.inArray(tmp, my_skins))
-      change_skin(tmp);
+    if (tmp && $.inArray(tmp, my_skins)){
+        change_skin(tmp);
+    }
+    init_layout();
 
     //Add the change skin listener
     $("[data-skin]").on('click', function (e) {
@@ -278,11 +312,11 @@
 
     //Add the layout manager
     $("[data-layout]").on('click', function () {
-      change_layout($(this).data('layout'));
+      change_layout($(this).data('layout'),$(this).prop('checked'));
     });
 
     $("[data-controlsidebar]").on('click', function () {
-      change_layout($(this).data('controlsidebar'));
+      change_layout($(this).data('controlsidebar'),$(this).prop('checked'));
       var slide = !AdminLTE.options.controlSidebarOptions.slide;
       AdminLTE.options.controlSidebarOptions.slide = slide;
       if (!slide)
@@ -292,11 +326,11 @@
     $("[data-sidebarskin='toggle']").on('click', function () {
       var sidebar = $(".control-sidebar");
       if (sidebar.hasClass("control-sidebar-dark")) {
-        sidebar.removeClass("control-sidebar-dark")
-        sidebar.addClass("control-sidebar-light")
+        sidebar.removeClass("control-sidebar-dark");
+        sidebar.addClass("control-sidebar-light");
       } else {
-        sidebar.removeClass("control-sidebar-light")
-        sidebar.addClass("control-sidebar-dark")
+        sidebar.removeClass("control-sidebar-light");
+        sidebar.addClass("control-sidebar-dark");
       }
     });
   }
