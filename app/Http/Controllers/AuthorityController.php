@@ -62,4 +62,9 @@ class AuthorityController extends CommonController
         Auth::logout();
         return redirect()->to('/');
     }
+
+    public function getRegister(){
+
+        return view('authority.register');
+    }
 }
