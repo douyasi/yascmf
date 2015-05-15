@@ -79,13 +79,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
         {!! Form::close() !!}
 
         <div class="social-auth-links text-center">
-          <p>- 或 -</p>
+          {{--<p>- 或 -</p>--}}
           <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i>使用QQ帐号登录</a>
           <a href="#" class="btn btn-block btn-social btn-google-plus btn-flat"><i class="fa fa-google-plus"></i>使用WeiBo帐号登录</a>
         </div><!-- /.social-auth-links -->
 
         <a href="#">忘记密码</a><br>
-        <a href="#" class="text-center">注册</a>
+        <a href="{{ route('register') }}" class="text-center">注册</a>
 
       </div><!-- /.login-box-body -->
     </div><!-- /.login-box -->

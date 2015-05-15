@@ -54,6 +54,7 @@ Route::group(['prefix' => 'auth'], function () {
 	# 登录
 	Route::get('login', ['as' => 'login', 'uses' => $Authority.'getLogin']);
 	Route::post('login', $Authority.'postLogin');
+	Route::get('register', ['as' => 'register', 'uses' => $Authority.'getRegister']);
 });
 
 
