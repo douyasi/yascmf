@@ -40,7 +40,7 @@ class UserRequest extends Request
                 'username'                 => 'required|min:4|max:10|eng_alpha_num|unique:users,username',
                 'password'                 => 'required|min:6|max:16|regex:/^[a-zA-Z0-9~@#%_]{6,16}$/i',  //登录密码只能英文字母(a-zA-Z)、阿拉伯数字(0-9)、特殊符号(~@#%)
                 'password_confirmation'    => 'required|same:password',
-                'role'                     => 'required|exists:roles,id',
+/*                'role'                     => 'required|exists:roles,id',*/
                 'email'                    => 'required|email|unique:users,email',
                 'realname'                 => 'required|min:2|max:5|regex:/^[\x{4e00}-\x{9fa5}]{2,5}$/u',  //中文正则匹配可能有遗漏
                 'phone'                    => 'size:11|mobile_phone|unique:users,phone',
