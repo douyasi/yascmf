@@ -55,6 +55,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <p>{!! $errors->first('attempt') !!}</p>
         </div>
         @endif
+        @if(Session::has('message'))
+        <div class="alert alert-success alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <h4>  <i class="icon fa fa-check"></i> 提示！</h4>
+                {{ Session::get('message') }}
+         </div>
+         @endif
         {!! Form::open(array('route' => 'login', 'method' => 'post')) !!}
           <div class="form-group has-feedback">
             <input type="text" class="form-control" maxlength="20" name="username" placeholder="用户名" autocomplete="off"/>

@@ -55,6 +55,8 @@ Route::group(['prefix' => 'auth'], function () {
 	Route::get('login', ['as' => 'login', 'uses' => $Authority.'getLogin']);
 	Route::post('login', $Authority.'postLogin');
 	Route::get('register', ['as' => 'register', 'uses' => $Authority.'getRegister']);
+	Route::post('register', $Authority.'postRegister');
+
 });
 
 
@@ -206,3 +208,17 @@ Route::group(array(), function () {
 	Route::get('{category}/{article}.html', ['as' => 'article.show', 'uses' => $Blog.'getArticleShow']);
 });
 
+/*
+|--------------------------------------------------------------------------
+| 后台Api Start
+|--------------------------------------------------------------------------
+*/
+
+Route::group(['prefix' => 'Api'], function () {
+	Route::controller('photo', 'Api\PhotoController');
+});
+/*
+|--------------------------------------------------------------------------
+| 后台Api End
+|--------------------------------------------------------------------------
+*/

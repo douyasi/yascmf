@@ -5,7 +5,9 @@ use Illuminate\Http\Request;
 use Auth;
 use Douyasi\Events\UserLogin as UserLogin;
 use Douyasi\Events\UserLogout as UserLogout;
-
+use Douyasi\Http\Requests\UserRequest;
+use Douyasi\Models\User;
+use Douyasi\Services\Registrar;
 /**
  * 用户登录统一认证
  *
@@ -66,5 +68,22 @@ class AuthorityController extends CommonController
     public function getRegister(){
 
         return view('authority.register');
+    }
+    /**
+     * Request
+     * Illuminate/Support/MessageBag.php
+     */
+
+    public function postRegister(UserRequest $request)
+    {
+
+        $user = new User();
+        $user->username  = $request->input('username');
+        $user->password  = bcrypt($request->input('password'));
+        $user->email     = $request->input('email');
+        $user->nickname  = $request->input('nickname');
+        $user->realname  = $request->input('realname');
+        $user->save();
+        return redirect()->route('login')->with('message', '注册成功！');
     }
 }
