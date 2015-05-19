@@ -18,6 +18,14 @@ Route::group(['prefix' => 'auth'], function () {
     Route::post('login', $Authority . 'postLogin');
     Route::get('register', ['as' => 'register', 'uses' => $Authority . 'getRegister']);
     Route::post('register', $Authority . 'postRegister');
+    $Authority = 'AuthorityController@';
+    # 退出
+    Route::get('logout', ['as' => 'logout', 'uses' => $Authority . 'getLogout']);
+    # 登录
+    Route::get('login', ['as' => 'login', 'uses' => $Authority . 'getLogin']);
+    Route::post('login', $Authority . 'postLogin');
+    Route::get('register', ['as' => 'register', 'uses' => $Authority . 'getRegister']);
+    Route::post('register', $Authority . 'postRegister');
 
 });
 

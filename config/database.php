@@ -13,8 +13,13 @@ return [
 	|
 	*/
 
+<<<<<<< e772876a62cca1715b389083af788bafdf449e51
 	//'fetch' => PDO::FETCH_ASSOC,
 	'fetch' => PDO::FETCH_ASSOC,
+=======
+	'fetch' => PDO::FETCH_CLASS,
+	//'fetch' => PDO::FETCH_ASSOC,
+>>>>>>> register
 	/*
 	|--------------------------------------------------------------------------
 	| Default Database Connection Name

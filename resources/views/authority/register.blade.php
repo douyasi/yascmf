@@ -96,6 +96,9 @@
             <div class="form-group has-feedback">
                 <input type="text" class="form-control" maxlength="20" name="username" placeholder="用户名"
                        autocomplete="off"/>
+            {!! Form::open(array('route' => 'register', 'method' => 'post')) !!}
+            <div class="form-group has-feedback">
+                <input type="text" class="form-control" maxlength="20" name="username" placeholder="用户名" value="{{ Input::old('username') }}" autocomplete="off" />
                 <span class="glyphicon glyphicon-user form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
@@ -103,7 +106,7 @@
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
-                <input type="password" class="form-control" maxlength="20" name="re_password" placeholder="请再次输入登录密码"/>
+                <input type="password" class="form-control" maxlength="20" name="password_confirmation" placeholder="请再次输入登录密码"/>
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
@@ -120,6 +123,15 @@
             <div class="form-group has-feedback">
                 <input type="text" class="form-control" maxlength="20" name="realname" placeholder="姓名"
                        autocomplete="off"/>
+                <input type="text" class="form-control" maxlength="40" name="email" placeholder="电子邮箱" value="{{ Input::old('email') }}" autocomplete="off"/>
+                <span class="glyphicon glyphicon glyphicon-envelope form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input type="text" class="form-control" maxlength="20" name="nickname" placeholder="昵称" autocomplete="off" value="{{ Input::old('nickname') }}"/>
+                <span class="glyphicon glyphicon glyphicon glyphicon-info-sign form-control-feedback layer_msg" data-msg="这将显示到你的个人资料中"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input type="text" class="form-control" maxlength="20" name="realname" placeholder="姓名" autocomplete="off" value="{{ Input::old('realname') }}"/>
                 <span class="glyphicon glyphicon glyphicon glyphicon-info-sign form-control-feedback"></span>
             </div>
             <div class="row">
