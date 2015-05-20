@@ -97,9 +97,6 @@ class AuthorityController extends CommonController
         $user->email = $request->input('email');
         $user->nickname = $request->input('nickname');
         $user->realname = $request->input('realname');
-        $user->username  = $request->input('username');
-        $user->password  = bcrypt($request->input('password'));
-        $user->email     = $request->input('email');
         $user->save();
         return redirect()->route('login')->with('message', '注册成功！');
     }
