@@ -17,13 +17,12 @@ class AdminMeController extends BackController
     /**
      * The MeRepository instance.
      *
-     * @var Douyasi\Repositories\MeRepository
+     * var Douyasi\Repositories\MeRepository
      */
     protected $me;
 
 
-    public function __construct(
-        MeRepository $me)
+    public function __construct(MeRepository $me)
     {
         parent::__construct();
         $this->me = $me;
@@ -35,7 +34,7 @@ class AdminMeController extends BackController
      *
      * @return Response
      */
-    public function getindex()
+    public function getIndex()
     {
         $me = user('object');
         return view('back.me.index', compact('me'));
