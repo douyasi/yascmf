@@ -37,7 +37,7 @@ class AuthorityController extends CommonController
         $credentials = [
             'username' => $request->input('username'),
             'password' => $request->input('password'),
-            'user_type' => 'Manager',
+            //'user_type' => 'Manager',
             'is_lock'=> 0,
         ];
         /* Auth::attempt
