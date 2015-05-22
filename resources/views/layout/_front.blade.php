@@ -22,7 +22,7 @@
 @stop
 
 @section('head_css')
-	<link href="{{ asset('static/css/bootstrap.min.css') }}" rel="stylesheet">
+	<link href="{{ asset('bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
 	<link href="{{ asset('static/yas_blog.css') }}" rel="stylesheet">
 @stop
 
@@ -49,7 +49,7 @@
 @section('afterBody')
 	@section('bootstrapJS')
 	<script src="{{ asset('static/js/jquery-1.10.2.min.js') }}"></script>
-	<script src="{{ asset('static/js/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+	<script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
 	@show{{-- 添加一些bootstrap需要加载的JS --}}
 	@section('extraSection')
 	@show{{-- 用户后期扩展时需要补充的一些代码片段 --}}
