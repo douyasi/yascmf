@@ -47,7 +47,7 @@
   border-bottom: 0px solid transparent;
 }
 .skin-red .main-header .logo:hover {
-  background: #d33724;
+  background-color: #d33724;
 }
 .skin-red .main-header li.user-header {
   background-color: #dd4b39;
@@ -70,7 +70,6 @@
 }
 .skin-red .sidebar-menu > li > a {
   border-left: 3px solid transparent;
-  margin-right: 1px;
 }
 .skin-red .sidebar-menu > li:hover > a,
 .skin-red .sidebar-menu > li.active > a {
