@@ -31,6 +31,12 @@
     <link href="{{ asset('plugins/layer/skin/layer.ext.css') }}" rel="stylesheet" type="text/css"/>
     <!--validation-->>
     <link href="{{ asset('plugins/formvalidation/css/formValidation.min.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('plugins/layer/skin/layer.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('plugins/layer/skin/layer.ext.css') }}" rel="stylesheet" type="text/css"/>
+    <!--validation-->>
+    <link href="{{ asset('plugins/formvalidation/css/formValidation.min.css') }}" rel="stylesheet" type="text/css"/>
+
+    @stop
 
     @stop
 
@@ -96,51 +102,52 @@
             <div class="form-group has-feedback">
                 <input type="text" class="form-control" maxlength="20" name="username" placeholder="用户名"
                        autocomplete="off"/>
-            {!! Form::open(array('route' => 'register', 'method' => 'post')) !!}
-            <div class="form-group has-feedback">
-                <input type="text" class="form-control" maxlength="20" name="username" placeholder="用户名" value="{{ Input::old('username') }}" autocomplete="off" />
-                <span class="glyphicon glyphicon-user form-control-feedback"></span>
-            </div>
-            <div class="form-group has-feedback">
-                <input type="password" class="form-control" maxlength="20" name="password" placeholder="登录密码"/>
-                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-            </div>
-            <div class="form-group has-feedback">
-                <input type="password" class="form-control" maxlength="20" name="password_confirmation" placeholder="请再次输入登录密码"/>
-                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-            </div>
-            <div class="form-group has-feedback">
-                <input type="text" class="form-control" maxlength="40" name="email" placeholder="电子邮箱"
-                       autocomplete="off"/>
-                <span class="glyphicon glyphicon glyphicon-envelope form-control-feedback"></span>
-            </div>
-            <div class="form-group has-feedback">
-                <input type="text" class="form-control" maxlength="20" name="nickname" placeholder="昵称"
-                       autocomplete="off"/>
+                {!! Form::open(array('route' => 'register', 'method' => 'post')) !!}
+                <div class="form-group has-feedback">
+                    <label class="control-label">用户名</label>
+                    <input type="text" class="form-control" maxlength="20" name="username" placeholder="用户名"
+                           value="{{ Input::old('username') }}" autocomplete="off"/>
+                </div>
+                <div class="form-group has-feedback">
+                    <input type="password" class="form-control" maxlength="20" name="password" placeholder="登录密码"/>
+                </div>
+                <div class="form-group has-feedback">
+                    <input type="password" class="form-control" maxlength="20" name="password_confirmation"
+                           placeholder="请再次输入登录密码"/>
+                </div>
+                <div class="form-group has-feedback">
+                    <input type="text" class="form-control" maxlength="40" name="email" placeholder="电子邮箱"
+                           autocomplete="off"/>
+                    <span class="glyphicon glyphicon glyphicon-envelope form-control-feedback"></span>
+                </div>
+                <div class="form-group has-feedback">
+                    <input type="text" class="form-control" maxlength="20" name="nickname" placeholder="昵称"
+                           autocomplete="off"/>
                 <span class="glyphicon glyphicon glyphicon glyphicon-info-sign form-control-feedback layer_msg"
                       data-msg="这将显示到你的个人资料中"></span>
-            </div>
-            <div class="form-group has-feedback">
-                <input type="text" class="form-control" maxlength="20" name="realname" placeholder="姓名"
-                       autocomplete="off"/>
-                <input type="text" class="form-control" maxlength="40" name="email" placeholder="电子邮箱" value="{{ Input::old('email') }}" autocomplete="off"/>
-                <span class="glyphicon glyphicon glyphicon-envelope form-control-feedback"></span>
-            </div>
-            <div class="form-group has-feedback">
-                <input type="text" class="form-control" maxlength="20" name="nickname" placeholder="昵称" autocomplete="off" value="{{ Input::old('nickname') }}"/>
-                <span class="glyphicon glyphicon glyphicon glyphicon-info-sign form-control-feedback layer_msg" data-msg="这将显示到你的个人资料中"></span>
-            </div>
-            <div class="form-group has-feedback">
-                <input type="text" class="form-control" maxlength="20" name="realname" placeholder="姓名" autocomplete="off" value="{{ Input::old('realname') }}"/>
-                <span class="glyphicon glyphicon glyphicon glyphicon-info-sign form-control-feedback"></span>
-            </div>
-            <div class="row">
-                <div class="col-xs-4">
-                    <button type="submit" class="btn btn-primary btn-block btn-flat ">注册</button>
-                </div><!-- /.col -->
-            </div>
-            {!! Form::close() !!}
-        </div><!-- /.login-box-body -->
+                </div>
+                <div class="form-group has-feedback">
+                    <input type="text" class="form-control" maxlength="20" name="realname" placeholder="姓名"
+                           autocomplete="off"/>
+                    <input type="text" class="form-control" maxlength="40" name="email" placeholder="电子邮箱"
+                           value="{{ Input::old('email') }}" autocomplete="off"/>
+                </div>
+                <div class="form-group has-feedback">
+                    <input type="text" class="form-control" maxlength="20" name="nickname" placeholder="昵称"
+                           autocomplete="off" value="{{ Input::old('nickname') }}"/>
+                </div>
+                <div class="form-group has-feedback">
+                    <input type="text" class="form-control" maxlength="20" name="realname" placeholder="姓名"
+                           autocomplete="off" value="{{ Input::old('realname') }}"/>
+                </div>
+                <div class="row">
+                    <div class="col-xs-4">
+                        <button type="submit" class="btn btn-primary btn-block btn-flat ">注册</button>
+                    </div><!-- /.col -->
+                </div>
+                {!! Form::close() !!}
+            </div><!-- /.login-box-body -->
+        </div><!-- /.login-box -->
     </div><!-- /.login-box -->
     @stop
 
@@ -158,7 +165,6 @@
     <!--formValidation -->
     <script src="{{ asset('plugins/formvalidation/js/formValidation.min.js')}}" type="text/javascript"></script>
     <script src="{{ asset('plugins/formvalidation/js/framework/bootstrap.js')}}" type="text/javascript"></script>
-
     <script>
         $(function () {
             $('input').iCheck({
