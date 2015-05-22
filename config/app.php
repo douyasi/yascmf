@@ -208,6 +208,7 @@ return [
 		'Form'      => 'Illuminate\Html\FormFacade',
 		'Html'      => 'Illuminate\Html\HtmlFacade',
 		'Ip'        => 'Zhuzhichao\IpLocationZh\Ip',
+		'Entrust'   => 'Zizaco\Entrust\EntrustFacade',
 	],
 
 ];

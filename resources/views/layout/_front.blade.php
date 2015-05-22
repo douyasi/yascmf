@@ -22,7 +22,7 @@
 @stop
 
 @section('head_css')
-	<link href="{{ asset('static/themes/simplex/bootstrap.min.css') }}" rel="stylesheet">
+	<link href="{{ asset('static/css/bootstrap.min.css') }}" rel="stylesheet">
 	<link href="{{ asset('static/yas_blog.css') }}" rel="stylesheet">
 @stop
 
