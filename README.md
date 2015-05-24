@@ -51,6 +51,13 @@ DB_PASSWORD=root
 
 CACHE_DRIVER=file
 SESSION_DRIVER=file
+QUEUE_DRIVER=sync
+
+MAIL_DRIVER=smtp
+MAIL_HOST=mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=null
+MAIL_PASSWORD=null
 ```
 
 ③ 服务器绑定域名，并将文档根目录设置为源码包 `public` 目录下，给 `storage` 目录可写权限，如果后台需要上传图片请给 `public\uploads` 可写权限，如果使用 `minify` 来压缩与合并 `CSS` 与 `JS` 静态资源，请给 `public\min\tmp` 可写权限。
