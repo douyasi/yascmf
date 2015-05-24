@@ -27,9 +27,11 @@ require __DIR__.'/../app/functions.php'; // 引入自定义helper函数库
 |
 */
 
-$compiledPath = __DIR__.'/../storage/framework/compiled.php';
-
-if (file_exists($compiledPath))
+if (file_exists($compiledPath = __DIR__.'/../vendor/compiled.php'))
+{
+	require $compiledPath;
+}
+elseif (file_exists($compiledPath = __DIR__.'/../storage/framework/compiled.php'))
 {
 	require $compiledPath;
 }
