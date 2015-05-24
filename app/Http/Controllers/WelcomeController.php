@@ -1,6 +1,5 @@
 <?php namespace Douyasi\Http\Controllers;
 
-use Route;
 class WelcomeController extends Controller {
 
 	/*
@@ -22,7 +21,6 @@ class WelcomeController extends Controller {
 	public function __construct()
 	{
 		$this->middleware('guest');
-		Route::get('welcome', 'WelcomeController@index');
 	}
 
 	/**

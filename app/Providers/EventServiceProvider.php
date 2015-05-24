@@ -3,7 +3,7 @@
 use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
-use Douyasi\Handlers\Events\UserEventHandler as UserEventHandler;
+use Douyasi\Handlers\Events\UserEventHandler;
 class EventServiceProvider extends ServiceProvider {
 
 	/**
