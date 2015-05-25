@@ -41,6 +41,11 @@
 	@show{{-- 添加一些bootstrap需要加载的JS --}}
 	@section('extraSection')
 	@show{{-- 用户后期扩展时需要补充的一些代码片段 --}}
+<script>
+	$('.filter_wrap li.item a input:checkbox').click(function(){
+		location.href = $(this).parent('a').attr('href');
+	});
+</script>
 @stop
 
 @section('hacker_footer')
