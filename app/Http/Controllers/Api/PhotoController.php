@@ -18,6 +18,7 @@ class PhotoController extends Controller {
 	 */
 	public function getIndex()
 	{
+		return view('home');
 /*		$result = DB::table('contents')->get();
 		print_r($result);*/
 		$decrypted = Crypt::encrypt('admin');

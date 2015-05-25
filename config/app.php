@@ -153,7 +153,7 @@ return [
 		'Barryvdh\Debugbar\ServiceProvider',
 		'Zizaco\Entrust\EntrustServiceProvider',
 		'Douyasi\Providers\DouyasiValidatorServiceProvider',
-
+		'Toplan\FilterManager\FilterManagerServiceProvider',
 	],
 
 	/*
@@ -208,6 +208,7 @@ return [
 		'Form'      => 'Illuminate\Html\FormFacade',
 		'Html'      => 'Illuminate\Html\HtmlFacade',
 		'Ip'        => 'Zhuzhichao\IpLocationZh\Ip',
+		'FilterManager' => 'Toplan\FilterManager\Facades\FilterManager',
 	],
 
 ];
