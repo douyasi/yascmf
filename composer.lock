@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0bdbeff4eda6cec99aa040f690aa99bf",
+    "hash": "1556f236e24dd1e158e43d0439899b7c",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -3764,13 +3764,55 @@
             "description": "Symfony Yaml Component",
             "homepage": "http://symfony.com",
             "time": "2015-01-25 04:39:26"
+        },
+        {
+            "name": "toplan/filter-manager",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/toplan/FilterManager.git",
+                "reference": "20b4b562c620126a2979b26e51b6cefdd76aca57"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/toplan/FilterManager/zipball/20b4b562c620126a2979b26e51b6cefdd76aca57",
+                "reference": "20b4b562c620126a2979b26e51b6cefdd76aca57",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "5.0.*",
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ],
+                "psr-0": {
+                    "Toplan\\FilterManager": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "toplan",
+                    "email": "toplan710@gmail.com"
+                }
+            ],
+            "description": "Filter manager package for product list,elegant generate url.",
+            "keywords": [
+                "filter",
+                "product list filter manager"
+            ],
+            "time": "2015-05-20 07:21:40"
         }
     ],
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "zizaco/entrust": 20,
-        "douyasi/identity-card": 20
+        "douyasi/identity-card": 20,
+        "toplan/filter-manager": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
