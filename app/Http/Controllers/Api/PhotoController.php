@@ -21,7 +21,6 @@ class PhotoController extends Controller {
 	{
 		$aa = DataCache::cacheSideBar();
 		print_r($aa);exit;
-		return view('home');
 /*		$result = DB::table('contents')->get();
 		print_r($result);*/
 		$decrypted = Crypt::encrypt('admin');
