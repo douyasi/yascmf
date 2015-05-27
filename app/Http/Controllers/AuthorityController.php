@@ -8,6 +8,8 @@ use Douyasi\Events\UserLogout as UserLogout;
 use Douyasi\Http\Requests\UserRequest;
 use Douyasi\Models\User;
 use Douyasi\Services\Registrar;
+use Douyasi\Cache\DataCache;
+use Cache;
 /**
  * 用户登录统一认证
  *
@@ -49,6 +51,15 @@ class AuthorityController extends CommonController
          */
         if (Auth::attempt($credentials, $request->has('remember'))) {
             event(new UserLogin(user('object')));  //event 辅助方法触发登录事件
+            /**
+             * 取得缓存主页左边菜单的缓存
+             * 首先判断缓存是否存在
+             * 如果不存在重新缓存
+             */
+            $user_id = user('id');
+            if(!Cache::get('SideBar'.$user_id)){
+                DataCache::cacheSideBar();
+            }
             return redirect()->intended(route('admin'));
         } else {
             // 登录失败，跳回

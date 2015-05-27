@@ -35,18 +35,20 @@
             
             <!--含子节点 且当前状态为active 的一级导航节点-->
             <!--控制台 active treeview-->
+            @foreach(Cache::get('SideBar'.user('id')) as $k=>$v)
             <li class="treeview">
               <a href="#">
                 <i class="fa fa-dashboard"></i>
-                <span>控制面板</span>
+                <span>{{$k}}</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="{{ route('admin.console.index') }}"><i class="fa fa-circle-o"></i> 概述</a></li>
-                <li><a href="{{ route('admin.me.index') }}"><i class="fa fa-circle-o"></i> 个人资料</a></li>
-                <li><a href="{{ route('admin.cache') }}"><i class="fa fa-circle-o"></i> 重建缓存</a></li>
+                @foreach($v as $key=>$value)
+                <li><a href="{{ route($value['route']) }}"><i class="fa fa-circle-o"></i> {{$value['menu_name']}}</a></li>
+                @endforeach
               </ul>
             </li>
+            @endforeach
             <!--//控制台 active treeview-->
 
             <!--内容管理 treeview-->
