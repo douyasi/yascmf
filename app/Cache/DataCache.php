@@ -151,7 +151,7 @@ class DataCache
     public static function cacheSideBar()
     {
         $user_id = user('id');
-        //Cache::forget('SideBar'.$user_id);  //清理掉个人侧边栏目录
+        Cache::forget('SideBar'.$user_id);  //清理掉个人侧边栏目录
 
         $user  = user('object');//User对象
         //$roles = $user->can('manage_system');
@@ -212,8 +212,11 @@ class DataCache
                 array('menu_name'=>'动态设置分组','route'=>'admin.setting_type.index','role'=>'manage_system','icon'=>'fa fa-square-o'),
                 array('menu_name'=>'动态设置','route'=>'admin.setting.index','role'=>'manage_system','icon'=>'fa fa-square-o'),
                 array('menu_name'=>'系统日志','route'=>'admin.system_log.index','role'=>'manage_system','icon'=>'fa fa-square-o'),
-                array('menu_name'=>'邮件日志','route'=>'#','role'=>'manage_system','icon'=>'fa fa-square-o')
-            ),
+                array('menu_name'=>'邮件日志','route'=>'#','role'=>'manage_system','icon'=>'fa fa-square-o'),
+                array('menu_name'=>'概述','route'=>'admin.console.index','role'=>'manage_system'),
+                array('menu_name'=>'个人资料','route'=>'admin.me.index','role'=>'manage_system'),
+                array('menu_name'=>'重建缓存','route'=>'admin.cache','role'=>'manage_system'),
+            )
         );
 
         foreach($templateSideBar as $k=>$v){
