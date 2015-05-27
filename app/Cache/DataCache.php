@@ -140,4 +140,40 @@ class DataCache
         static::cacheArchive();
         return true;
     }
+
+    /**
+     * 缓存后台SideBar
+     * @return boolean true
+     * key-value
+     * SideBar+$user_id
+     */
+
+    public static function cacheSideBar()
+    {
+        $user_id = user('id');
+        Cache::forget('SideBar'.$user_id);  //清理掉个人侧边栏目录
+
+        $user  = user('object');//User对象
+        //$roles = $user->can('manage_system');
+        $templateSideBar = array(
+            '控制面板'=>array(
+                array('menu_name'=>'概述','route'=>'admin.console.index','role'=>'manage_system'),
+                array('menu_name'=>'个人资料','route'=>'admin.me.index','role'=>'manage_system'),
+                array('menu_name'=>'重建缓存','route'=>'admin.cache','role'=>'manage_system')
+            ),
+        );
+
+        foreach($templateSideBar as $k=>$v){
+            foreach($v as $key=>$value){
+                if(!$user->can('manage_system')){
+                    unset($templateSideBar[$k][$key]);
+                }
+            }
+            if(empty($templateSideBar[$k])){
+                unset($templateSideBar[$k]);
+            }
+        }
+        Cache::forever('SideBar'.$user_id,$templateSideBar);
+        return true;
+    }
 }
