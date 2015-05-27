@@ -15,7 +15,7 @@ class AdminPermissionController extends BackController
     /**
      * The RoleRepository instance.
      *
-     * @var Douyasi\Repositories\RoleRepository
+     * var Douyasi\Repositories\RoleRepository
      */
     protected $role;
 
@@ -25,7 +25,7 @@ class AdminPermissionController extends BackController
     {
         parent::__construct();
         $this->role = $role;
-        
+        //user('object');返回User对象
         if (! user('object')->can('manage_users')) {
             $this->middleware('deny403');
         }
