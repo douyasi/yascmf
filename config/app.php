@@ -209,6 +209,7 @@ return [
 		'Html'      => 'Illuminate\Html\HtmlFacade',
 		'Ip'        => 'Zhuzhichao\IpLocationZh\Ip',
 		'FilterManager' => 'Toplan\FilterManager\Facades\FilterManager',
+		'Entrust'   => 'Zizaco\Entrust\EntrustFacade'
 	],
 
 ];
