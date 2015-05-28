@@ -78,3 +78,30 @@
     </section>
     <!-- /.sidebar -->
 </aside>
+@if(isset($v[0]))
+    <li class="treeview">
+        <a href="#">
+            <i class="{{$v['icon']}}"></i>
+            <span>{{$k}}</span>
+            <i class="{{$v['message_class']}}">{{$v['notice']}}</i>
+        </a>
+        <ul class="treeview-menu">
+            @foreach($v as $key=>$value)
+                @if( is_array($value))
+                    <li><a href="{{ route($value['route']) }}"><i
+                                    class="{{$value['icon']}}"></i> {{$value['menu_name']}}</a></li>
+                @endif
+            @endforeach
+        </ul>
+    </li>
+    @else
+            <!--无子节点的一级导航节点-->
+    <li><a href="{{ route($v['route']) }}"><i class='{{$v['icon']}}'></i> <span>{{$v['menu_name']}}</span></a></li>
+    @endif
+    @endforeach
+            <!--//控制台 active treeview-->
+
+    </ul><!-- /.sidebar-menu -->
+    </section>
+    <!-- /.sidebar -->
+    </aside>

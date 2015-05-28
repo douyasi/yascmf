@@ -151,7 +151,7 @@ class DataCache
     public static function cacheSideBar()
     {
         $user_id = user('id');
-        Cache::forget('SideBar'.$user_id);  //清理掉个人侧边栏目录
+        //Cache::forget('SideBar'.$user_id);  //清理掉个人侧边栏目录
 
         $user  = user('object');//User对象
         //$roles = $user->can('manage_system');
