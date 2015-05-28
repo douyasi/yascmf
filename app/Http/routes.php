@@ -61,6 +61,19 @@ Route::group(['prefix' => 'auth'], function () {
 
 
 /*
+ * 权限相关
+ *
+ * @param string       $route      Route pattern. i.e: "admin/*"
+ * @param array|string $roles      The role(s) needed
+ * @param mixed        $result     i.e: Redirect::to('/')
+ * @param bool         $requireAll User must have all roles
+ * @return mixed
+ * param roles can be a array
+ */
+Entrust::routeNeedsRole('admin/me*', 'user_manage', Redirect::to('/'));
+
+
+/*
 |--------------------------------------------------------------------------
 | 管理员后台 实现文章和用户等管理操作
 |--------------------------------------------------------------------------
