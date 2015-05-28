@@ -151,15 +151,68 @@ class DataCache
     public static function cacheSideBar()
     {
         $user_id = user('id');
-        Cache::forget('SideBar'.$user_id);  //清理掉个人侧边栏目录
+        //Cache::forget('SideBar'.$user_id);  //清理掉个人侧边栏目录
 
         $user  = user('object');//User对象
         //$roles = $user->can('manage_system');
         $templateSideBar = array(
             '控制面板'=>array(
-                array('menu_name'=>'概述','route'=>'admin.console.index','role'=>'manage_system'),
-                array('menu_name'=>'个人资料','route'=>'admin.me.index','role'=>'manage_system'),
-                array('menu_name'=>'重建缓存','route'=>'admin.cache','role'=>'manage_system')
+                'icon'=>'fa fa-dashboard',
+                'message_class'=>'fa fa-angle-left pull-right',
+                'notice'=>'',
+                array('menu_name'=>'概述','route'=>'admin.console.index','role'=>'manage_system','icon'=>'fa fa-circle-o'),
+                array('menu_name'=>'个人资料','route'=>'admin.me.index','role'=>'manage_system','icon'=>'fa fa-circle-o'),
+                array('menu_name'=>'重建缓存','route'=>'admin.cache','role'=>'manage_system','icon'=>'fa fa-circle-o')
+            ),
+            '内容管理'=>array(
+                'icon'=>'fa fa-edit',
+                'message_class'=>'label label-primary pull-right',
+                'notice'=>'New',
+                array('menu_name'=>'文章','route'=>'admin.article.index','role'=>'manage_system','icon'=>'fa fa-file-o'),
+                array('menu_name'=>'单页','route'=>'admin.page.index','role'=>'manage_system','icon'=>'fa fa-file-o'),
+                array('menu_name'=>'碎片','route'=>'admin.fragment.index','role'=>'manage_system','icon'=>'fa fa-file-o'),
+                array('menu_name'=>'分类','route'=>'admin.category.index','role'=>'manage_system','icon'=>'fa fa-file-o')
+            ),
+            '友链'=>array('menu_name'=>'友链','route'=>'#','role'=>'manage_system','icon'=>'fa fa-link'),
+            '写作'=>array('menu_name'=>'写作','route'=>'#','role'=>'manage_system','icon'=>'fa fa-book'),
+            '标签'=>array('menu_name'=>'标签','route'=>'admin.tag.index','role'=>'manage_system','icon'=>'fa fa-tags'),
+            '讨论'=>array(
+                'icon'=>'fa fa-comments-o',
+                'message_class'=>'label pull-right bg-green',
+                'notice'=>'New',
+                array('menu_name'=>'节点','route'=>'#','role'=>'manage_system','icon'=>'fa fa-square-o'),
+                array('menu_name'=>'话题','route'=>'#','role'=>'manage_system','icon'=>'fa fa-square-o'),
+                array('menu_name'=>'审核','route'=>'#','role'=>'manage_system','icon'=>'fa fa-square-o'),
+                array('menu_name'=>'举报','route'=>'#','role'=>'manage_system','icon'=>'fa fa-square-o')
+            ),
+            '用户管理'=>array(
+                'icon'=>'fa fa-user',
+                'message_class'=>'label pull-right bg-red',
+                'notice'=>'4',
+                array('menu_name'=>'管理员','route'=>'admin.user.index','role'=>'manage_system','icon'=>'fa fa-circle-o'),
+                array('menu_name'=>'注册用户','route'=>'#','role'=>'manage_system','icon'=>'fa fa-circle-o'),
+                array('menu_name'=>'付费客户','route'=>'admin.fragment.index','role'=>'manage_system','icon'=>'fa fa-circle-o'),
+                array('menu_name'=>'角色','route'=>'admin.role.index','role'=>'manage_system','icon'=>'fa fa-circle-o'),
+                array('menu_name'=>'权限','route'=>'admin.permission.index','role'=>'manage_system','icon'=>'fa fa-circle-o')
+            ),
+            '业务管理'=>array(
+                'icon'=>'fa fa-coffee',
+                'message_class'=>'fa fa-angle-left pull-right',
+                'notice'=>'',
+                array('menu_name'=>'业务流程','route'=>'admin.flow','role'=>'manage_system','icon'=>'fa fa-sitemap'),
+                array('menu_name'=>'信息','route'=>'#','role'=>'manage_system','icon'=>'fa fa-envelope-o'),
+                array('menu_name'=>'通知','route'=>'#','role'=>'manage_system','icon'=>'fa fa-bell-o'),
+                array('menu_name'=>'任务','route'=>'#','role'=>'manage_system','icon'=>'fa fa-flag-o')
+            ),
+            '系统管理'=>array(
+                'icon'=>'fa fa-cog',
+                'message_class'=>'fa fa-angle-left pull-right',
+                'notice'=>'',
+                array('menu_name'=>'系统配置','route'=>'admin.system_option.index','role'=>'manage_system','icon'=>'fa fa-square-o'),
+                array('menu_name'=>'动态设置分组','route'=>'admin.setting_type.index','role'=>'manage_system','icon'=>'fa fa-square-o'),
+                array('menu_name'=>'动态设置','route'=>'admin.setting.index','role'=>'manage_system','icon'=>'fa fa-square-o'),
+                array('menu_name'=>'系统日志','route'=>'admin.system_log.index','role'=>'manage_system','icon'=>'fa fa-square-o'),
+                array('menu_name'=>'邮件日志','route'=>'#','role'=>'manage_system','icon'=>'fa fa-square-o')
             ),
         );
 

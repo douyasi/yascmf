@@ -67,10 +67,12 @@ Route::group(['prefix' => 'auth'], function () {
 */
 Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
 
+
 # 后台首页
 	$Admin = 'AdminController@';
 	# 访问后台首页 会 重定向至 后台控制台概要页面 （在控制器方法getIndex中处理）
 	Route::get('/', ['as' => 'admin', 'uses' => $Admin.'getIndex']);
+	Route::get('#', ['as' => '#', 'uses' => $Admin.'getIndex']);
 
 
 # 后台上传图片文件layer
