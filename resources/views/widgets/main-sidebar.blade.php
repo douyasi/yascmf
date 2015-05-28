@@ -36,105 +36,27 @@
             <!--含子节点 且当前状态为active 的一级导航节点-->
             <!--控制台 active treeview-->
             @foreach(Cache::get('SideBar'.user('id')) as $k=>$v)
-            <li class="treeview">
-              <a href="#">
-                <i class="fa fa-dashboard"></i>
-                <span>{{$k}}</span>
-                <i class="fa fa-angle-left pull-right"></i>
-              </a>
-              <ul class="treeview-menu">
-                @foreach($v as $key=>$value)
-                <li><a href="{{ route($value['route']) }}"><i class="fa fa-circle-o"></i> {{$value['menu_name']}}</a></li>
-                @endforeach
-              </ul>
-            </li>
+              @if(isset($v[0]))
+              <li class="treeview">
+                <a href="#">
+                  <i class="{{$v['icon']}}"></i>
+                  <span>{{$k}}</span>
+                  <i class="{{$v['message_class']}}">{{$v['notice']}}</i>
+                </a>
+                <ul class="treeview-menu">
+                  @foreach($v as $key=>$value)
+                    @if( is_array($value))
+                      <li><a href="{{ route($value['route']) }}"><i class="{{$value['icon']}}"></i> {{$value['menu_name']}}</a></li>
+                    @endif
+                  @endforeach
+                </ul>
+              </li>
+              @else
+                <!--无子节点的一级导航节点-->
+                <li><a href="{{ route($v['route']) }}"><i class='{{$v['icon']}}'></i> <span>{{$v['menu_name']}}</span></a></li>
+              @endif
             @endforeach
             <!--//控制台 active treeview-->
-
-            <!--内容管理 treeview-->
-            <li class="treeview">
-              <a href="#">
-                <i class="fa fa-edit"></i>
-                <span>内容管理</span>
-                <span class="label label-primary pull-right">4</span>
-              </a>
-              <ul class="treeview-menu">
-                <li><a href="{{ route('admin.article.index') }}"><i class="fa fa-file-o"></i> 文章</a></li>
-                <li><a href="{{ route('admin.page.index') }}"><i class="fa fa-file-o"></i> 单页</a></li>
-                <li><a href="{{ route('admin.fragment.index') }}"><i class="fa fa-file-o"></i> 碎片</a></li>
-                <li><a href="{{ route('admin.category.index') }}"><i class="fa fa-file-o"></i> 分类</a></li>
-              </ul>
-            </li>
-            <!--//内容管理 treeview-->
-
-            <!--无子节点的一级导航节点-->
-            <li><a href="#"><i class='fa fa-link'></i> <span>友链</span></a></li>
-            <li><a href="#"><i class='fa fa-book'></i> <span>写作</span></a></li>
-            <li><a href="{{ route('admin.tag.index') }}"><i class="fa fa-tags"></i> <span>标签</span></a></li>
-
-            <!--讨论 treeview-->
-            <li class="treeview">
-              <a href="#">
-                <i class='fa fa-comments-o'></i>
-                <span>讨论</span>
-                <small class="label pull-right bg-green">New</small>
-              </a>
-              <ul class="treeview-menu">
-                <li><a href="#"><i class="fa fa-square-o"></i>节点</a></li>
-                <li><a href="#"><i class="fa fa-square-o"></i>话题</a></li>
-                <li><a href="#"><i class="fa fa-square-o"></i>审核</a></li>
-                <li><a href="#"><i class="fa fa-square-o"></i>举报</a></li>
-                <li><a href="#"><i class="fa fa-square-o"></i>论友</a></li>
-              </ul>
-            </li>
-            <!--//讨论 treeview-->
-
-            <!--用户管理 treeview-->
-            <li class="treeview">
-              <a href="#"><i class='fa fa-user'></i>
-                <span>用户管理</span>
-                <small class="label pull-right bg-red">5</small>
-              </a>
-              <ul class="treeview-menu">
-                <li><a href="{{ route('admin.user.index') }}"><i class="fa fa-circle-o"></i>管理员</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i>注册用户</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i>付费客户</a></li>
-                <li><a href="{{ route('admin.role.index') }}"><i class="fa fa-circle-o"></i>角色</a></li>
-                <li><a href="{{ route('admin.permission.index') }}"><i class="fa fa-circle-o"></i>权限</a></li>
-              </ul>
-            </li>
-            <!--//用户管理 treeview-->
-
-            <!--业务管理 treeview-->
-            <li class="treeview">
-              <a href="#"><i class='fa fa-coffee'></i>
-                <span>业务管理</span>
-                <i class="fa fa-angle-left pull-right"></i>
-              </a>
-              <ul class="treeview-menu">
-                <li><a href="{{ route('admin.flow') }}"><i class="fa fa-sitemap"></i>业务流程</a></li>
-                <li><a href="#"><i class="fa fa-envelope-o"></i>信息 <span class="label label-success pull-right">4</span></a></li>
-                <li><a href="#"><i class="fa fa-bell-o"></i>通知 <span class="label label-warning pull-right">10</span></a></li>
-                <li><a href="#"><i class="fa fa-flag-o"></i>任务 <span class="label label-danger pull-right">9</span></a></li>
-              </ul>
-            </li>
-            <!--//业务管理 treeview-->
-
-            <!--系统管理 treeview-->
-            <li class="treeview">
-              <a href="#"><i class='fa fa-cog'></i>
-                <span>系统管理</span>
-                <i class="fa fa-angle-left pull-right"></i>
-              </a>
-              <ul class="treeview-menu">
-                <li><a href="{{ route('admin.system_option.index') }}"><i class="fa fa-square-o"></i>系统配置</a></li>
-                <li><a href="{{ route('admin.setting_type.index') }}"><i class="fa fa-square-o"></i>动态设置分组</a></li>
-                <li><a href="{{ route('admin.setting.index') }}"><i class="fa fa-square-o"></i>动态设置</a></li>
-                <li><a href="{{ route('admin.system_log.index') }}"><i class="fa fa-square-o"></i>系统日志</a></li>
-                <li><a href="#"><i class="fa fa-square-o"></i>邮件日志</a></li>
-              </ul>
-            </li>
-            <!--//系统管理 treeview-->
 
           </ul><!-- /.sidebar-menu -->
         </section>
