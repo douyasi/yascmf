@@ -73,7 +73,7 @@ return array(
     | database.
     |
     */
-    //'role_user_table' => 'role_user',
-    'role_user_table' => 'assigned_roles',  //兼容旧版4的数据表
+    'role_user_table' => 'role_user',
+
 
 );
