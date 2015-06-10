@@ -70,6 +70,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         @endif
 
         <form method="post" action="{{ route('login') }}" accept-charset="utf-8">
+          <input type="hidden" name="_token" value="{{ csrf_token() }}">
           <div class="form-group has-feedback">
             <input type="text" class="form-control" maxlength="20" name="username" placeholder="用户名"/>
             <span class="glyphicon glyphicon-user form-control-feedback"></span>

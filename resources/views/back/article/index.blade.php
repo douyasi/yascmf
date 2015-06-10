@@ -87,8 +87,11 @@
                 </div>
 
                 <!--隐藏型删除表单-->
-                {!! Form::open( array('url' => route('admin.article.index'), 'method' => 'delete', 'id' => 'hidden-delete-form') ) !!}
-                {!! Form::close() !!}
+
+                <form method="post" action="{{ route('admin.article.index') }}" accept-charset="utf-8" id="hidden-delete-form">
+                <input name="_method" type="hidden" value="delete">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                </form>
 
               </div>
 @stop
