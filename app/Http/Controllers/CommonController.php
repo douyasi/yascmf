@@ -1,4 +1,6 @@
-<?php namespace Douyasi\Http\Controllers;
+<?php
+
+namespace Douyasi\Http\Controllers;
 
 /**
  * 前后台共用控制器

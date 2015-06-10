@@ -1,4 +1,6 @@
-<?php namespace Douyasi\Cache;
+<?php
+
+namespace Douyasi\Cache;
 
 use Cache;
 use DB;

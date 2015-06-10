@@ -1,6 +1,8 @@
-<?php namespace Douyasi\Cache;
+<?php
 
-use Douyasi\Models\SystemOption as SystemOption;
+namespace Douyasi\Cache;
+
+use Douyasi\Models\SystemOption;
 use Cache;
 use Config;
 

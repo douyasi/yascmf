@@ -1,4 +1,6 @@
-<?php namespace Douyasi\Cache;
+<?php
+
+namespace Douyasi\Cache;
 
 use Douyasi\Models\Setting as Setting;
 use Douyasi\Models\SettingType as SettingType;

@@ -1,7 +1,9 @@
-<?php namespace Douyasi\Extensions;
+<?php
 
-use Illuminate\Validation\Validator as Validator;
-//use Douyasi\IdentityCard\ID as ID;
+namespace Douyasi\Extensions;
+
+use Illuminate\Validation\Validator;
+
 
 /**
  * DouyasiValidator

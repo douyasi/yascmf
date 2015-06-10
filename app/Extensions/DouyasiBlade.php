@@ -1,4 +1,6 @@
-<?php namespace Douyasi\Extensions;
+<?php
+
+namespace Douyasi\Extensions;
 
 use Blade;
 

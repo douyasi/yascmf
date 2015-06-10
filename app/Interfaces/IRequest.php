@@ -1,4 +1,6 @@
-<?php namespace Douyasi\Interfaces;
+<?php 
+
+namespace Douyasi\Interfaces;
 
 /**
  * 定义DouyasiRequest接口
