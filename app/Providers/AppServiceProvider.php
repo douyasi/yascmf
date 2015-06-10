@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Providers;
+namespace Douyasi\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Douyasi\Extensions\DouyasiBlade as DouyasiBlade;
