@@ -1,4 +1,6 @@
-<?php namespace Douyasi\Models;
+<?php
+
+namespace Douyasi\Models;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
