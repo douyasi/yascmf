@@ -93,10 +93,10 @@ class UserEventListener
      */
     public function subscribe($events)
     {
-        //这里需申明完整类路径，否则会出现'Class UserEventHandler does not exist'错误
-        $events->listen('Douyasi\Events\UserLogin', 'Douyasi\Handlers\Events\UserEventHandler@onUserLogin');
-        $events->listen('Douyasi\Events\UserLogout', 'Douyasi\Handlers\Events\UserEventHandler@onUserLogout');
-        $events->listen('Douyasi\Events\UserUpdate', 'Douyasi\Handlers\Events\UserEventHandler@onUserUpdate');
-        $events->listen('Douyasi\Events\UserUpload', 'Douyasi\Handlers\Events\UserEventHandler@onUserUpload');
+        //这里需申明完整类路径，否则会出现'Class UserEventListener does not exist'错误
+        $events->listen('Douyasi\Events\UserLogin', 'Douyasi\Listeners\UserEventListener@onUserLogin');
+        $events->listen('Douyasi\Events\UserLogout', 'Douyasi\Listeners\UserEventListener@onUserLogout');
+        $events->listen('Douyasi\Events\UserUpdate', 'Douyasi\Listeners\UserEventListener@onUserUpdate');
+        $events->listen('Douyasi\Events\UserUpload', 'Douyasi\Listeners\UserEventListener@onUserUpload');
     }
 }

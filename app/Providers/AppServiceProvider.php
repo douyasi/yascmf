@@ -3,7 +3,6 @@
 namespace Douyasi\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Douyasi\Extensions\DouyasiBlade as DouyasiBlade;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -14,8 +13,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        /*注册自定义blade标签规则*/
-        DouyasiBlade::register();
+        //
     }
 
     /**
