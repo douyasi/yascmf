@@ -1,4 +1,6 @@
-<?php namespace Douyasi\Repositories;
+<?php
+
+namespace Douyasi\Repositories;
 
 use Douyasi\Models\User;
 use Douyasi\Models\Role;
