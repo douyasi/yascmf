@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'debug' => env('APP_DEBUG'),
+    'debug' => env('APP_DEBUG', 'true'),
 
     /*
     |--------------------------------------------------------------------------
@@ -150,7 +150,7 @@ return [
         /*
          * YASCMF附加
          */
-        Illuminate\Html\HtmlServiceProvider::class,
+        //Illuminate\Html\HtmlServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
         Zizaco\Entrust\EntrustServiceProvider::class,
         Douyasi\Providers\DouyasiValidatorServiceProvider::class,
