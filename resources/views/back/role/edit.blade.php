@@ -36,7 +36,9 @@
           @endif
 
               <h2 class="page-header">修改角色</h2>
-              {!! Form::open( array('url' => route('admin.role.update', $role->id), 'method' => 'put', 'id' => 'editRoleForm') ) !!}
+              <form method="post" action="{{ route('admin.role.update', $role->id) }}" accept-charset="utf-8">
+              <input name="_method" type="hidden" value="put">
+              <input type="hidden" name="_token" value="{{ csrf_token() }}">
               <div class="nav-tabs-custom">
                   
                   <ul class="nav nav-tabs">
@@ -66,7 +68,7 @@
                   </div><!-- /.tab-content -->
                   
               </div>
-              {!! Form::close() !!}
+              </form>
 
 @stop
 

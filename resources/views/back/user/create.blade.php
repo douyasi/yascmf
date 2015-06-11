@@ -36,7 +36,8 @@
           @endif
 
               <h2 class="page-header">新增管理员</h2>
-              {!! Form::open( array('url' => route('admin.user.store'), 'method' => 'post', 'id' => 'addManagerForm') ) !!}
+              <form method="post" action="{{ route('admin.user.store') }}" accept-charset="utf-8">
+              <input type="hidden" name="_token" value="{{ csrf_token() }}">
               <div class="nav-tabs-custom">
                   
                   <ul class="nav nav-tabs">
@@ -94,7 +95,7 @@
                   </div><!-- /.tab-content -->
                   
               </div>
-              {!! Form::close() !!}
+              </form>
           <div id="layerPreviewPic" class="fn-hide">
             
           </div>

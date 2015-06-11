@@ -36,7 +36,9 @@
           @endif
 
               <h2 class="page-header">新增分类</h2>
-              {!! Form::open( array('url' => route('admin.category.store'), 'method' => 'post', 'id' => 'addCategoryForm') ) !!}
+              <form method="post" action="{{ route('admin.category.store') }}" accept-charset="utf-8">
+              <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
               <div class="nav-tabs-custom">
                   
                   <ul class="nav nav-tabs">
@@ -61,5 +63,5 @@
                   </div><!-- /.tab-content -->
                   
               </div>
-              {!! Form::close() !!}
+              </form>
 @stop
