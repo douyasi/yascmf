@@ -10,28 +10,10 @@ Target Server Type    : MYSQL
 Target Server Version : 50704
 File Encoding         : 65001
 
-Date: 2015-03-12 00:14:06
+Date: 2015-06-11 21:49:49
 */
 
 SET FOREIGN_KEY_CHECKS=0;
-
--- ----------------------------
--- Table structure for yascmf_assigned_roles
--- ----------------------------
-DROP TABLE IF EXISTS `yascmf_assigned_roles`;
-CREATE TABLE `yascmf_assigned_roles` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'id',
-  `user_id` int(10) unsigned NOT NULL COMMENT '用户id',
-  `role_id` int(10) unsigned NOT NULL COMMENT '用户组角色id',
-  PRIMARY KEY (`id`),
-  KEY `user_id_foreign` (`user_id`),
-  KEY `role_id_foreign` (`role_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='用户与用户组角色对应关系表';
-
--- ----------------------------
--- Records of yascmf_assigned_roles
--- ----------------------------
-INSERT INTO `yascmf_assigned_roles` VALUES ('1', '1', '2');
 
 -- ----------------------------
 -- Table structure for yascmf_contents
@@ -80,7 +62,7 @@ CREATE TABLE `yascmf_metas` (
   `name` varchar(20) COLLATE utf8_unicode_ci NOT NULL COMMENT 'meta名',
   `thumb` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'meta缩略图',
   `slug` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'meta缩略名',
-  `type` varchar(32) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'CATEGORY' COMMENT 'meta类型: [CATEGORY]-分类，[TAG]-标签',
+  `type` varchar(32) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'category' COMMENT 'meta类型: [category]-分类，[tag]-标签',
   `description` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'meta描述',
   `count` int(10) unsigned DEFAULT '0' COMMENT 'meta被使用的次数',
   `sort` int(6) unsigned DEFAULT '0' COMMENT 'meta排序，数字越大排序越靠前',
@@ -92,25 +74,25 @@ CREATE TABLE `yascmf_metas` (
 -- ----------------------------
 -- Records of yascmf_metas
 -- ----------------------------
-INSERT INTO `yascmf_metas` VALUES ('1', '默认', null, 'default', 'CATEGORY', '默认', '0', '0');
-INSERT INTO `yascmf_metas` VALUES ('2', '软件', null, 'soft', 'CATEGORY', '收录个人开发的软件或脚本', '0', '0');
-INSERT INTO `yascmf_metas` VALUES ('3', '文档', null, 'docs', 'CATEGORY', '这里收录自己开发过程中所撰写的文档', '0', '0');
-INSERT INTO `yascmf_metas` VALUES ('4', 'Laravel', null, 'laravel', 'CATEGORY', '分享一些Laravel相关文章', '0', '0');
-INSERT INTO `yascmf_metas` VALUES ('5', 'Javascript', null, 'javascript', 'CATEGORY', '前端Javascript相关知识', '0', '0');
-INSERT INTO `yascmf_metas` VALUES ('6', '测试', null, null, 'CATEGORY', '测试内容', '0', '0');
+INSERT INTO `yascmf_metas` VALUES ('1', '默认', null, 'default', 'category', '默认', '0', '0');
+INSERT INTO `yascmf_metas` VALUES ('2', '软件', null, 'soft', 'category', '收录个人开发的软件或脚本', '0', '0');
+INSERT INTO `yascmf_metas` VALUES ('3', '文档', null, 'docs', 'category', '这里收录自己开发过程中所撰写的文档', '0', '0');
+INSERT INTO `yascmf_metas` VALUES ('4', 'Laravel', null, 'laravel', 'category', '分享一些Laravel相关文章', '0', '0');
+INSERT INTO `yascmf_metas` VALUES ('5', 'Javascript', null, 'javascript', 'category', '前端Javascript相关知识', '0', '0');
+INSERT INTO `yascmf_metas` VALUES ('6', '测试', null, null, 'category', '测试内容', '0', '0');
 
 -- ----------------------------
--- Table structure for yascmf_password_reminders
+-- Table structure for yascmf_password_resets
 -- ----------------------------
-DROP TABLE IF EXISTS `yascmf_password_reminders`;
-CREATE TABLE `yascmf_password_reminders` (
+DROP TABLE IF EXISTS `yascmf_password_resets`;
+CREATE TABLE `yascmf_password_resets` (
   `email` varchar(120) COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT '邮箱',
   `token` varchar(60) COLLATE utf8_unicode_ci NOT NULL COMMENT '会话token',
   `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
--- Records of yascmf_password_reminders
+-- Records of yascmf_password_resets
 -- ----------------------------
 
 -- ----------------------------
@@ -121,6 +103,7 @@ CREATE TABLE `yascmf_permissions` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'id',
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT '权限名',
   `display_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT '权限展示名',
+  `description` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
   `updated_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '修改更新时间',
   PRIMARY KEY (`id`),
@@ -130,32 +113,30 @@ CREATE TABLE `yascmf_permissions` (
 -- ----------------------------
 -- Records of yascmf_permissions
 -- ----------------------------
-INSERT INTO `yascmf_permissions` VALUES ('1', 'manage_contents', '管理内容', '2014-12-22 02:30:59', '2014-12-22 02:30:59');
-INSERT INTO `yascmf_permissions` VALUES ('2', 'manage_users', '管理用户', '2014-12-22 02:30:59', '2014-12-22 02:30:59');
-INSERT INTO `yascmf_permissions` VALUES ('3', 'manage_system', '管理系统', '2015-02-04 09:40:56', '2015-02-04 09:40:59');
+INSERT INTO `yascmf_permissions` VALUES ('1', 'manage_contents', '管理内容', null, '2014-12-22 02:30:59', '2014-12-22 02:30:59');
+INSERT INTO `yascmf_permissions` VALUES ('2', 'manage_users', '管理用户', null, '2014-12-22 02:30:59', '2014-12-22 02:30:59');
+INSERT INTO `yascmf_permissions` VALUES ('3', 'manage_system', '管理系统', null, '2015-02-04 09:40:56', '2015-02-04 09:40:59');
 
 -- ----------------------------
 -- Table structure for yascmf_permission_role
 -- ----------------------------
 DROP TABLE IF EXISTS `yascmf_permission_role`;
 CREATE TABLE `yascmf_permission_role` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'id',
   `permission_id` int(10) unsigned NOT NULL COMMENT '权限id',
   `role_id` int(10) unsigned NOT NULL COMMENT '角色id',
-  PRIMARY KEY (`id`),
-  KEY `permission_id_foreign` (`permission_id`),
+  PRIMARY KEY (`permission_id`,`role_id`),
   KEY `role_id_foreign` (`role_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='权限与用户组角色对应关系表';
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='权限与用户组角色对应关系表';
 
 -- ----------------------------
 -- Records of yascmf_permission_role
 -- ----------------------------
-INSERT INTO `yascmf_permission_role` VALUES ('1', '2', '1');
-INSERT INTO `yascmf_permission_role` VALUES ('2', '3', '1');
-INSERT INTO `yascmf_permission_role` VALUES ('3', '1', '2');
-INSERT INTO `yascmf_permission_role` VALUES ('4', '2', '2');
-INSERT INTO `yascmf_permission_role` VALUES ('5', '3', '2');
-INSERT INTO `yascmf_permission_role` VALUES ('6', '1', '3');
+INSERT INTO `yascmf_permission_role` VALUES ('1', '2');
+INSERT INTO `yascmf_permission_role` VALUES ('1', '3');
+INSERT INTO `yascmf_permission_role` VALUES ('2', '1');
+INSERT INTO `yascmf_permission_role` VALUES ('2', '2');
+INSERT INTO `yascmf_permission_role` VALUES ('3', '1');
+INSERT INTO `yascmf_permission_role` VALUES ('3', '2');
 
 -- ----------------------------
 -- Table structure for yascmf_relationships
@@ -178,6 +159,8 @@ DROP TABLE IF EXISTS `yascmf_roles`;
 CREATE TABLE `yascmf_roles` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'id',
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT '角色名',
+  `display_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT '角色展示名',
+  `description` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '角色描述',
   `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
   `updated_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '修改更新时间',
   PRIMARY KEY (`id`),
@@ -187,10 +170,26 @@ CREATE TABLE `yascmf_roles` (
 -- ----------------------------
 -- Records of yascmf_roles
 -- ----------------------------
-INSERT INTO `yascmf_roles` VALUES ('1', 'Founder', '2014-12-22 02:30:59', '2014-12-22 02:30:59');
-INSERT INTO `yascmf_roles` VALUES ('2', 'Admin', '2014-12-22 02:30:59', '2014-12-22 02:30:59');
-INSERT INTO `yascmf_roles` VALUES ('3', 'Editor', '2015-02-04 17:12:22', '2015-02-04 17:12:22');
-INSERT INTO `yascmf_roles` VALUES ('4', 'Demo', '2015-02-04 17:13:03', '2015-02-04 17:13:03');
+INSERT INTO `yascmf_roles` VALUES ('1', 'Founder', '创始人', null, '2014-12-22 02:30:59', '2014-12-22 02:30:59');
+INSERT INTO `yascmf_roles` VALUES ('2', 'Admin', '超级管理员', null, '2014-12-22 02:30:59', '2014-12-22 02:30:59');
+INSERT INTO `yascmf_roles` VALUES ('3', 'Editor', '编辑', null, '2015-02-04 17:12:22', '2015-02-04 17:12:22');
+INSERT INTO `yascmf_roles` VALUES ('4', 'Demo', '演示', null, '2015-02-04 17:13:03', '2015-02-04 17:13:03');
+
+-- ----------------------------
+-- Table structure for yascmf_role_user
+-- ----------------------------
+DROP TABLE IF EXISTS `yascmf_role_user`;
+CREATE TABLE `yascmf_role_user` (
+  `user_id` int(10) unsigned NOT NULL,
+  `role_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`user_id`,`role_id`),
+  KEY `role_id_foreign` (`role_id`) USING BTREE
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- ----------------------------
+-- Records of yascmf_role_user
+-- ----------------------------
+INSERT INTO `yascmf_role_user` VALUES ('1', '2');
 
 -- ----------------------------
 -- Table structure for yascmf_settings
@@ -204,13 +203,13 @@ CREATE TABLE `yascmf_settings` (
   `type_id` int(12) DEFAULT '0' COMMENT '设置所属类型id 0表示无任何归属类型',
   `sort` int(6) unsigned DEFAULT '0' COMMENT '设置排序，数字越大排序越靠前',
   PRIMARY KEY (`id`),
-  KEY `config_name_index` (`name`)
+  KEY `setting_name_index` (`name`)
 ) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='动态设置表';
 
 -- ----------------------------
 -- Records of yascmf_settings
 -- ----------------------------
-INSERT INTO `yascmf_settings` VALUES ('1', 'default_setting', '默认设置', '1', '1', '0');
+INSERT INTO `yascmf_settings` VALUES ('1', 'default_setting', '默认设置', '1', '1', '999');
 INSERT INTO `yascmf_settings` VALUES ('2', 'system', '系统', '1', '2', '0');
 INSERT INTO `yascmf_settings` VALUES ('3', 'manager', '管理员', '1', '2', '0');
 INSERT INTO `yascmf_settings` VALUES ('4', 'content', '内容', '1', '2', '0');
@@ -266,6 +265,7 @@ CREATE TABLE `yascmf_system_log` (
 -- Records of yascmf_system_log
 -- ----------------------------
 
+
 -- ----------------------------
 -- Table structure for yascmf_system_options
 -- ----------------------------
@@ -319,7 +319,7 @@ CREATE TABLE `yascmf_users` (
   `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
   `updated_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '修改更新时间',
   `is_lock` tinyint(3) NOT NULL DEFAULT '0' COMMENT '是否锁定限制用户登录，1锁定,0正常',
-  `user_type` enum('Visitor','Customer','Manager') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'Visitor' COMMENT '用户类型：Visitor 游客,Customer 投资客户, Manager 管理型用户',
+  `user_type` enum('visitor','customer','manager') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'visitor' COMMENT '用户类型：visitor 游客, customer 投资客户, manager 管理型用户',
   `confirmation_code` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT '确认码',
   `confirmed` tinyint(1) DEFAULT '0' COMMENT '是否已通过验证 0：未通过 1：通过',
   `remember_token` varchar(60) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Laravel 追加的记住令牌',
@@ -335,4 +335,4 @@ CREATE TABLE `yascmf_users` (
 -- ----------------------------
 -- Records of yascmf_users
 -- ----------------------------
-INSERT INTO `yascmf_users` VALUES ('1', 'admin', '$2y$10$J7LHukU1OvdKS0HjHyP67OckaKXwci9vV6iqOCpN65x8X7MDgMNlu', 'Admin', 'admin@example.com', '芽丝', null, null, null, null, null, null, null, null, null, '2014-12-22 02:30:59', '2015-02-10 13:23:08', '0', 'Manager', '161590b511f23a7aca43e785ba037d4f', '1', 'xGPbn9vlLcISKxOoqLjnlMWXkOGLRKLTDv69GUXjED6YLxzCNoGf2HPMCYaD');
+INSERT INTO `yascmf_users` VALUES ('1', 'admin', '$2y$10$J7LHukU1OvdKS0HjHyP67OckaKXwci9vV6iqOCpN65x8X7MDgMNlu', 'Admin', 'admin@example.com', '芽丝', null, null, null, null, null, null, null, null, null, '2014-12-22 02:30:59', '2015-04-26 19:26:04', '0', 'manager', '161590b511f23a7aca43e785ba037d4f', '1', 'GFdBArEXF5jmURqJwsiVfNjZg2AmmR4kBX0Wtgw9djGZgsO6D3G8XZGMTxg9');
