@@ -54,7 +54,7 @@
         </div>
     </div>
 
-<form method="post" action="{{ route('admin.upload.store') }}" accept-charset="utf-8" enctype="multipart/form-data">
+<form method="post" action="{{ route('admin.upload.store') }}" accept-charset="utf-8" enctype="multipart/form-data" id="uploadPictureForm">
 <input type="hidden" name="_token" value="{{ csrf_token() }}">
     <div class="upload_picture_form">
         <div class="form-group">
