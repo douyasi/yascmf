@@ -36,7 +36,8 @@
           @endif
 
               <h2 class="page-header">撰写新单页</h2>
-              {!! Form::open( array('url' => route('admin.page.store'), 'method' => 'post', 'id' => 'addPageForm') ) !!}
+              <form method="post" action="{{ route('admin.page.store') }}" accept-charset="utf-8">
+              <input type="hidden" name="_token" value="{{ csrf_token() }}">
               <div class="nav-tabs-custom">
                   
                   <ul class="nav nav-tabs">
@@ -82,7 +83,7 @@
                   </div><!-- /.tab-content -->
                   
               </div>
-              {!! Form::close() !!}
+              </form>
           <div id="layerPreviewPic" class="fn-hide">
             
           </div>

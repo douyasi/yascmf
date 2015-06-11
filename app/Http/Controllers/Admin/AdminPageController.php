@@ -1,4 +1,6 @@
-<?php namespace Douyasi\Http\Controllers\Admin;
+<?php
+
+namespace Douyasi\Http\Controllers\Admin;
 
 use Douyasi\Http\Requests\PageRequest;
 use Douyasi\Http\Controllers\Controller;

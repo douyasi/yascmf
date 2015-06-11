@@ -1,4 +1,6 @@
-<?php namespace Douyasi\Http\Requests;
+<?php
+
+namespace Douyasi\Http\Requests;
 
 use Douyasi\Http\Requests\DouyasiRequest;
 

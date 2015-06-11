@@ -1,4 +1,6 @@
-<?php namespace Douyasi\Logger;
+<?php 
+
+namespace Douyasi\Logger;
 
 use Request;
 use Douyasi\Models\SystemLog;

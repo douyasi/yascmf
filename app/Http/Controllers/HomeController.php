@@ -1,4 +1,6 @@
-<?php namespace Douyasi\Http\Controllers;
+<?php
+
+namespace Douyasi\Http\Controllers;
 
 class HomeController extends Controller {
 

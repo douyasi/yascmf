@@ -16,6 +16,7 @@ define('LARAVEL_START', microtime(true));
 
 require __DIR__.'/../vendor/autoload.php';
 require __DIR__.'/../app/functions.php'; // 引入自定义helper函数库
+
 /*
 |--------------------------------------------------------------------------
 | Include The Compiled Class File
@@ -27,11 +28,8 @@ require __DIR__.'/../app/functions.php'; // 引入自定义helper函数库
 |
 */
 
-if (file_exists($compiledPath = __DIR__.'/../vendor/compiled.php'))
-{
-	require $compiledPath;
-}
-elseif (file_exists($compiledPath = __DIR__.'/../storage/framework/compiled.php'))
-{
-	require $compiledPath;
+$compiledPath = __DIR__.'/cache/compiled.php';
+
+if (file_exists($compiledPath)) {
+    require $compiledPath;
 }

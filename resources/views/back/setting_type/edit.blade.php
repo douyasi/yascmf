@@ -36,7 +36,9 @@
           @endif
 
               <h2 class="page-header">修改动态设置分组</h2>
-              {!! Form::open( array('url' => route('admin.setting_type.update', $data->id), 'method' => 'put', 'id' => 'editSettingTypeForm') ) !!}
+              <form method="post" action="{{ route('admin.setting_type.update', $data->id) }}" accept-charset="utf-8">
+              <input name="_method" type="hidden" value="put">
+              <input type="hidden" name="_token" value="{{ csrf_token() }}">
               <div class="nav-tabs-custom">
                   
                   <ul class="nav nav-tabs">
@@ -65,6 +67,6 @@
                   </div><!-- /.tab-content -->
                   
               </div>
-              {!! Form::close() !!}
+              </form>
 
 @stop

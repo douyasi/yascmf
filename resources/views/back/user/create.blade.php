@@ -36,7 +36,8 @@
           @endif
 
               <h2 class="page-header">新增管理员</h2>
-              {!! Form::open( array('url' => route('admin.user.store'), 'method' => 'post', 'id' => 'addManagerForm') ) !!}
+              <form method="post" action="{{ route('admin.user.store') }}" accept-charset="utf-8">
+              <input type="hidden" name="_token" value="{{ csrf_token() }}">
               <div class="nav-tabs-custom">
                   
                   <ul class="nav nav-tabs">
@@ -56,7 +57,7 @@
                         <div class="input-group">
                           <select data-placeholder="选择角色（用户组）..." class="chosen-select" style="min-width:280px;" name="role">
                           @foreach ($roles as $role)
-                            <option value="{{ $role->id }}" {{ ($role->name === 'Demo') ? 'selected':'' }}>{{ (Lang::has('roles.'.$role->name)) ? Lang::get('roles.'.$role->name) : ''}}({{ $role->name }})</option>
+                            <option value="{{ $role->id }}" {{ ($role->name === 'Demo') ? 'selected':'' }}>{{ $role->display_name }}({{ $role->name }})</option>
                           @endforeach
                           </select>
                         </div>
@@ -94,7 +95,7 @@
                   </div><!-- /.tab-content -->
                   
               </div>
-              {!! Form::close() !!}
+              </form>
           <div id="layerPreviewPic" class="fn-hide">
             
           </div>

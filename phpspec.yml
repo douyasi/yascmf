@@ -1,5 +1,5 @@
 suites:
     main:
-        namespace: Douyasi
-        psr4_prefix: Douyasi
+        namespace: App
+        psr4_prefix: App
         src_path: app

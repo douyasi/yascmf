@@ -1,4 +1,6 @@
-<?php namespace Douyasi\Http\Controllers\Admin;
+<?php
+
+namespace Douyasi\Http\Controllers\Admin;
 
 use Douyasi\Http\Requests\ArticleRequest;  //请求层
 use Douyasi\Http\Controllers\Controller;

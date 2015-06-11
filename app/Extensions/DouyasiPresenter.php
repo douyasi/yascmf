@@ -1,4 +1,6 @@
-<?php namespace Douyasi\Extensions;
+<?php
+
+namespace Douyasi\Extensions;
 
 use Illuminate\Contracts\Pagination\Paginator as PaginatorContract;
 use Illuminate\Contracts\Pagination\Presenter as PresenterContract;

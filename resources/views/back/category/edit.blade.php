@@ -36,7 +36,9 @@
           @endif
 
               <h2 class="page-header">修改分类</h2>
-              {!! Form::open( array('url' => route('admin.category.update', $data->id), 'method' => 'put', 'id' => 'editCategoryForm') ) !!}
+              <form method="post" action="{{ route('admin.category.update', $data->id) }}" accept-charset="utf-8">
+              <input name="_method" type="hidden" value="put">
+              <input type="hidden" name="_token" value="{{ csrf_token() }}">
               <div class="nav-tabs-custom">
                   
                   <ul class="nav nav-tabs">
@@ -62,7 +64,7 @@
                       </div>
                       <div class="form-group">
                         <label>分类描述 <small class="text-red">*</small> <span class="text-green small">建议百字以内，有助于网站SEO</span></label>
-                        <textarea class="form-control" name="description" cols="45" rows="2" maxlength="200" placeholder="分类描述">{{ Input::old('content', isset($data) ? $data->content : null) }}</textarea>
+                        <textarea class="form-control" name="description" cols="45" rows="2" maxlength="200" placeholder="分类描述">{{ Input::old('description', isset($data) ? $data->description : null) }}</textarea>
                       </div>
                     </div><!-- /.tab-pane -->
 
@@ -71,7 +73,7 @@
                   </div><!-- /.tab-content -->
                   
               </div>
-              {!! Form::close() !!}
+              </form>
 @stop
 
 

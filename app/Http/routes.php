@@ -12,31 +12,14 @@
 */
 
 /*
-#Laravel 5默认路由
-Route::get('/', 'WelcomeController@index');
-
-Route::get('home', 'HomeController@index');
-
-Route::controllers([
-	'auth' => 'Auth\AuthController',
-	'password' => 'Auth\PasswordController',
-]);
+#Laravel 5.1 默认路由
+Route::get('/', function () {
+    return view('welcome');
+});
 */
-
 
 //added some test routes
 
-#测试
-/*
-Route::get('/test', function(){
-	$ID = new Douyasi\IdentityCard\ID;
-	$is_pass = $ID->validateIDCard('42032319930606629x');  //校验身份是否合法
-	$area = $ID->getArea('42032319930606629x');  //获取身份证所在地信息 遵循GB/T 2260-2007中华人民共和国行政区划代码 标准
-	$gender = $ID->getGender('42032319930606629x');  //获取性别 'f'表示女，'m'表示男，校验失败返回false
-	$birthday = $ID->getBirth('42032319930606629x');  //获取出生日期
-	return compact('is_pass', 'area', 'gender', 'birthday');
-});
-*/
 
 
 #对后台开启csrf过滤

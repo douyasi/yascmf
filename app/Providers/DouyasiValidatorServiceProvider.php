@@ -1,4 +1,6 @@
-<?php namespace Douyasi\Providers;
+<?php
+
+namespace Douyasi\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Douyasi\Extensions\DouyasiValidator as DouyasiValidator;

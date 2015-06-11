@@ -1,4 +1,6 @@
-<?php namespace Douyasi\Models;
+<?php
+
+namespace Douyasi\Models;
 
 use Eloquent;
 
@@ -23,12 +25,12 @@ class Meta extends Eloquent
     //限定分类
     public function scopeCategory($query)
     {
-        return $query->where('type', '=', 'CATEGORY');
+        return $query->where('type', '=', 'category');
     }
     //限定标签
     public function scopeTag($query)
     {
-        return $query->where('type', '=', 'TAG');
+        return $query->where('type', '=', 'tag');
     }
 
     /**

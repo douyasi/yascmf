@@ -1,4 +1,6 @@
-<?php namespace Douyasi\Repositories;
+<?php
+
+namespace Douyasi\Repositories;
 
 use Douyasi\Models\User;
 use Douyasi\Models\Role;
@@ -45,7 +47,7 @@ class UserRepository extends BaseRepository
         $manager->password = bcrypt(e($inputs['password']));
         $manager->email = e($inputs['email']);
         $manager->realname = e($inputs['realname']);
-        $manager->user_type = 'Manager';  //管理型用户
+        $manager->user_type = 'manager';  //管理型用户
         $manager->confirmation_code = md5(uniqid(mt_rand(), true));
         $manager->confirmed = true;  //确定用户已被验证激活
 

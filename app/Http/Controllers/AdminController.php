@@ -1,4 +1,6 @@
-<?php namespace Douyasi\Http\Controllers;
+<?php
+
+namespace Douyasi\Http\Controllers;
 
 use Douyasi\Http\Controllers\Controller;
 use Illuminate\Http\Request;

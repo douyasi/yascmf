@@ -1,4 +1,6 @@
-<?php namespace Douyasi\Models;
+<?php
+
+namespace Douyasi\Models;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
@@ -31,12 +33,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     //限定管理型用户
     public function scopeManager($query)
     {
-        return $query->where('user_type', '=', 'Manager');
+        return $query->where('user_type', '=', 'manager');
     }
 
     //限定投资型客户
     public function scopeCustomer($query)
     {
-        return $query->where('user_type', '=', 'Customer');
+        return $query->where('user_type', '=', 'customer');
     }
 }

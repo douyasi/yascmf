@@ -1,7 +1,8 @@
-<?php namespace Douyasi\Events;
+<?php
 
-abstract class Event {
+namespace Douyasi\Events;
 
-	//
-
+abstract class Event
+{
+    //
 }

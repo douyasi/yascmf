@@ -41,6 +41,7 @@
                         <th>操作</th>
                         <th>编号</th>
                         <th>角色（用户组）名</th>
+                        <th>角色展示名</th>
                         <th>创建日期</th>
                         <th>更新日期</th>
                       </tr>
@@ -55,6 +56,7 @@
                         </td>
                         <td class="text-muted">{{ $role->id }}</td>
                         <td class="text-green">{{ $role->name }}</td>
+                        <td class="text-red">{{ $role->display_name }}</td>
                         <td>{{ $role->created_at }}</td>
                         <td>{{ $role->updated_at }}</td>
                       </tr>
@@ -65,8 +67,10 @@
                 </div><!-- /.box-body -->
 
                 <!--隐藏型删除表单-->
-                {!! Form::open( array('url' => route('admin.role.index'), 'method' => 'delete', 'id' => 'hidden-delete-form') ) !!}
-                {!! Form::close() !!}
+                <form method="post" action="{{ route('admin.role.index') }}" accept-charset="utf-8" id="hidden-delete-form">
+                <input name="_method" type="hidden" value="delete">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                </form>
 
               </div>
 @stop

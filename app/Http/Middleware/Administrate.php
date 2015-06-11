@@ -1,4 +1,6 @@
-<?php namespace Douyasi\Http\Middleware;
+<?php
+
+namespace Douyasi\Http\Middleware;
 
 use Closure;
 use Illuminate\Contracts\Auth\Guard;

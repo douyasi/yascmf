@@ -1,4 +1,6 @@
-<?php namespace Douyasi\Handlers\Events;
+<?php
+
+namespace Douyasi\Listeners;
 
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldBeQueued;
@@ -7,12 +9,12 @@ use Douyasi\Logger\SystemLogger as SystemLogger;
 
 /**
  * Class UserEventHandler
- * (管理)用户登录/登出等活动事件监听处理器
+ * (管理)用户登录/登出等活动事件监听器
  *
  * @package Douyasi\Handlers\Events
  * @author raoyc <raoyc2009@gmail.com>
  */
-class UserEventHandler
+class UserEventListener
 {
 
     /**
@@ -91,10 +93,10 @@ class UserEventHandler
      */
     public function subscribe($events)
     {
-        //这里需申明完整类路径，否则会出现'Class UserEventHandler does not exist'错误
-        $events->listen('Douyasi\Events\UserLogin', 'Douyasi\Handlers\Events\UserEventHandler@onUserLogin');
-        $events->listen('Douyasi\Events\UserLogout', 'Douyasi\Handlers\Events\UserEventHandler@onUserLogout');
-        $events->listen('Douyasi\Events\UserUpdate', 'Douyasi\Handlers\Events\UserEventHandler@onUserUpdate');
-        $events->listen('Douyasi\Events\UserUpload', 'Douyasi\Handlers\Events\UserEventHandler@onUserUpload');
+        //这里需申明完整类路径，否则会出现'Class UserEventListener does not exist'错误
+        $events->listen('Douyasi\Events\UserLogin', 'Douyasi\Listeners\UserEventListener@onUserLogin');
+        $events->listen('Douyasi\Events\UserLogout', 'Douyasi\Listeners\UserEventListener@onUserLogout');
+        $events->listen('Douyasi\Events\UserUpdate', 'Douyasi\Listeners\UserEventListener@onUserUpdate');
+        $events->listen('Douyasi\Events\UserUpload', 'Douyasi\Listeners\UserEventListener@onUserUpload');
     }
 }

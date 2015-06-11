@@ -52,7 +52,9 @@
                   </div>
                 </div><!-- /.box-header -->
 
-                {!! Form::open( array('url' => route('admin.user.update', $user->id), 'method' => 'put', 'id' => 'updateUserForm') ) !!}
+                <form method="post" action="{{ route('admin.user.update', $user->id) }}" accept-charset="utf-8">
+                <input name="_method" type="hidden" value="put">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
                   <div class="box-body">
                     <div class="form-group">
                       <label>昵称 <small class="text-red">*</small></label>
@@ -95,7 +97,7 @@
                   <div class="box-footer">
                     <button type="submit" class="btn btn-primary">修改个人资料</button>
                   </div>
-                {!! Form::close() !!}
+                </form>
 
               </div>
 

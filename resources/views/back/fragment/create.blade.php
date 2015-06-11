@@ -36,7 +36,8 @@
           @endif
 
               <h2 class="page-header">新增碎片</h2>
-              {!! Form::open( array('url' => route('admin.fragment.store'), 'method' => 'post', 'id' => 'addFragmentForm') ) !!}
+              <form method="post" action="{{ route('admin.fragment.store') }}" accept-charset="utf-8">
+              <input type="hidden" name="_token" value="{{ csrf_token() }}">
               <div class="nav-tabs-custom">
                   
                   <ul class="nav nav-tabs">
@@ -72,7 +73,7 @@
                   </div><!-- /.tab-content -->
                   
               </div>
-              {!! Form::close() !!}
+              </form>
           <div id="layerPreviewPic" class="fn-hide">
             
           </div>

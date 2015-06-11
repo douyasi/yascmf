@@ -31,7 +31,9 @@
           @endif
 
               <h2 class="page-header">系统配置</h2>
-              {!! Form::open( array('url' => route('admin.system_option.index'), 'method' => 'put', 'id' => 'editSystemOptionForm') ) !!}
+              <form method="post" action="{{ route('admin.system_option.index') }}" accept-charset="utf-8">
+              <input name="_method" type="hidden" value="put">
+              <input type="hidden" name="_token" value="{{ csrf_token() }}">
               <div class="nav-tabs-custom">
                   
                   <ul class="nav nav-tabs">
@@ -115,7 +117,7 @@
                   </div><!-- /.tab-content -->
                   
               </div>
-              {!! Form::close() !!}
+              </form>
           <div id="layerPreviewPic" class="fn-hide">
             
           </div>

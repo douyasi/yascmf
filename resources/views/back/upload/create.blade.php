@@ -54,15 +54,16 @@
         </div>
     </div>
 
-{!! Form::open( array('url' => route('admin.upload.store'), 'method' => 'post', 'id' => 'uploadPictureForm', 'files'=>true) ) !!}
-    <div class="upload_picture_form">{{-- 表单数据项目 --}}
+<form method="post" action="{{ route('admin.upload.store') }}" accept-charset="utf-8" enctype="multipart/form-data" id="uploadPictureForm">
+<input type="hidden" name="_token" value="{{ csrf_token() }}">
+    <div class="upload_picture_form">
         <div class="form-group">
           <label>上传图片文件</label>
-          {!! Form::file('picture', array('accept' => '.jpg,.png,.gif,.bmp')) !!}
+          <input accept=".jpg,.png,.gif,.bmp" name="picture" type="file">
         </div>
         <button type="submit" class="btn btn-primary" id="uploadPicSubmit">上传</button>
     </div>
-{!! Form::close() !!}
+</form>
 @stop
 
 @section('endLayerJS')
