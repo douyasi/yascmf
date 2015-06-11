@@ -57,7 +57,7 @@
                         <div class="input-group">
                           <select data-placeholder="选择角色（用户组）..." class="chosen-select" style="min-width:280px;" name="role">
                           @foreach ($roles as $role)
-                            <option value="{{ $role->id }}" {{ ($role->name === 'Demo') ? 'selected':'' }}>{{ (Lang::has('roles.'.$role->name)) ? Lang::get('roles.'.$role->name) : ''}}({{ $role->name }})</option>
+                            <option value="{{ $role->id }}" {{ ($role->name === 'Demo') ? 'selected':'' }}>{{ $role->display_name }}({{ $role->name }})</option>
                           @endforeach
                           </select>
                         </div>

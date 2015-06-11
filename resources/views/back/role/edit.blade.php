@@ -53,6 +53,14 @@
                         <input type="text" class="form-control" name="name" autocomplete="off" value="{{ Input::old('name', isset($role) ? $role->name : null) }}" placeholder="角色(用户组)名">
                       </div>
                       <div class="form-group">
+                        <label>角色(用户组)展示名 <small class="text-red">*</small> <span class="text-green small">展示名可以为中文</span></label>
+                        <input type="text" class="form-control" name="display_name" autocomplete="off" value="{{ Input::old('display_name', isset($role) ? $role->display_name : null) }}" placeholder="角色(用户组)展示名">
+                      </div>
+                      <div class="form-group">
+                        <label>角色(用户组)描述</label>
+                        <textarea class="form-control" name="description" cols="45" rows="2" maxlength="200" placeholder="角色(用户组)描述" autocomplete="off">{{ Input::old('description', isset($role) ? $role->description : null) }}</textarea>
+                      </div>
+                      <div class="form-group">
                         <label>关联权限 <small class="text-red">*</small></label>
                         <div class="input-group">
                           @foreach($permissions as $per)
