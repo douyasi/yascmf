@@ -84,6 +84,10 @@ class RoleRepository extends BaseRepository
     private function saveRole($role, $inputs)
     {
         $role->name = e($inputs['name']);
+        $role->display_name = e($inputs['display_name']);
+        if (array_key_exists('description', $inputs)) {
+            $role->description = e($inputs['description']) ;
+        }
         if ($role->save()) {
             if (array_key_exists('permissions', $inputs)) {
                 $permissions = $inputs['permissions'];  //这里提交的为数组

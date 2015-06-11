@@ -77,7 +77,7 @@ class MetaRepository extends BaseRepository
     {
         $meta->name              = e($inputs['name']);
         $meta->description       = e($inputs['description']);
-        $meta->type              = 'CATEGORY';
+        $meta->type              = 'category';
         if (array_key_exists('slug', $inputs)) {
             $meta->slug = e($inputs['slug']) ;
         }
