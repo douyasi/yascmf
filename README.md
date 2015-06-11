@@ -7,16 +7,22 @@
 
 欢迎加入群交流，官方QQ群：260655062 。
 
-###更新说明
+### 更新说明
 
+####2015-05-22 
+
+修正一些错误，更新 `AdminLTE` 到 `v2.1.1` 。
+
+#### 2015-06-11 
+
+更新框架到 `Laravel 5.1 TLS` ，一次升级，永不痛苦！
+
+* 注意：该版数据库表结构有些变化，建议全新安装 `YASCMF` ；  
+* 在本系统基础上有二次开发的，请自行备份旧版进行比较，手动升级；
+* 源码根目录下提供一个从旧版升级到新版的SQL脚本 `upgrade.sql` ，可以尝试在旧有数据库中执行完成数据库表的升级，**升级前请注意备份相关数据，源码作者不保证不出任何差错**。
 ```
-2015-05-22 修正一些错误，更新 `AdminLTE` 到 `v2.1.1` 。
 
-2015-06-11 更新框架到 `Laravel 5.1 TLS` ，一次升级，永不痛苦！
-注意，该版数据库表结构有些变化，请全新安装YASCMF，在本系统基础上有二次开发的，请自行比较，手动升级。
-```
-
-###安装说明
+### 安装说明
 
 ① 下载源码包：
 
@@ -69,9 +75,9 @@ MAIL_PASSWORD=null
 
 ⑤ 登录后台，后台使用的帐号与密码均为 `admin`，登入之后，您可以体验一番。
 
-###界面展示
+### 界面展示
 
-####前台
+#### 前台
 
 在线演示网站为：http://www.yas.so 。
 
@@ -82,7 +88,7 @@ MAIL_PASSWORD=null
 ![20150426223857.jpg][3]
 
 
-####后台
+#### 后台
 
 新的后台模版基于 [AdminLTE][4] ， 经过本人修改以适配当前系统 。
 `AdminLTE` 后台拥有 12 套配色皮肤，响应式布局，支持电脑、平板和手机各个终端。
@@ -94,7 +100,7 @@ MAIL_PASSWORD=null
 ![20150426224002.jpg][7]
 
 
-###源码学习
+### 源码学习
 
 
 通过阅读本源码结合 `Laravel 5`  [中文文档](http://laravel-china.org/docs/5.0)，您能学习、理解或掌握框架自身功能、架构与服务，加强  `Laravel`  的实践操作能力：
@@ -136,10 +142,10 @@ Email: raoyc <raoyc2009@gmail.com>
 QQ群：260655062
 
 
-  [1]: http://douyasi.com/usr/uploads/2015/04/3530676302.jpg?20150522
-  [2]: http://douyasi.com/usr/uploads/2015/04/2716073848.jpg?20150522
-  [3]: http://douyasi.com/usr/uploads/2015/04/913925879.jpg?20150522
+  [1]: http://douyasi.com/usr/uploads/2015/04/3530676302.jpg
+  [2]: http://douyasi.com/usr/uploads/2015/04/2716073848.jpg
+  [3]: http://douyasi.com/usr/uploads/2015/04/913925879.jpg
   [4]: https://github.com/almasaeed2010/AdminLTE
-  [5]: http://douyasi.com/usr/uploads/2015/04/2937226833.jpg?20150522
-  [6]: http://douyasi.com/usr/uploads/2015/04/1471181251.jpg?20150522
-  [7]: http://douyasi.com/usr/uploads/2015/04/2433451104.jpg?20150522
+  [5]: http://douyasi.com/usr/uploads/2015/04/2937226833.jpg
+  [6]: http://douyasi.com/usr/uploads/2015/04/1471181251.jpg 
+  [7]: http://douyasi.com/usr/uploads/2015/04/2433451104.jpg
