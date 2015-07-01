@@ -172,6 +172,5 @@ class DataCache
         static::cacheArchive();
         static::cacheFlags();
         return true;
-        return true;
     }
 }
