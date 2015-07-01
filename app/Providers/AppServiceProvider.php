@@ -3,6 +3,7 @@
 namespace Douyasi\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Douyasi\Extensions\DouyasiBlade;
 
 class AppServiceProvider extends ServiceProvider
 {
