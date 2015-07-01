@@ -93,6 +93,17 @@ class ContentRepository extends BaseRepository
         if ($type === 'article') {
             $content->category_id = e($inputs['category_id']);
             $content->type        = 'article';
+            $tmp_flag = '';
+            /*这里需要对推荐位flag进行处理*/
+            if(!empty($inputs['flag']) && is_array($inputs['flag'])) {
+                foreach($inputs['flag'] as $flag)
+                {
+                    if(!empty($flag)){
+                        $tmp_flag .= $flag.',';
+                    }
+                }
+                $content->flag = $tmp_flag;
+            }
         } elseif ($type === 'page') {
             $content->category_id = 0;
             $content->type        = 'page';

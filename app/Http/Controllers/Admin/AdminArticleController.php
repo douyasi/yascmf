@@ -6,6 +6,8 @@ use Douyasi\Http\Requests\ArticleRequest;  //请求层
 use Douyasi\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Douyasi\Repositories\ContentRepository;  //模型仓库层
+use Douyasi\Repositories\FlagRepository;  //推荐位仓库层
+use Douyasi\Cache\DataCache;
 use Cache;
 
 /**
@@ -24,16 +26,34 @@ class AdminArticleController extends BackController
      */
     protected $content;
 
+    /**
+     * The FlagRepository instance.
+     *
+     * @var Douyasi\Repositories\FlagRepository
+     */
+    protected $flag;
+
+    /**
+     * 推荐位缓存数据
+     *
+     * @var array
+     */
+    protected $flags;
 
     public function __construct(
-        ContentRepository $content)
+        ContentRepository $content,
+        FlagRepository $flag)
     {
         parent::__construct();
         $this->content = $content;
-        
+        $this->flag = $flag;
         if (! user('object')->can('manage_contents')) {
             $this->middleware('deny403');
         }
+        if (!Cache::has('flags')) {  //如果推荐位缓存不存在
+            DataCache::cacheFlags();
+        }
+        $this->flags = Cache::get('flags');
     }
 
 
@@ -46,6 +66,7 @@ class AdminArticleController extends BackController
     {
         $data = [
             's_title' => $request->input('s_title'),
+            's_cat_id' => $request->input('s_cat_id', 0),
         ];
 
         //使用仓库方法获取文章列表
@@ -54,8 +75,8 @@ class AdminArticleController extends BackController
         //注意：因为已经使用 Bootstrap 后台模版，故无须再传入自定义的分页样式
         //传入自定义的分页Presenter
         //$links = page_links($articles, $data);
-
-        return view('back.article.index', compact('articles'));
+        $flags = $this->flags;
+        return view('back.article.index', compact('articles', 'flags'));
     }
 
 
@@ -68,7 +89,8 @@ class AdminArticleController extends BackController
     {
         //需传递分类信息进去
         $categories = $this->content->meta();
-        return view('back.article.create', compact('categories'));
+        $flags = $this->flag->index();
+        return view('back.article.create', compact('categories', 'flags'));
     }
 
 
@@ -103,7 +125,8 @@ class AdminArticleController extends BackController
         $article = $this->content->edit($id, 'article');
         //已经findOrFail处理，如果不存在该id资源会抛出异常，再加is_null判定无意义
         //is_null($article) and abort(404); 
-        return view('back.article.edit', ['data' => $article, 'categories' => $categories]);
+        $flags = $this->flag->index();
+        return view('back.article.edit', ['data' => $article, 'categories' => $categories, 'flags' => $flags]);
     }
 
 
