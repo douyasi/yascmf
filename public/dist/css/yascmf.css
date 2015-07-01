@@ -4216,3 +4216,7 @@ td.overflow-hidden {
   white-space: nowrap;
   max-width: 350px;
 }
+/*添加推荐位样式*/
+span.article-flag {
+  cursor: pointer;
+}
