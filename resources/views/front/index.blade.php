@@ -7,12 +7,13 @@
         <div class="col-lg-8 col-md-7 col-sm-6">
             <ul class="list-unstyled yas_articles">
                 <!-- 文章循环START -->
+                @inject('article_service', 'Douyasi\Services\ArticleService') {{-- Blade模版里面服务注入 Laravel 5.1 LTS 新增功能 --}}
                 @foreach($articles as $art)
                 <li class="yas_article_item">
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <div class="yas_article_title">
-                                <a href="{{ get_article_slug($art->slug, $art->id, $art->meta->slug, $art->meta->id) }}"><h2>{{ $art->title }}</h2></a>
+                                <a href="{{ $article_service->getArticleSlug($art->slug, $art->id, $art->meta->slug, $art->meta->id) }}"><h2>{{ $art->title }}</h2></a>
                             </div>
                             <div class="yas_metas yas_tags">
                                 <!--标签模型暂未完善-->

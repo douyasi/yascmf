@@ -4,11 +4,11 @@
 @parent
 
 <div class="container" id="content">
-
+    @inject('article_service', 'Douyasi\Services\ArticleService') {{-- Blade模版里面服务注入 Laravel 5.1 LTS 新增功能 --}}
     <!-- 面包屑导航 -->
     <ul class="breadcrumb">
         <li><a href="{{{ route('home') }}}">首页</a></li>
-        <li><a href="{{{ get_category_slug($category->slug, $category->id) }}}"><strong>{{{ $category->name }}}</strong></a></li>
+        <li><a href="{{{ $article_service->getCategorySlug($category->slug, $category->id) }}}"><strong>{{{ $category->name }}}</strong></a></li>
         <li class="active">文章列表</li>
     </ul>
 
@@ -23,7 +23,7 @@
 
             <div class="list-group">
                 @foreach($articles as $art)
-                <a href="{{ get_article_slug($art->slug, $art->id, $art->meta->slug, $art->meta->id) }}" class="list-group-item">{{ $art->title }}</a>
+                <a href="{{ $article_service->getArticleSlug($art->slug, $art->id, $art->meta->slug, $art->meta->id) }}" class="list-group-item">{{ $art->title }}</a>
                 @endforeach
             </div>
 

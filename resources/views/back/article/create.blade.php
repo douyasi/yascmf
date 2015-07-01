@@ -53,6 +53,15 @@
                         <input type="text" class="form-control" name="title" autocomplete="off" value="{{ Input::old('title') }}" placeholder="标题">
                       </div>
                       <div class="form-group">
+                        <label>推荐位属性</label>
+                        <div class="input-group">
+                          @foreach($flags as $flag)
+                          <input type="checkbox" name="flag[]" value="{{ $flag->attr }}">
+                          <label class="choice" for="flag[]" title="{{ $flag->description }}">[{{ $flag->attr }}]{{ $flag->display_name }}</label>
+                          @endforeach
+                        </div>
+                      </div>
+                      <div class="form-group">
                         <label>缩略图  <a href="javascript:void(0);" class="uploadPic" data-id="thumb"><i class="fa fa-fw fa-picture-o" title="上传"></i></a>  <a href="javascript:void(0);" class="previewPic" data-id="thumb"><i class="fa fa-fw fa-eye" title="预览小图"></i></a></label>
                         <input type="text" class="form-control" id="thumb" name="thumb" value="{{ Input::old('thumb') }}" placeholder="缩略图地址：如{{ url('') }}/assets/img/yas_logo.png">
                       </div>
@@ -118,6 +127,9 @@
           radioClass: 'iradio_flat-blue',
           increaseArea: '20%' // optional
         });
-
+        $('input[type="checkbox"]').iCheck({
+          checkboxClass: 'icheckbox_flat-blue',
+          increaseArea: '20%' // optional
+        });
         @include('scripts.endSinglePic') {{-- 引入单个图片上传与预览JS，依赖于Layer --}}
 @stop

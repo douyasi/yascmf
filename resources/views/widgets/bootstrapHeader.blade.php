@@ -13,9 +13,10 @@
             <div class="navbar-collapse collapse" id="navbar-main" aria-expanded="true" style="">
                 <ul class="nav navbar-nav">
                     <li><a href="{{ route('home') }}">首页</a>
+                    @inject('article_service', 'Douyasi\Services\ArticleService') {{-- Blade模版里面服务注入 Laravel 5.1 LTS 新增功能 --}}
                     @foreach($topPage as $tPage)
                     <li>
-                        <a href="{{ get_page_slug($tPage->slug, $tPage->id) }}">{{ $tPage->title }}</a>
+                        <a href="{{ $article_service->getPageSlug($tPage->slug, $tPage->id) }}">{{ $tPage->title }}</a>
                     </li>
                     @endforeach
                     <li><a href="{{ route('archive') }}">归档</a>

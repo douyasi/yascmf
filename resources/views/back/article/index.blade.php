@@ -51,8 +51,9 @@
                       <tr>
                         <th>选择</th>
                         <th>操作</th>
+                        <th>推荐位</th>
                         <th>标题</th>
-                        <th>slug</th>
+                        <th>Slug</th>
                         <th>分类</th>
                         <th>最后修改时间</th>
                       </tr>
@@ -66,6 +67,7 @@
                             <a href="javascript:void(0);"><i class="fa fa-fw fa-link" title="预览"></i></a>  
                             <a href="javascript:void(0);"><i class="fa fa-fw fa-minus-circle delete_item" title="删除" data-id="{{ $art->id }}"></i></a>
                         </td>
+                        <td class="text-green">{!! flag_tag($art->flag, $flags) !!}</td>
                         <td class="text-muted">{{ str_limit($art->title,36) }}</td>
                         <td class="text-green">
                           @if(empty($art->slug))

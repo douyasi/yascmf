@@ -66,7 +66,6 @@
             <!--//内容管理 treeview-->
 
             <!--无子节点的一级导航节点-->
-            <li><a href="#"><i class='fa fa-link'></i> <span>友链</span></a></li>
             <li><a href="#"><i class='fa fa-book'></i> <span>写作</span></a></li>
             <li><a href="{{ route('admin.tag.index') }}"><i class="fa fa-tags"></i> <span>标签</span></a></li>
 

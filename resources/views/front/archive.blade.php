@@ -6,7 +6,7 @@
 <div class="container" id="content">
     <!-- 面包屑导航 -->
     <ul class="breadcrumb">
-        <li><a href="#">首页</a></li>
+        <li><a href="{{ route('home') }}">首页</a></li>
         <li class="active">归档</li>
     </ul>
 
@@ -34,8 +34,9 @@
                     共发布 <strong>{{ $archive['count'] }}</strong> 文章
                 </div>
                 <div class="list-group">
+                    @inject('article_service', 'Douyasi\Services\ArticleService') {{-- Blade模版里面服务注入 Laravel 5.1 LTS 新增功能 --}}
                     @foreach($archive['articles'] as $art)
-                    <a href="{{ get_article_slug($art->slug, $art->id, $art->c_slug, $art->c_id) }}" class="list-group-item">{{ $art->title }}</a>
+                    <a href="{{ $article_service->getArticleSlug($art->slug, $art->id, $art->c_slug, $art->c_id) }}" class="list-group-item">{{ $art->title }}</a>
                     @endforeach
                 </div>
             </div>
