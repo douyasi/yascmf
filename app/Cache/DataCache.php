@@ -167,8 +167,11 @@ class DataCache
     {
         Cache::forget('categories');  //清理掉分类缓存
         Cache::forget('archives');  //清理掉存档缓存
+        Cache::forget('flags');  //清理掉推荐位缓存
         static::cacheCategories();
         static::cacheArchive();
+        static::cacheFlags();
+        return true;
         return true;
     }
 }
