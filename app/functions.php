@@ -87,6 +87,38 @@ function minify($data, $base='assets')
     return app('url')->asset($static);
 }
 
+/**
+ * 文章推荐位 flag html标签化
+ * 
+ * @param string $flag_str
+ * @param array $flags
+ * @return string
+ */
+function flag_tag($flag_str, $flags)
+{
+    if(empty($flag_str)) {
+        return '';
+    } else {
+        $flags_array = explode(',', rtrim($flag_str, ','));
+        $str = '';
+        foreach ($flags_array as $flag)
+        {
+            $str .= '<span class="label label-danger article-flag" title="'.$flags[$flag].'" data-toggle="tooltip" data-placement="bottom">'.$flag.'</span>  ';
+        }
+        return $str;
+    }
+}
+
+/**
+ * 中文摘要算法
+ *
+ * @param string $content 正文
+ * @return string
+ */
+function chinese_excerpt($content)
+{
+    return mb_strimwidth(strip_tags($content), 0, 200, '...');
+}
 
 /**
  * 芽丝CMF后台分页helper
@@ -105,88 +137,6 @@ function page_links($model, $data = [])
     }
     return $links;
 }
-
-/**
- * 芽丝slug URL生成
- * 优先使用string型的$slug作为slug url，否则使用int型的$id
- *
- * @param string $slug
- * @param int $id
- * @return string|int
- */
-function get_slug($slug, $id)
-{
-    $slug = e(trim($slug));
-    if (empty($slug)) {
-        return $id;
-    } else {
-        if (ctype_digit($slug)) {
-            return $id;
-        } else {
-            return $slug;
-        }
-    }
-}
-
-/**
- * 芽丝分类slug URL生成
- *
- * @param string $slug 分类slug
- * @param int $id 分类id
- * @return string 返回slug化的字符串
- */
-function get_category_slug($slug, $id)
-{
-    $slug = e(trim($slug));
-    if (empty($slug)) {
-        return '/cat_'.$id;
-    } else {
-        if (ctype_digit($slug)) {
-            return '/cat_'.$id;
-        } else {
-            return '/'.$slug;
-        }
-    }
-}
-
-/**
- * 芽丝单页slug URL生成
- *
- * @param string $slug 单页slug
- * @param int $id 单页id
- * @return string 返回slug化的字符串
- */
-function get_page_slug($slug, $id)
-{
-    $slug = e(trim($slug));
-    if (empty($slug)) {
-        return '/page_'.$id.'.html';
-    } else {
-        if (ctype_digit($slug)) {
-            return '/page_'.$id.'.html';
-        } else {
-            return '/'.$slug.'.html';
-        }
-    }
-}
-
-
-/**
- * 芽丝文章slug URL生成
- *
- * @param string $slug 文章slug
- * @param int $id 文章id
- * @param string $cslug 分类slug
- * @param int $id 分类id
- * @return string 返回slug化的字符串
- */
-function get_article_slug($slug, $id, $cslug, $cid)
-{
-    $slug = get_slug($slug, $id);
-    $cslug = get_category_slug($cslug, $cid);
-    return '/'.ltrim($cslug, '/').'/'.$slug.'.html';
-}
-
 
 /**
  * 检查 特定数组 特定键名的键值 是否与待比较的值一致
@@ -210,6 +160,32 @@ function check_array($array, $key, $value)
         }
     }
     
+    return $status;
+}
+
+/**
+ * 检查 特殊字符串（如逗号分隔值字符串） 是否与待比较的值一致
+ * 此helper主要用于文章推荐位特征判断
+ *
+ * @param string $string 逗号分隔值字符串
+ * @param string $value 待比较的值
+ * @return boolean 一致则返回true，否则返回false
+ */
+function check_string($string, $value)
+{
+    $status = false;
+    $csv_array = explode(',', rtrim($string, ','));  //逗号分割值字符串转成数组
+
+    foreach ($csv_array as $csv)
+    {
+        if ($csv === $value) {
+            $status = true;
+            break;
+        } else {
+            continue;
+        }
+    }
+
     return $status;
 }
 
