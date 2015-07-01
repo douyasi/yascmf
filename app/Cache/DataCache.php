@@ -77,6 +77,36 @@ class DataCache
         return true;
     }
 
+    /**
+     * 缓存推荐位
+     *
+     * @return boolean true
+     */
+    public static function cacheFlags()
+    {
+        $cache_flags = array();
+        $flags = DB::table('flags')
+            ->select('id', 'attr', 'attr_full_name', 'display_name')
+            ->take(5)
+            ->get();
+        if(!empty($flags)) {
+            foreach($flags as $flag) {
+                $cache_flags[$flag->attr] = $flag->display_name.'('.$flag->attr_full_name.')';
+            }
+        }
+        if (Config::get('cache.driver') === 'memcached') {
+            //建议上memcached缓存，可以使用缓存标签特性
+
+            Cache::tag('flags')->remember('flags', 120, function () use ($cache_flags) {
+                return $cache_flags;
+            });
+        } else {
+            Cache::remember('flags', 120, function () use ($cache_flags) {
+                return $cache_flags;
+            });
+        }
+        return true;
+    }
 
     /**
      * 缓存存档，数据量大时可加快访问速度
