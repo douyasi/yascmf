@@ -134,8 +134,8 @@ class ArticleTagRepository extends BaseRepository
         $ret = $this->model->where('tag_name', 'like', '%'.e($data['s_name']).'%');
         //$data = array_add($data, 's_name', '');
         $ret = $this->model
-               ->where('tag_name', 'like', '%'.e($data['s_name']).'%')
-               ->paginate($size);
+            ->where('tag_name', 'like', '%'.e($data['s_name']).'%')
+            ->paginate($size);
 
         return $ret;
     }

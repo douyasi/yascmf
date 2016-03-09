@@ -21,7 +21,7 @@ class AdminTagController extends BackController
         }
         $this->article_tag = $article_tag;
     }
-    
+
     /**
      * Display a listing of the resource.
      *

@@ -45,9 +45,9 @@ class DataCache
         if (!empty($cats)) {
             foreach ($cats as $key=>$cat) {
                 $count = DB::table('contents')
-                                ->where('category_id', '=', $cat->id)
-                                ->where('type', '=', 'article')
-                                ->count();
+                    ->where('category_id', '=', $cat->id)
+                    ->where('type', '=', 'article')
+                    ->count();
                 $categories[$key]['category'] = $cat;
                 $categories[$key]['count'] = $count;
             }
@@ -94,14 +94,14 @@ class DataCache
         if (!empty($yms)) {
             foreach ($yms as $key=>$ym) {
                 $articles = DB::table('contents')
-                                ->join('metas', function ($join) {
-                                        $join->on('metas.id', '=', 'category_id')
-                                             ->where('metas.type', '=', 'CATEGORY');
-                                    })
-                                ->select('metas.id as c_id', 'metas.slug as c_slug', 'contents.title', 'contents.id', 'contents.slug', 'contents.category_id')
-                                ->where('contents.created_at', 'LIKE', ''.$ym->post_year_month.'%')
-                                ->where('contents.type', '=', 'article')
-                                ->get();
+                    ->join('metas', function ($join) {
+                        $join->on('metas.id', '=', 'category_id')
+                            ->where('metas.type', '=', 'CATEGORY');
+                    })
+                    ->select('metas.id as c_id', 'metas.slug as c_slug', 'contents.title', 'contents.id', 'contents.slug', 'contents.category_id')
+                    ->where('contents.created_at', 'LIKE', ''.$ym->post_year_month.'%')
+                    ->where('contents.type', '=', 'article')
+                    ->get();
                 if (!empty($articles)) {
                     $archives[$key]['year_month'] = $ym->post_year_month;
                     $archives[$key]['articles'] = $articles;
