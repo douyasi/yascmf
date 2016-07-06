@@ -46,17 +46,10 @@ class SettingCache
                 $set = $settings;
             }
 
-            if (Config::get('cache.driver') === 'memcached') {
-                //建议上memcached缓存，可以使用缓存标签特性
+            Cache::remember($type_name, 60, function () use ($type_id, $set) {
+                return $set;
+            });
 
-                Cache::tag('setting', $type_name)->remember($type_name, 60, function () use ($type_id, $set) {
-                    return $set;
-                });
-            } else {
-                Cache::remember($type_name, 60, function () use ($type_id, $set) {
-                    return $set;
-                });
-            }
             //虽说属于动态设置，但一般被改动的几率较小，故这里建议缓存1小时（即60分钟）
             return true;  //缓存成功
         }
@@ -73,19 +66,12 @@ class SettingCache
     public static function uncacheSetting($type_name = '')
     {
         if ($type_name === '') {
-            if (Config::get('cache.driver') === 'memcached') {
-                Cache::tags('setting')->flush();  //清理所有动态设置（缓存标签为setting）缓存
-            } else {
-                $setting_types = SettingType::lists('name');  //这里返回是数组
-                foreach ($setting_types as $st)
-                {
-                    static::uncacheSetting($st);
-                }
+            $setting_types = SettingType::lists('name');  //这里返回是数组
+            foreach ($setting_types as $st)
+            {
+                static::uncacheSetting($st);
             }
         } else {
-            if (Config::get('cache.driver') === 'memcached') {
-                Cache::tags($type_name)->flush();
-            }
             Cache::forget($type_name);  //为保险起见，这里通过key来清理掉分组名为$type_name的缓存，因为它支持file驱动的缓存
         }
     }

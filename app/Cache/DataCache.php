@@ -53,17 +53,10 @@ class DataCache
                 $categories[$key]['count'] = $count;
             }
         }
-        if (Config::get('cache.driver') === 'memcached') {
-            //建议上memcached缓存，可以使用缓存标签特性
 
-            Cache::tag('categories')->remember('categories', 120, function () use ($categories) {
-                return $categories;
-            });
-        } else {
-            Cache::remember('categories', 120, function () use ($categories) {
-                return $categories;
-            });
-        }
+        Cache::remember('categories', 120, function () use ($categories) {
+            return $categories;
+        });
         return true;
     }
 
@@ -94,17 +87,11 @@ class DataCache
                 $cache_flags[$flag->attr] = $flag->display_name.'('.$flag->attr_full_name.')';
             }
         }
-        if (Config::get('cache.driver') === 'memcached') {
-            //建议上memcached缓存，可以使用缓存标签特性
 
-            Cache::tag('flags')->remember('flags', 120, function () use ($cache_flags) {
-                return $cache_flags;
-            });
-        } else {
-            Cache::remember('flags', 120, function () use ($cache_flags) {
-                return $cache_flags;
-            });
-        }
+        Cache::remember('flags', 120, function () use ($cache_flags) {
+            return $cache_flags;
+        });
+
         return true;
     }
 
@@ -144,17 +131,9 @@ class DataCache
                 }
             }
         }
-        if (Config::get('cache.driver') === 'memcached') {
-            //建议上memcached缓存，可以使用缓存标签特性
-
-            Cache::tag('archives')->remember('archives', 120, function () use ($archives) {
-                return $archives;
-            });
-        } else {
-            Cache::remember('archives', 120, function () use ($archives) {
-                return $archives;
-            });
-        }
+        Cache::remember('archives', 120, function () use ($archives) {
+            return $archives;
+        });
         return true;
     }
 
