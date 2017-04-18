@@ -155,13 +155,13 @@ MAIL_PASSWORD=null
 ......
 
 
-###文档
+### 文档
 
 [第三方文档参考](https://github.com/douyasi/yascmf/wiki/%E8%8A%BD%E4%B8%9D%E5%86%85%E5%AE%B9%E7%AE%A1%E7%90%86%E6%A1%86%E6%9E%B6%E9%83%A8%E5%88%86%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3%E5%8F%82%E8%80%83)
 
 关于本源码的文档正在完善中，您可以留意博客分享的文章，或者加群反馈意见或建议。
 
-###联系作者
+### 联系作者
 
 Email: raoyc <raoyc2009@gmail.com>  
 官网：http://douyasi.com | http://www.yas.so  
