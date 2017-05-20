@@ -33,8 +33,8 @@ CREATE TABLE `yascmf_contents` (
   `outer_link` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '外链地址',
   `category_id` int(10) NOT NULL COMMENT '文章分类id',
   `deleted_at` datetime DEFAULT NULL COMMENT '被软删除时间',
-  `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
-  `updated_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '修改更新时间',
+  `created_at` datetime NOT NULL DEFAULT '1971-01-01 00:00:00' COMMENT '创建时间',
+  `updated_at` datetime NOT NULL DEFAULT '1971-01-01 00:00:00' COMMENT '修改更新时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `content_slug_unique` (`slug`),
   KEY `content_title_index` (`title`)
@@ -110,7 +110,7 @@ DROP TABLE IF EXISTS `yascmf_password_resets`;
 CREATE TABLE `yascmf_password_resets` (
   `email` varchar(120) COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT '邮箱',
   `token` varchar(60) COLLATE utf8_unicode_ci NOT NULL COMMENT '会话token',
-  `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间'
+  `created_at` datetime NOT NULL DEFAULT '1971-01-01 00:00:00' COMMENT '创建时间'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
@@ -126,8 +126,8 @@ CREATE TABLE `yascmf_permissions` (
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT '权限名',
   `display_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT '权限展示名',
   `description` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
-  `updated_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '修改更新时间',
+  `created_at` datetime NOT NULL DEFAULT '1971-01-01 00:00:00' COMMENT '创建时间',
+  `updated_at` datetime NOT NULL DEFAULT '1971-01-01 00:00:00' COMMENT '修改更新时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `permissions_name_unique` (`name`)
 ) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='权限信息表';
@@ -183,8 +183,8 @@ CREATE TABLE `yascmf_roles` (
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT '角色名',
   `display_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT '角色展示名',
   `description` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '角色描述',
-  `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
-  `updated_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '修改更新时间',
+  `created_at` datetime NOT NULL DEFAULT '1971-01-01 00:00:00' COMMENT '创建时间',
+  `updated_at` datetime NOT NULL DEFAULT '1971-01-01 00:00:00' COMMENT '修改更新时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `role_name_unique` (`name`)
 ) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='用户组角色表';
@@ -278,8 +278,8 @@ CREATE TABLE `yascmf_system_log` (
   `content` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '操作内容',
   `operator_ip` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '操作者ip',
   `deleted_at` datetime DEFAULT NULL COMMENT '被软删除时间',
-  `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
-  `updated_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '修改更新时间',
+  `created_at` datetime NOT NULL DEFAULT '1971-01-01 00:00:00' COMMENT '创建时间',
+  `updated_at` datetime NOT NULL DEFAULT '1971-01-01 00:00:00' COMMENT '修改更新时间',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='系统日志表';
 
@@ -337,8 +337,8 @@ CREATE TABLE `yascmf_users` (
   `emergency_contact` varchar(300) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '紧急联系人信息',
   `servicer_id` int(12) DEFAULT '0' COMMENT '专属客服id，（为0表示其为无专属客服的管理用户）',
   `deleted_at` datetime DEFAULT NULL COMMENT '被软删除时间',
-  `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
-  `updated_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '修改更新时间',
+  `created_at` datetime NOT NULL DEFAULT '1971-01-01 00:00:00' COMMENT '创建时间',
+  `updated_at` datetime NOT NULL DEFAULT '1971-01-01 00:00:00' COMMENT '修改更新时间',
   `is_lock` tinyint(3) NOT NULL DEFAULT '0' COMMENT '是否锁定限制用户登录，1锁定,0正常',
   `user_type` enum('visitor','customer','manager') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'visitor' COMMENT '用户类型：visitor 游客, customer 投资客户, manager 管理型用户',
   `confirmation_code` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT '确认码',
